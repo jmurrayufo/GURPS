@@ -2,6 +2,67 @@ import random
 import csv
 import time
 
+class Skill():
+    def __init__(self, name, atributeStr, atributeVal,  difficulty=0, points=1):
+        """
+            Default to 0 (easy) and 1 point spent
+        """
+
+        # Error checking
+        assert(type(atributeStr) == type(str()))
+        assert(type(atributeVal) == type(int()))
+        assert(type(difficulty) == type(int()))
+        assert(type(points) == type(int()))
+        assert(points>0)
+
+        self.Name=name
+        self.AtributeString = atributeStr
+        self.AtributeValue = atributeVal
+        self.Difficulty = difficulty
+        self.Points = points
+        self.CalcSkillMod()
+
+
+    def CalcSkillMod(self):
+        assert(self.Points > 0)
+        if(self.Points < 4):
+            self.SkillMod = int(self.Points / 2) 
+        else:
+            self.SkillMod = int(self.Points/4) + 1
+        if( self.Difficulty == 0 ):
+             pass
+        elif( self.Difficulty == 1 ):
+             self.SkillMod -= 1
+        elif( self.Difficulty == 2 ):
+             self.SkillMod -= 2
+        elif( self.Difficulty == 3 ):
+             self.SkillMod -= 3
+        else:
+            print "INVALID DIFFiCULTY!"
+            assert(False)
+
+    def SetAtrib(self, atributeStr, atributeVal):
+        self.AtributeString = atributeStr
+        self.AtributeValue = atributeVal
+
+    def ModPoints(self, deltaPoints):
+        self.Points += deltaPoints
+        self.CalcSkillMod()
+    
+    def SetPoints(self, newPoints):
+        self.Points = newPoints
+        self.CalcSkillMod()
+
+    def Check(self, mods=0):
+        dieRoll = list()
+        for i in range(3):
+            dieRoll.append(random.randint(1,6))
+        return  (self.SkillMod + self.AtributeValue) - sum(dieRoll)
+
+    def Print(self):
+        print "%s-%d (%+d)" %(self.Name, self.SkillMod + self.AtributeValue, self.SkillMod)
+
+
 class CharSheet():
     
     def __init__(self,default=10):
@@ -130,13 +191,6 @@ class CharSheet():
             for i in firstNamesFemale:
                 if selecton <= i[1]:
                     return i[0].title()
-
-
-x=CharSheet(8)
-
-x.Roll(0)
-
-x.PrintStats()
 
 
             
