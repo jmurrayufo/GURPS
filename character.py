@@ -180,12 +180,12 @@ class CharSheet():
                 i[1]=i[1]+runningTotalFemale
                 runningTotalFemale=i[1]
 
+        # Randomly select one of the weight targets
         if(gender=="male"):
             selecton = random.randint(0,runningTotalMale)
             for i in firstNamesMale:
                 if selecton <= i[1]:
                     return i[0].title()
-
         elif(gender=="female"):
             selecton = random.randint(0,runningTotalFemale)
             for i in firstNamesFemale:
