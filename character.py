@@ -1,6 +1,19 @@
-import random
+
+
 import csv
+import json
+import operator
+import random
+import sys
 import time
+"""
+GURPS is a trademark of Steve Jackson Games, and its rules and art are copyrighted 
+by Steve Jackson Games. All rights are reserved by Steve Jackson Games. This game aid is 
+the original creation of John Murray and is released for free distribution, and not for 
+resale, under the permissions granted in the 
+<a href="http://www.sjgames.com/general/online_policy.html">Steve Jackson Games Online 
+Policy</a>.
+"""
 
 class Skill():
     def __init__(self, name, atributeStr, atributeVal,  difficulty=0, points=1):
@@ -11,14 +24,27 @@ class Skill():
         # Error checking
         assert(type(atributeStr) == type(str()))
         assert(type(atributeVal) == type(int()))
-        assert(type(difficulty) == type(int()))
         assert(type(points) == type(int()))
         assert(points>0)
 
         self.Name=name
         self.AtributeString = atributeStr
         self.AtributeValue = atributeVal
-        self.Difficulty = difficulty
+
+        if(type(difficulty) == type(int())):
+            self.Difficulty = difficulty
+        else:
+            if(difficulty=="E"):
+                self.Difficulty=0
+            elif(difficulty=="A"):
+                self.Difficulty=1
+            elif(difficulty=="H"):
+                self.Difficulty=2
+            elif(difficulty=="VH"):
+                self.Difficulty=3
+
+
+
         self.Points = points
         self.CalcSkillMod()
 
@@ -62,6 +88,9 @@ class Skill():
     def Print(self):
         print "%s-%d (%+d)" %(self.Name, self.SkillMod + self.AtributeValue, self.SkillMod)
 
+    def GetPrint(self):
+        return "%s-%d (%+d)" %(self.Name, self.SkillMod + self.AtributeValue, self.SkillMod)
+
 
 class CharSheet():
     
@@ -81,16 +110,40 @@ class CharSheet():
         self.Weight=0
         self.Points=0+(default-10)*(10+20+20+10)
     
-    def Roll(self,points=0):
+    def Roll(self,template,points=0):
         self.Height = random.gauss(1.778,0.15)
 
         self.GenerateName()
 
-        statsSelection = ["ST","ST","DX","DX","IQ","IQ","HT","HT","HP","WILL","PER","FP"]
+        with open(template,'rb') as f:
+            settingsData=json.load(f)
+
+        dataAttributes = settingsData['Attributes']
+
+        dataSkills = settingsData['Skills']
+
+        runningTotalAttributes = 0
+        for i in dataAttributes:
+            oldData = dataAttributes[i]["weight"]
+            dataAttributes[i]["weight"] = dataAttributes[i]["weight"] + runningTotalAttributes
+            runningTotalAttributes += oldData
+
+        runningTotalSkills = 0
+        for i in dataSkills:
+            oldData = dataSkills[i]["weight"]
+            dataSkills[i]["weight"] = dataSkills[i]["weight"] + runningTotalSkills
+            runningTotalSkills += oldData
 
         while(self.Points < points):
             # Spend points on stuff!
-            selection = random.choice(statsSelection)
+            # Select a weighted 
+            selection = random.randint(0,runningTotalAttributes)
+            
+            for i in dataAttributes:
+                if(selection <= dataAttributes[i]["weight"]):
+                    selection = i
+                    break
+
 
             if(selection == "ST"):
                 self.ST+=1
@@ -128,11 +181,35 @@ class CharSheet():
             elif(selection == "FP" and self.FP+1 <= self.HT*1.3):
                 self.FP+=1
                 self.Points+=3
+            
+            selection = random.randint(0,runningTotalSkills)
+            
+            for i in dataSkills:
+                if(selection <= dataSkills[i]["weight"]):
+                    selection = i
+                    break
+
+            if(selection in self.Skills):
+                self.Skills[selection].ModPoints(1)
+                self.Points+=1
+            else:
+                #__init__(self, name, atributeStr, atributeVal,  difficulty=0, points=1):
+                self.Skills[selection]=Skill(   i,
+                                                str(dataSkills[i]["attribute"]),
+                                                getattr(self,dataSkills[i]["attribute"]),
+                                                dataSkills[i]["diff"]
+                                            )
+                self.Points+=1
+
+        # Update Skills
+        for i in self.Skills:
+            tempAttribute = self.Skills[i].AtributeString
+            self.Skills[i].SetAtrib(tempAttribute,getattr(self,tempAttribute))
 
     def __str__(self):
         return self.name
 
-    def PrintStats(self):
+    def Print(self):
         print "Name:",self.name
         print " ST:",self.ST
         print " DX:",self.DX
@@ -143,6 +220,11 @@ class CharSheet():
         print " PER:",self.PER
         print " FP:",self.FP
         print " Points:",self.Points
+        print " Skills:"
+        sortedSkills = sorted(self.Skills.iteritems(), key=operator.itemgetter(0))
+        for i in sortedSkills:
+            print " ",i[1].GetPrint()
+
 
     def GenerateName(self,gender="male"):
         self.name = self.ParseNameFile('firstnames.csv',gender) + " " + self.ParseNameFile('lastnames.csv')
@@ -172,13 +254,15 @@ class CharSheet():
         if(gender=="male"):
             runningTotalMale=0
             for i in firstNamesMale:
+                oldData = i[1]
                 i[1]=i[1]+runningTotalMale
-                runningTotalMale=i[1]
+                runningTotalMale+=oldData
         if(gender=="female"):
             runningTotalFemale=0
             for i in firstNamesFemale:
+                oldData = i[1]
                 i[1]=i[1]+runningTotalFemale
-                runningTotalFemale=i[1]
+                runningTotalFemale+=oldData
 
         # Randomly select one of the weight targets
         if(gender=="male"):
@@ -193,9 +277,17 @@ class CharSheet():
                     return i[0].title()
 
 
-            
+x = list()
+for i in range(100):
+    x.append(CharSheet(8))
+    x[i].Roll('data/farmerTemplate.json',i)
 
 
+for i in x:
+    i.Print()
 
+sys.stdout = open('output.txt','w')
 
-
+for i in x:
+    i.Print()
+    print 
