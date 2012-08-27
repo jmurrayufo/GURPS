@@ -227,7 +227,7 @@ class CharSheet():
 
 
     def GenerateName(self,gender="male"):
-        self.name = self.ParseNameFile('firstnames.csv',gender) + " " + self.ParseNameFile('lastnames.csv')
+        self.name = self.ParseNameFile('data/firstnames.csv',gender) + " " + self.ParseNameFile('data/lastnames.csv')
 
     def ParseNameFile(self,namesFile,gender="male"):
         with open(namesFile,'r') as namesFile:
@@ -280,7 +280,7 @@ class CharSheet():
 x = list()
 for i in range(100):
     x.append(CharSheet(8))
-    x[i].Roll('data/farmerTemplate.json',i)
+    x[i].Roll('data/farmerTemplate.json',150)
 
 
 for i in x:
