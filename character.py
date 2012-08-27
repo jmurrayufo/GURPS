@@ -1,11 +1,10 @@
-
-
 import csv
 import json
 import operator
 import random
 import sys
 import time
+
 """
 GURPS is a trademark of Steve Jackson Games, and its rules and art are copyrighted 
 by Steve Jackson Games. All rights are reserved by Steve Jackson Games. This game aid is 
@@ -110,7 +109,7 @@ class CharSheet():
         self.Weight=0
         self.Points=0+(default-10)*(10+20+20+10)
     
-    def Roll(self,template,points=0):
+    def Roll(self,template,statPoints=0,skillPoints=0):
         self.Height = random.gauss(1.778,0.15)
 
         self.GenerateName()
@@ -133,8 +132,17 @@ class CharSheet():
             oldData = dataSkills[i]["weight"]
             dataSkills[i]["weight"] = dataSkills[i]["weight"] + runningTotalSkills
             runningTotalSkills += oldData
-
-        while(self.Points < points):
+        
+        startPoints  = (self.ST - 10)*10
+        startPoints += (self.DX - 10)*20
+        startPoints += (self.IQ - 10)*20
+        startPoints += (self.HT - 10)*10
+        startPoints += (self.HP - self.ST)*2
+        startPoints += (self.WILL - self.IQ)*5
+        startPoints += (self.PER - self.IQ)*5
+        startPoints += (self.FP - self.HT)*3
+        
+        while(startPoints < statPoints):
             # Spend points on stuff!
             # Select a weighted 
             selection = random.randint(0,runningTotalAttributes)
@@ -149,39 +157,49 @@ class CharSheet():
                 self.ST+=1
                 self.HP+=1
                 self.Points+=10
+                statPoints -=10
 
             elif(selection == "DX"):
                 self.DX+=1
                 self.Points+=20
+                statPoints -=20
 
             elif(selection == "IQ"):
                 self.IQ+=1
                 self.WILL+=1
                 self.PER+=1
                 self.Points+=20
+                statPoints -=20
 
             elif(selection == "HT"):
                 self.HT+=1
                 self.FP+=1
                 self.Points+=10
+                statPoints -=10
 
             elif(selection == "HP" and self.HP+1 <= self.ST*1.3):
                 # Limited to +/- 30% of ST
                 self.HP+=1
                 self.Points+=2
+                statPoints -=2
 
             elif(selection == "WILL" and self.WILL <=20):
                 self.WILL+=1
                 self.Points+=5
+                statPoints -=5
 
             elif(selection == "PER" and self.PER <= 20):
                 self.PER+=1
                 self.Points+=5
+                statPoints -=5
 
             elif(selection == "FP" and self.FP+1 <= self.HT*1.3):
                 self.FP+=1
                 self.Points+=3
-            
+                statPoints -=3
+
+        startPoints = 0
+        while(startPoints < skillPoints):
             selection = random.randint(0,runningTotalSkills)
             
             for i in dataSkills:
@@ -191,7 +209,6 @@ class CharSheet():
 
             if(selection in self.Skills):
                 self.Skills[selection].ModPoints(1)
-                self.Points+=1
             else:
                 #__init__(self, name, atributeStr, atributeVal,  difficulty=0, points=1):
                 self.Skills[selection]=Skill(   i,
@@ -199,7 +216,8 @@ class CharSheet():
                                                 getattr(self,dataSkills[i]["attribute"]),
                                                 dataSkills[i]["diff"]
                                             )
-                self.Points+=1
+            self.Points+=1
+            skillPoints -=1
 
         # Update Skills
         for i in self.Skills:
@@ -211,16 +229,16 @@ class CharSheet():
 
     def Print(self):
         print "Name:",self.name
-        print " ST:",self.ST
-        print " DX:",self.DX
-        print " IQ:",self.IQ
-        print " HT:",self.HT
-        print " HP:",self.HP
-        print " WILL:",self.WILL
-        print " PER:",self.PER
-        print " FP:",self.FP
-        print " Points:",self.Points
-        print " Skills:"
+        print "     ST: %3d" % (self.ST)
+        print "     DX: %3d" % (self.DX)
+        print "     IQ: %3d" % (self.IQ)
+        print "     HT: %3d" % (self.HT)
+        print "     HP: %3d" % (self.HP)
+        print "   WILL: %3d" % (self.WILL)
+        print "    PER: %3d" % (self.PER)
+        print "     FP: %3d" % (self.FP)
+        print " Points: %3d" % (self.Points)
+        print " Skills:"      
         sortedSkills = sorted(self.Skills.iteritems(), key=operator.itemgetter(0))
         for i in sortedSkills:
             print " ",i[1].GetPrint()
@@ -280,14 +298,9 @@ class CharSheet():
 x = list()
 for i in range(100):
     x.append(CharSheet(8))
-    x[i].Roll('data/farmerTemplate.json',150)
+    x[i].Roll('data/farmerTemplate.json',50,100)
 
 
 for i in x:
     i.Print()
-
-sys.stdout = open('output.txt','w')
-
-for i in x:
-    i.Print()
-    print 
+    print

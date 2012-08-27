@@ -1,0 +1,1908 @@
+Name: Nicholas Fuller
+ ST: 9
+ DX: 15
+ IQ: 11
+ HT: 13
+ HP: 9
+ WILL: 13
+ PER: 11
+ FP: 13
+ Points: 168
+ Skills:
+  Accounting-10 (-1)
+  Administration-11 (+0)
+  Biology-8 (-3)
+  Electrician-12 (+1)
+  Farming-13 (+2)
+
+Name: Justin Thomas
+ ST: 11
+ DX: 13
+ IQ: 11
+ HT: 12
+ HP: 11
+ WILL: 13
+ PER: 14
+ FP: 15
+ Points: 167
+ Skills:
+  Administration-11 (+0)
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-11 (+0)
+  Farming-14 (+3)
+  First Aid-11 (+0)
+  Meteorology-10 (-1)
+
+Name: Joshua Lawrence
+ ST: 14
+ DX: 10
+ IQ: 12
+ HT: 13
+ HP: 17
+ WILL: 13
+ PER: 13
+ FP: 15
+ Points: 156
+ Skills:
+  Administration-12 (+0)
+  Animal Handling-11 (-1)
+  Biology-10 (-2)
+  Electrician-12 (+0)
+  Farming-14 (+2)
+  First Aid-13 (+1)
+  Freight Handling-12 (+0)
+  Meteorology-11 (-1)
+
+Name: Christopher Castaneda
+ ST: 11
+ DX: 10
+ IQ: 12
+ HT: 15
+ HP: 14
+ WILL: 13
+ PER: 13
+ FP: 18
+ Points: 150
+ Skills:
+  Administration-11 (-1)
+  Animal Handling-12 (+0)
+  Biology-10 (-2)
+  Electrician-13 (+1)
+  Farming-15 (+3)
+  Freight Handling-11 (-1)
+  Meteorology-11 (-1)
+
+Name: Colby Olson
+ ST: 10
+ DX: 13
+ IQ: 12
+ HT: 12
+ HP: 12
+ WILL: 14
+ PER: 13
+ FP: 13
+ Points: 163
+ Skills:
+  Accounting-10 (-2)
+  Animal Handling-12 (+0)
+  Biology-9 (-3)
+  Farming-15 (+3)
+  First Aid-12 (+0)
+  Freight Handling-11 (-1)
+  Meteorology-11 (-1)
+
+Name: Benjamin Johnson
+ ST: 12
+ DX: 12
+ IQ: 13
+ HT: 9
+ HP: 15
+ WILL: 13
+ PER: 16
+ FP: 11
+ Points: 162
+ Skills:
+  Administration-12 (-1)
+  Animal Handling-12 (-1)
+  Biology-10 (-3)
+  Electrician-14 (+1)
+  Farming-16 (+3)
+  Freight Handling-13 (+0)
+  Meteorology-13 (+0)
+
+Name: Ethan Evans
+ ST: 13
+ DX: 10
+ IQ: 14
+ HT: 11
+ HP: 13
+ WILL: 15
+ PER: 18
+ FP: 12
+ Points: 170
+ Skills:
+  Accounting-12 (-2)
+  Administration-13 (-1)
+  Animal Handling-13 (-1)
+  Biology-13 (-1)
+  Electrician-13 (-1)
+  Farming-16 (+2)
+  First Aid-15 (+1)
+  Freight Handling-13 (-1)
+
+Name: Dylan Mejia
+ ST: 14
+ DX: 12
+ IQ: 11
+ HT: 10
+ HP: 16
+ WILL: 14
+ PER: 13
+ FP: 13
+ Points: 163
+ Skills:
+  Administration-11 (+0)
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-12 (+1)
+  Farming-13 (+2)
+  First Aid-11 (+0)
+  Freight Handling-10 (-1)
+  Meteorology-10 (-1)
+
+Name: Travis Obrien
+ ST: 9
+ DX: 12
+ IQ: 14
+ HT: 11
+ HP: 10
+ WILL: 18
+ PER: 14
+ FP: 11
+ Points: 161
+ Skills:
+  Accounting-13 (-1)
+  Administration-13 (-1)
+  Animal Handling-14 (+0)
+  Biology-12 (-2)
+  Electrician-13 (-1)
+  Farming-15 (+1)
+  Freight Handling-13 (-1)
+  Meteorology-13 (-1)
+
+Name: Brandon Reese
+ ST: 9
+ DX: 11
+ IQ: 12
+ HT: 14
+ HP: 10
+ WILL: 16
+ PER: 14
+ FP: 16
+ Points: 151
+ Skills:
+  Accounting-11 (-1)
+  Administration-12 (+0)
+  Animal Handling-11 (-1)
+  Biology-9 (-3)
+  Electrician-12 (+0)
+  Farming-14 (+2)
+  Freight Handling-11 (-1)
+  Meteorology-12 (+0)
+
+Name: Evan Hansen
+ ST: 14
+ DX: 11
+ IQ: 12
+ HT: 10
+ HP: 16
+ WILL: 13
+ PER: 14
+ FP: 13
+ Points: 154
+ Skills:
+  Administration-12 (+0)
+  Animal Handling-12 (+0)
+  Biology-10 (-2)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  First Aid-13 (+1)
+
+Name: Oliver Foreman
+ ST: 11
+ DX: 13
+ IQ: 13
+ HT: 9
+ HP: 12
+ WILL: 14
+ PER: 15
+ FP: 9
+ Points: 155
+ Skills:
+  Accounting-12 (-1)
+  Animal Handling-12 (-1)
+  Biology-10 (-3)
+  Electrician-13 (+0)
+  Farming-15 (+2)
+  First Aid-13 (+0)
+
+Name: Michael Ford
+ ST: 13
+ DX: 12
+ IQ: 10
+ HT: 12
+ HP: 14
+ WILL: 12
+ PER: 13
+ FP: 15
+ Points: 150
+ Skills:
+  Accounting-10 (+0)
+  Administration-10 (+0)
+  Animal Handling-11 (+1)
+  Biology-8 (-2)
+  Electrician-9 (-1)
+  Farming-11 (+1)
+  First Aid-10 (+0)
+  Meteorology-9 (-1)
+
+Name: Brandon Anderson
+ ST: 12
+ DX: 13
+ IQ: 10
+ HT: 12
+ HP: 13
+ WILL: 13
+ PER: 13
+ FP: 14
+ Points: 162
+ Skills:
+  Accounting-8 (-2)
+  Administration-10 (+0)
+  Animal Handling-10 (+0)
+  Biology-8 (-2)
+  Electrician-10 (+0)
+  Farming-12 (+2)
+  First Aid-11 (+1)
+  Freight Handling-9 (-1)
+  Meteorology-9 (-1)
+
+Name: Erik Munoz
+ ST: 14
+ DX: 11
+ IQ: 10
+ HT: 15
+ HP: 16
+ WILL: 12
+ PER: 11
+ FP: 18
+ Points: 165
+ Skills:
+  Accounting-9 (-1)
+  Administration-10 (+0)
+  Animal Handling-11 (+1)
+  Biology-8 (-2)
+  Electrician-11 (+1)
+  Farming-12 (+2)
+  Freight Handling-10 (+0)
+  Meteorology-9 (-1)
+
+Name: Michael Miller
+ ST: 13
+ DX: 10
+ IQ: 12
+ HT: 13
+ HP: 15
+ WILL: 14
+ PER: 15
+ FP: 16
+ Points: 164
+ Skills:
+  Accounting-11 (-1)
+  Animal Handling-12 (+0)
+  Biology-11 (-1)
+  Electrician-12 (+0)
+  Farming-14 (+2)
+  First Aid-12 (+0)
+  Meteorology-11 (-1)
+
+Name: Shane Flynn
+ ST: 12
+ DX: 13
+ IQ: 11
+ HT: 13
+ HP: 12
+ WILL: 12
+ PER: 11
+ FP: 14
+ Points: 157
+ Skills:
+  Animal Handling-11 (+0)
+  Biology-8 (-3)
+  Farming-14 (+3)
+  First Aid-11 (+0)
+  Meteorology-11 (+0)
+
+Name: Zachary Moore
+ ST: 14
+ DX: 12
+ IQ: 11
+ HT: 12
+ HP: 15
+ WILL: 11
+ PER: 11
+ FP: 15
+ Points: 155
+ Skills:
+  Accounting-9 (-2)
+  Administration-10 (-1)
+  Animal Handling-11 (+0)
+  Electrician-12 (+1)
+  Farming-13 (+2)
+  First Aid-11 (+0)
+  Freight Handling-10 (-1)
+
+Name: Joshua Wall
+ ST: 12
+ DX: 12
+ IQ: 11
+ HT: 12
+ HP: 15
+ WILL: 12
+ PER: 14
+ FP: 15
+ Points: 161
+ Skills:
+  Accounting-9 (-2)
+  Animal Handling-12 (+1)
+  Biology-8 (-3)
+  Electrician-12 (+1)
+  Farming-14 (+3)
+  Meteorology-10 (-1)
+
+Name: Joshua Wilson
+ ST: 10
+ DX: 13
+ IQ: 13
+ HT: 10
+ HP: 12
+ WILL: 14
+ PER: 15
+ FP: 13
+ Points: 170
+ Skills:
+  Accounting-11 (-2)
+  Administration-12 (-1)
+  Animal Handling-12 (-1)
+  Biology-12 (-1)
+  Electrician-13 (+0)
+  Farming-15 (+2)
+  First Aid-14 (+1)
+  Freight Handling-13 (+0)
+  Meteorology-12 (-1)
+
+Name: Shane Mitchell
+ ST: 11
+ DX: 11
+ IQ: 12
+ HT: 13
+ HP: 13
+ WILL: 13
+ PER: 17
+ FP: 13
+ Points: 157
+ Skills:
+  Accounting-11 (-1)
+  Administration-12 (+0)
+  Animal Handling-11 (-1)
+  Biology-10 (-2)
+  Electrician-13 (+1)
+  Farming-14 (+2)
+  Freight Handling-11 (-1)
+  Meteorology-11 (-1)
+
+Name: Michael Davis
+ ST: 13
+ DX: 12
+ IQ: 10
+ HT: 13
+ HP: 16
+ WILL: 11
+ PER: 12
+ FP: 16
+ Points: 156
+ Skills:
+  Administration-10 (+0)
+  Animal Handling-10 (+0)
+  Biology-8 (-2)
+  Electrician-10 (+0)
+  Farming-14 (+4)
+
+Name: Ethan Cunningham
+ ST: 12
+ DX: 9
+ IQ: 15
+ HT: 11
+ HP: 12
+ WILL: 17
+ PER: 16
+ FP: 14
+ Points: 155
+ Skills:
+  Accounting-13 (-2)
+  Administration-14 (-1)
+  Animal Handling-16 (+1)
+  Biology-12 (-3)
+  Electrician-16 (+1)
+  Farming-17 (+2)
+
+Name: Thomas Scott
+ ST: 10
+ DX: 11
+ IQ: 11
+ HT: 16
+ HP: 12
+ WILL: 13
+ PER: 14
+ FP: 19
+ Points: 166
+ Skills:
+  Accounting-10 (-1)
+  Administration-11 (+0)
+  Animal Handling-10 (-1)
+  Biology-10 (-1)
+  Electrician-11 (+0)
+  Farming-14 (+3)
+  First Aid-11 (+0)
+  Freight Handling-11 (+0)
+
+Name: James Chen
+ ST: 10
+ DX: 14
+ IQ: 10
+ HT: 14
+ HP: 11
+ WILL: 11
+ PER: 12
+ FP: 14
+ Points: 157
+ Skills:
+  Accounting-8 (-2)
+  Administration-9 (-1)
+  Animal Handling-10 (+0)
+  Biology-8 (-2)
+  Electrician-11 (+1)
+  Farming-12 (+2)
+  Freight Handling-9 (-1)
+
+Name: Javier Palmer
+ ST: 11
+ DX: 12
+ IQ: 12
+ HT: 11
+ HP: 14
+ WILL: 13
+ PER: 14
+ FP: 13
+ Points: 150
+ Skills:
+  Accounting-11 (-1)
+  Administration-12 (+0)
+  Biology-9 (-3)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  Meteorology-12 (+0)
+
+Name: Ian Munoz
+ ST: 10
+ DX: 11
+ IQ: 13
+ HT: 14
+ HP: 10
+ WILL: 14
+ PER: 13
+ FP: 17
+ Points: 156
+ Skills:
+  Accounting-12 (-1)
+  Administration-13 (+0)
+  Animal Handling-13 (+0)
+  Biology-11 (-2)
+  Electrician-13 (+0)
+  Farming-15 (+2)
+  Freight Handling-12 (-1)
+  Meteorology-12 (-1)
+
+Name: Wyatt Wright
+ ST: 12
+ DX: 11
+ IQ: 14
+ HT: 12
+ HP: 12
+ WILL: 14
+ PER: 14
+ FP: 12
+ Points: 157
+ Skills:
+  Accounting-12 (-2)
+  Administration-14 (+0)
+  Animal Handling-14 (+0)
+  Biology-11 (-3)
+  Electrician-14 (+0)
+  Farming-15 (+1)
+  First Aid-14 (+0)
+  Freight Handling-13 (-1)
+  Meteorology-13 (-1)
+
+Name: Julian Robinson
+ ST: 15
+ DX: 12
+ IQ: 11
+ HT: 9
+ HP: 15
+ WILL: 13
+ PER: 15
+ FP: 11
+ Points: 159
+ Skills:
+  Accounting-9 (-2)
+  Administration-11 (+0)
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-10 (-1)
+  Farming-14 (+3)
+  Freight Handling-10 (-1)
+  Meteorology-10 (-1)
+
+Name: Christopher Brown
+ ST: 11
+ DX: 12
+ IQ: 13
+ HT: 9
+ HP: 14
+ WILL: 16
+ PER: 16
+ FP: 11
+ Points: 166
+ Skills:
+  Accounting-12 (-1)
+  Animal Handling-12 (-1)
+  Electrician-13 (+0)
+  Farming-16 (+3)
+  First Aid-14 (+1)
+  Meteorology-12 (-1)
+
+Name: David Gillespie
+ ST: 16
+ DX: 10
+ IQ: 12
+ HT: 11
+ HP: 18
+ WILL: 15
+ PER: 13
+ FP: 11
+ Points: 157
+ Skills:
+  Accounting-11 (-1)
+  Administration-12 (+0)
+  Animal Handling-12 (+0)
+  Biology-11 (-1)
+  Electrician-12 (+0)
+  Farming-14 (+2)
+  Freight Handling-11 (-1)
+  Meteorology-11 (-1)
+
+Name: Carlos West
+ ST: 12
+ DX: 13
+ IQ: 10
+ HT: 13
+ HP: 15
+ WILL: 11
+ PER: 10
+ FP: 15
+ Points: 150
+ Skills:
+  Accounting-8 (-2)
+  Administration-10 (+0)
+  Biology-7 (-3)
+  Electrician-11 (+1)
+  Farming-12 (+2)
+  First Aid-10 (+0)
+  Freight Handling-10 (+0)
+  Meteorology-9 (-1)
+
+Name: William Fischer
+ ST: 11
+ DX: 11
+ IQ: 12
+ HT: 13
+ HP: 14
+ WILL: 14
+ PER: 14
+ FP: 14
+ Points: 152
+ Skills:
+  Accounting-10 (-2)
+  Administration-12 (+0)
+  Animal Handling-12 (+0)
+  Biology-9 (-3)
+  Electrician-13 (+1)
+  Farming-14 (+2)
+  Freight Handling-12 (+0)
+  Meteorology-11 (-1)
+
+Name: Jack Flynn
+ ST: 14
+ DX: 13
+ IQ: 10
+ HT: 12
+ HP: 14
+ WILL: 13
+ PER: 11
+ FP: 13
+ Points: 165
+ Skills:
+  Accounting-8 (-2)
+  Administration-9 (-1)
+  Animal Handling-9 (-1)
+  Biology-7 (-3)
+  Electrician-10 (+0)
+  Farming-13 (+3)
+  First Aid-11 (+1)
+  Freight Handling-9 (-1)
+
+Name: Matthew Walker
+ ST: 12
+ DX: 11
+ IQ: 12
+ HT: 13
+ HP: 14
+ WILL: 15
+ PER: 12
+ FP: 13
+ Points: 150
+ Skills:
+  Administration-11 (-1)
+  Animal Handling-12 (+0)
+  Electrician-11 (-1)
+  Farming-15 (+3)
+  First Aid-12 (+0)
+  Freight Handling-11 (-1)
+  Meteorology-11 (-1)
+
+Name: Kaden Melton
+ ST: 11
+ DX: 13
+ IQ: 11
+ HT: 10
+ HP: 12
+ WILL: 13
+ PER: 15
+ FP: 12
+ Points: 150
+ Skills:
+  Accounting-11 (+0)
+  Administration-10 (-1)
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-11 (+0)
+  Farming-13 (+2)
+  Freight Handling-11 (+0)
+  Meteorology-10 (-1)
+
+Name: Anthony Haley
+ ST: 10
+ DX: 11
+ IQ: 9
+ HT: 19
+ HP: 12
+ WILL: 10
+ PER: 14
+ FP: 20
+ Points: 153
+ Skills:
+  Accounting-8 (-1)
+  Administration-8 (-1)
+  Animal Handling-9 (+0)
+  Biology-7 (-2)
+  Electrician-9 (+0)
+  Farming-12 (+3)
+  Freight Handling-8 (-1)
+
+Name: David Robinson
+ ST: 13
+ DX: 10
+ IQ: 11
+ HT: 14
+ HP: 15
+ WILL: 13
+ PER: 14
+ FP: 16
+ Points: 150
+ Skills:
+  Accounting-9 (-2)
+  Animal Handling-10 (-1)
+  Electrician-12 (+1)
+  Farming-14 (+3)
+  First Aid-11 (+0)
+  Freight Handling-11 (+0)
+  Meteorology-10 (-1)
+
+Name: Jesse Wilcox
+ ST: 13
+ DX: 12
+ IQ: 12
+ HT: 10
+ HP: 14
+ WILL: 13
+ PER: 15
+ FP: 12
+ Points: 160
+ Skills:
+  Administration-12 (+0)
+  Biology-10 (-2)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  Freight Handling-11 (-1)
+  Meteorology-12 (+0)
+
+Name: Logan Adams
+ ST: 13
+ DX: 9
+ IQ: 14
+ HT: 12
+ HP: 13
+ WILL: 15
+ PER: 17
+ FP: 13
+ Points: 154
+ Skills:
+  Accounting-12 (-2)
+  Administration-13 (-1)
+  Animal Handling-13 (-1)
+  Electrician-13 (-1)
+  Farming-17 (+3)
+  Freight Handling-14 (+0)
+  Meteorology-14 (+0)
+
+Name: David Moreno
+ ST: 16
+ DX: 10
+ IQ: 12
+ HT: 10
+ HP: 18
+ WILL: 16
+ PER: 12
+ FP: 12
+ Points: 154
+ Skills:
+  Accounting-11 (-1)
+  Administration-11 (-1)
+  Animal Handling-11 (-1)
+  Biology-10 (-2)
+  Electrician-11 (-1)
+  Farming-14 (+2)
+  First Aid-13 (+1)
+  Freight Handling-12 (+0)
+
+Name: Jonathan Kemp
+ ST: 12
+ DX: 12
+ IQ: 11
+ HT: 13
+ HP: 14
+ WILL: 14
+ PER: 11
+ FP: 15
+ Points: 160
+ Skills:
+  Administration-10 (-1)
+  Animal Handling-11 (+0)
+  Biology-9 (-2)
+  Electrician-11 (+0)
+  Farming-14 (+3)
+  First Aid-12 (+1)
+  Freight Handling-10 (-1)
+
+Name: Parker Henderson
+ ST: 10
+ DX: 13
+ IQ: 11
+ HT: 12
+ HP: 11
+ WILL: 12
+ PER: 14
+ FP: 15
+ Points: 155
+ Skills:
+  Administration-11 (+0)
+  Animal Handling-11 (+0)
+  Biology-10 (-1)
+  Electrician-11 (+0)
+  Farming-13 (+2)
+  First Aid-11 (+0)
+  Freight Handling-10 (-1)
+
+Name: John Butler
+ ST: 12
+ DX: 11
+ IQ: 10
+ HT: 17
+ HP: 15
+ WILL: 12
+ PER: 12
+ FP: 18
+ Points: 165
+ Skills:
+  Accounting-9 (-1)
+  Animal Handling-10 (+0)
+  Biology-8 (-2)
+  Electrician-9 (-1)
+  Farming-12 (+2)
+  First Aid-10 (+0)
+  Freight Handling-10 (+0)
+  Meteorology-10 (+0)
+
+Name: Joseph Stokes
+ ST: 9
+ DX: 13
+ IQ: 12
+ HT: 12
+ HP: 10
+ WILL: 12
+ PER: 14
+ FP: 15
+ Points: 151
+ Skills:
+  Accounting-10 (-2)
+  Administration-12 (+0)
+  Animal Handling-11 (-1)
+  Biology-9 (-3)
+  Electrician-11 (-1)
+  Farming-14 (+2)
+  First Aid-12 (+0)
+  Freight Handling-12 (+0)
+  Meteorology-12 (+0)
+
+Name: Colin Murphy
+ ST: 14
+ DX: 12
+ IQ: 10
+ HT: 11
+ HP: 16
+ WILL: 12
+ PER: 15
+ FP: 11
+ Points: 153
+ Skills:
+  Accounting-8 (-2)
+  Administration-9 (-1)
+  Animal Handling-9 (-1)
+  Electrician-10 (+0)
+  Farming-14 (+4)
+  First Aid-11 (+1)
+
+Name: Alexander Guerrero
+ ST: 12
+ DX: 12
+ IQ: 13
+ HT: 12
+ HP: 13
+ WILL: 13
+ PER: 14
+ FP: 13
+ Points: 170
+ Skills:
+  Accounting-12 (-1)
+  Administration-12 (-1)
+  Animal Handling-12 (-1)
+  Biology-11 (-2)
+  Electrician-12 (-1)
+  Farming-14 (+1)
+  Meteorology-14 (+1)
+
+Name: Daniel Charles
+ ST: 14
+ DX: 12
+ IQ: 10
+ HT: 12
+ HP: 17
+ WILL: 11
+ PER: 12
+ FP: 14
+ Points: 152
+ Skills:
+  Administration-10 (+0)
+  Animal Handling-10 (+0)
+  Electrician-11 (+1)
+  Farming-13 (+3)
+  Meteorology-9 (-1)
+
+Name: Joshua Lee
+ ST: 12
+ DX: 11
+ IQ: 12
+ HT: 12
+ HP: 15
+ WILL: 15
+ PER: 14
+ FP: 13
+ Points: 158
+ Skills:
+  Accounting-10 (-2)
+  Animal Handling-13 (+1)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  First Aid-12 (+0)
+  Freight Handling-11 (-1)
+
+Name: Kyle Edwards
+ ST: 15
+ DX: 11
+ IQ: 11
+ HT: 13
+ HP: 15
+ WILL: 11
+ PER: 12
+ FP: 15
+ Points: 152
+ Skills:
+  Accounting-10 (-1)
+  Administration-11 (+0)
+  Animal Handling-10 (-1)
+  Biology-8 (-3)
+  Electrician-10 (-1)
+  Farming-14 (+3)
+  Freight Handling-10 (-1)
+
+Name: Jayden Lawson
+ ST: 17
+ DX: 9
+ IQ: 11
+ HT: 14
+ HP: 20
+ WILL: 12
+ PER: 11
+ FP: 16
+ Points: 152
+ Skills:
+  Accounting-9 (-2)
+  Administration-10 (-1)
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-11 (+0)
+  Farming-13 (+2)
+  First Aid-12 (+1)
+  Freight Handling-10 (-1)
+  Meteorology-11 (+0)
+
+Name: Jesse Torres
+ ST: 12
+ DX: 11
+ IQ: 11
+ HT: 14
+ HP: 13
+ WILL: 16
+ PER: 11
+ FP: 16
+ Points: 157
+ Skills:
+  Accounting-10 (-1)
+  Animal Handling-11 (+0)
+  Biology-8 (-3)
+  Farming-15 (+4)
+  First Aid-11 (+0)
+  Meteorology-10 (-1)
+
+Name: Michael Barber
+ ST: 12
+ DX: 10
+ IQ: 12
+ HT: 12
+ HP: 15
+ WILL: 13
+ PER: 18
+ FP: 15
+ Points: 159
+ Skills:
+  Accounting-11 (-1)
+  Administration-12 (+0)
+  Animal Handling-12 (+0)
+  Biology-10 (-2)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  Freight Handling-12 (+0)
+
+Name: James Trujillo
+ ST: 11
+ DX: 11
+ IQ: 13
+ HT: 11
+ HP: 11
+ WILL: 16
+ PER: 14
+ FP: 14
+ Points: 150
+ Skills:
+  Accounting-11 (-2)
+  Administration-13 (+0)
+  Animal Handling-14 (+1)
+  Electrician-13 (+0)
+  Farming-15 (+2)
+  Meteorology-13 (+0)
+
+Name: Benjamin Williams
+ ST: 14
+ DX: 12
+ IQ: 10
+ HT: 14
+ HP: 15
+ WILL: 11
+ PER: 11
+ FP: 15
+ Points: 157
+ Skills:
+  Accounting-8 (-2)
+  Administration-11 (+1)
+  Animal Handling-10 (+0)
+  Biology-8 (-2)
+  Farming-12 (+2)
+  First Aid-10 (+0)
+  Freight Handling-9 (-1)
+
+Name: Luis Nelson
+ ST: 11
+ DX: 11
+ IQ: 12
+ HT: 13
+ HP: 14
+ WILL: 13
+ PER: 13
+ FP: 16
+ Points: 153
+ Skills:
+  Administration-11 (-1)
+  Animal Handling-12 (+0)
+  Biology-11 (-1)
+  Electrician-13 (+1)
+  Farming-14 (+2)
+  First Aid-12 (+0)
+  Freight Handling-12 (+0)
+  Meteorology-12 (+0)
+
+Name: Kevin Delacruz
+ ST: 12
+ DX: 10
+ IQ: 13
+ HT: 11
+ HP: 12
+ WILL: 16
+ PER: 16
+ FP: 14
+ Points: 154
+ Skills:
+  Accounting-11 (-2)
+  Administration-13 (+0)
+  Animal Handling-14 (+1)
+  Biology-12 (-1)
+  Electrician-13 (+0)
+  Farming-15 (+2)
+  First Aid-13 (+0)
+  Freight Handling-12 (-1)
+
+Name: Christopher Nicholson
+ ST: 9
+ DX: 13
+ IQ: 13
+ HT: 12
+ HP: 10
+ WILL: 13
+ PER: 13
+ FP: 14
+ Points: 156
+ Skills:
+  Accounting-12 (-1)
+  Administration-12 (-1)
+  Animal Handling-13 (+0)
+  Biology-11 (-2)
+  Farming-15 (+2)
+  First Aid-13 (+0)
+  Meteorology-12 (-1)
+
+Name: Cesar Nguyen
+ ST: 12
+ DX: 12
+ IQ: 11
+ HT: 12
+ HP: 15
+ WILL: 11
+ PER: 14
+ FP: 15
+ Points: 155
+ Skills:
+  Accounting-10 (-1)
+  Animal Handling-11 (+0)
+  Biology-9 (-2)
+  Electrician-11 (+0)
+  Farming-14 (+3)
+  Freight Handling-10 (-1)
+  Meteorology-10 (-1)
+
+Name: Jesus Davis
+ ST: 11
+ DX: 10
+ IQ: 15
+ HT: 12
+ HP: 11
+ WILL: 16
+ PER: 16
+ FP: 13
+ Points: 162
+ Skills:
+  Accounting-15 (+0)
+  Administration-15 (+0)
+  Animal Handling-15 (+0)
+  Electrician-14 (-1)
+  Farming-16 (+1)
+  First Aid-16 (+1)
+
+Name: Justin Cole
+ ST: 12
+ DX: 14
+ IQ: 10
+ HT: 10
+ HP: 14
+ WILL: 12
+ PER: 12
+ FP: 12
+ Points: 152
+ Skills:
+  Accounting-9 (-1)
+  Administration-9 (-1)
+  Biology-7 (-3)
+  Electrician-9 (-1)
+  Farming-13 (+3)
+  First Aid-11 (+1)
+  Freight Handling-9 (-1)
+
+Name: Ryan Burke
+ ST: 12
+ DX: 11
+ IQ: 12
+ HT: 14
+ HP: 14
+ WILL: 12
+ PER: 13
+ FP: 18
+ Points: 166
+ Skills:
+  Accounting-10 (-2)
+  Animal Handling-12 (+0)
+  Electrician-13 (+1)
+  Farming-15 (+3)
+  First Aid-14 (+2)
+
+Name: Nicholas Taylor
+ ST: 11
+ DX: 10
+ IQ: 14
+ HT: 11
+ HP: 13
+ WILL: 15
+ PER: 17
+ FP: 14
+ Points: 157
+ Skills:
+  Animal Handling-14 (+0)
+  Biology-12 (-2)
+  Electrician-15 (+1)
+  Farming-16 (+2)
+  First Aid-15 (+1)
+  Freight Handling-14 (+0)
+
+Name: Tristan Myers
+ ST: 11
+ DX: 10
+ IQ: 15
+ HT: 11
+ HP: 14
+ WILL: 15
+ PER: 16
+ FP: 11
+ Points: 150
+ Skills:
+  Administration-14 (-1)
+  Animal Handling-14 (-1)
+  Biology-12 (-3)
+  Electrician-15 (+0)
+  Farming-17 (+2)
+  First Aid-15 (+0)
+  Freight Handling-15 (+0)
+  Meteorology-15 (+0)
+
+Name: Johnathan Dunn
+ ST: 9
+ DX: 16
+ IQ: 8
+ HT: 13
+ HP: 11
+ WILL: 9
+ PER: 12
+ FP: 16
+ Points: 163
+ Skills:
+  Accounting-6 (-2)
+  Administration-8 (+0)
+  Animal Handling-9 (+1)
+  Electrician-8 (+0)
+  Farming-11 (+3)
+  First Aid-9 (+1)
+  Freight Handling-7 (-1)
+
+Name: Nathan Serrano
+ ST: 12
+ DX: 12
+ IQ: 11
+ HT: 11
+ HP: 15
+ WILL: 14
+ PER: 12
+ FP: 14
+ Points: 150
+ Skills:
+  Administration-12 (+1)
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-11 (+0)
+  Farming-14 (+3)
+  First Aid-12 (+1)
+  Meteorology-10 (-1)
+
+Name: Manuel Phillips
+ ST: 12
+ DX: 9
+ IQ: 12
+ HT: 16
+ HP: 15
+ WILL: 15
+ PER: 12
+ FP: 19
+ Points: 156
+ Skills:
+  Accounting-11 (-1)
+  Animal Handling-11 (-1)
+  Biology-10 (-2)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  First Aid-13 (+1)
+  Freight Handling-11 (-1)
+  Meteorology-11 (-1)
+
+Name: Gavin Justice
+ ST: 10
+ DX: 13
+ IQ: 12
+ HT: 13
+ HP: 11
+ WILL: 12
+ PER: 13
+ FP: 16
+ Points: 167
+ Skills:
+  Accounting-10 (-2)
+  Animal Handling-11 (-1)
+  Biology-9 (-3)
+  Farming-16 (+4)
+  First Aid-12 (+0)
+  Freight Handling-11 (-1)
+
+Name: Jeffrey Phillips
+ ST: 12
+ DX: 11
+ IQ: 12
+ HT: 14
+ HP: 12
+ WILL: 13
+ PER: 15
+ FP: 15
+ Points: 165
+ Skills:
+  Administration-12 (+0)
+  Animal Handling-11 (-1)
+  Biology-10 (-2)
+  Electrician-11 (-1)
+  Farming-15 (+3)
+  First Aid-12 (+0)
+  Freight Handling-11 (-1)
+  Meteorology-12 (+0)
+
+Name: Dylan Knox
+ ST: 13
+ DX: 13
+ IQ: 9
+ HT: 13
+ HP: 14
+ WILL: 10
+ PER: 12
+ FP: 16
+ Points: 156
+ Skills:
+  Animal Handling-9 (+0)
+  Biology-6 (-3)
+  Electrician-9 (+0)
+  Farming-12 (+3)
+  First Aid-10 (+1)
+  Freight Handling-9 (+0)
+  Meteorology-8 (-1)
+
+Name: Johnathan Silva
+ ST: 8
+ DX: 12
+ IQ: 14
+ HT: 14
+ HP: 9
+ WILL: 15
+ PER: 14
+ FP: 14
+ Points: 165
+ Skills:
+  Accounting-12 (-2)
+  Administration-14 (+0)
+  Animal Handling-15 (+1)
+  Biology-11 (-3)
+  Electrician-14 (+0)
+  Farming-15 (+1)
+
+Name: Evan Alexander
+ ST: 12
+ DX: 14
+ IQ: 11
+ HT: 10
+ HP: 15
+ WILL: 12
+ PER: 13
+ FP: 11
+ Points: 166
+ Skills:
+  Administration-10 (-1)
+  Animal Handling-12 (+1)
+  Biology-8 (-3)
+  Electrician-12 (+1)
+  Farming-13 (+2)
+  Meteorology-10 (-1)
+
+Name: Thomas Moore
+ ST: 13
+ DX: 10
+ IQ: 13
+ HT: 12
+ HP: 14
+ WILL: 13
+ PER: 17
+ FP: 13
+ Points: 157
+ Skills:
+  Accounting-11 (-2)
+  Administration-13 (+0)
+  Biology-10 (-3)
+  Electrician-14 (+1)
+  Farming-16 (+3)
+  First Aid-13 (+0)
+  Freight Handling-12 (-1)
+
+Name: Andrew Cherry
+ ST: 9
+ DX: 10
+ IQ: 15
+ HT: 13
+ HP: 11
+ WILL: 16
+ PER: 16
+ FP: 16
+ Points: 168
+ Skills:
+  Accounting-13 (-2)
+  Administration-15 (+0)
+  Animal Handling-16 (+1)
+  Biology-13 (-2)
+  Electrician-14 (-1)
+  Farming-17 (+2)
+  Freight Handling-15 (+0)
+  Meteorology-14 (-1)
+
+Name: Alejandro Leach
+ ST: 11
+ DX: 11
+ IQ: 13
+ HT: 12
+ HP: 13
+ WILL: 13
+ PER: 16
+ FP: 13
+ Points: 153
+ Skills:
+  Accounting-12 (-1)
+  Administration-12 (-1)
+  Animal Handling-13 (+0)
+  Biology-10 (-3)
+  Electrician-14 (+1)
+  Farming-14 (+1)
+  First Aid-14 (+1)
+  Freight Handling-13 (+0)
+
+Name: Nathan Holloway
+ ST: 10
+ DX: 13
+ IQ: 10
+ HT: 12
+ HP: 13
+ WILL: 17
+ PER: 11
+ FP: 12
+ Points: 150
+ Skills:
+  Accounting-9 (-1)
+  Animal Handling-10 (+0)
+  Biology-7 (-3)
+  Electrician-10 (+0)
+  Farming-13 (+3)
+  First Aid-11 (+1)
+  Meteorology-10 (+0)
+
+Name: Peyton Jordan
+ ST: 13
+ DX: 10
+ IQ: 12
+ HT: 13
+ HP: 16
+ WILL: 13
+ PER: 15
+ FP: 15
+ Points: 158
+ Skills:
+  Accounting-10 (-2)
+  Administration-12 (+0)
+  Animal Handling-13 (+1)
+  Biology-10 (-2)
+  Electrician-13 (+1)
+  Farming-14 (+2)
+  Freight Handling-12 (+0)
+  Meteorology-12 (+0)
+
+Name: Elijah Wilson
+ ST: 9
+ DX: 14
+ IQ: 11
+ HT: 14
+ HP: 10
+ WILL: 11
+ PER: 13
+ FP: 14
+ Points: 161
+ Skills:
+  Animal Handling-10 (-1)
+  Biology-9 (-2)
+  Electrician-12 (+1)
+  Farming-12 (+1)
+  First Aid-11 (+0)
+  Freight Handling-10 (-1)
+  Meteorology-10 (-1)
+
+Name: Mario Morgan
+ ST: 12
+ DX: 12
+ IQ: 13
+ HT: 10
+ HP: 13
+ WILL: 14
+ PER: 15
+ FP: 11
+ Points: 160
+ Skills:
+  Administration-12 (-1)
+  Biology-11 (-2)
+  Electrician-13 (+0)
+  Farming-15 (+2)
+  Freight Handling-12 (-1)
+  Meteorology-14 (+1)
+
+Name: Jose Robinson
+ ST: 14
+ DX: 10
+ IQ: 13
+ HT: 12
+ HP: 17
+ WILL: 13
+ PER: 14
+ FP: 15
+ Points: 164
+ Skills:
+  Accounting-11 (-2)
+  Administration-12 (-1)
+  Animal Handling-12 (-1)
+  Biology-12 (-1)
+  Electrician-14 (+1)
+  Farming-15 (+2)
+  Freight Handling-13 (+0)
+
+Name: Marcus Smith
+ ST: 13
+ DX: 12
+ IQ: 11
+ HT: 11
+ HP: 13
+ WILL: 12
+ PER: 16
+ FP: 13
+ Points: 159
+ Skills:
+  Accounting-10 (-1)
+  Administration-12 (+1)
+  Animal Handling-12 (+1)
+  Electrician-10 (-1)
+  Farming-12 (+1)
+  First Aid-12 (+1)
+  Freight Handling-10 (-1)
+  Meteorology-10 (-1)
+
+Name: Dylan Gray
+ ST: 14
+ DX: 10
+ IQ: 11
+ HT: 11
+ HP: 17
+ WILL: 18
+ PER: 14
+ FP: 12
+ Points: 157
+ Skills:
+  Administration-10 (-1)
+  Animal Handling-12 (+1)
+  Biology-8 (-3)
+  Farming-15 (+4)
+  First Aid-12 (+1)
+  Meteorology-11 (+0)
+
+Name: Isaiah Silva
+ ST: 12
+ DX: 10
+ IQ: 15
+ HT: 9
+ HP: 14
+ WILL: 16
+ PER: 17
+ FP: 10
+ Points: 152
+ Skills:
+  Administration-16 (+1)
+  Animal Handling-14 (-1)
+  Electrician-15 (+0)
+  Farming-16 (+1)
+  First Aid-16 (+1)
+  Freight Handling-15 (+0)
+  Meteorology-15 (+0)
+
+Name: Joseph Curtis
+ ST: 9
+ DX: 13
+ IQ: 11
+ HT: 15
+ HP: 9
+ WILL: 12
+ PER: 13
+ FP: 16
+ Points: 158
+ Skills:
+  Accounting-10 (-1)
+  Administration-10 (-1)
+  Biology-8 (-3)
+  Electrician-11 (+0)
+  Farming-13 (+2)
+  First Aid-11 (+0)
+  Freight Handling-10 (-1)
+
+Name: Ethan Fleming
+ ST: 8
+ DX: 12
+ IQ: 12
+ HT: 14
+ HP: 10
+ WILL: 13
+ PER: 15
+ FP: 17
+ Points: 156
+ Skills:
+  Accounting-10 (-2)
+  Administration-12 (+0)
+  Animal Handling-12 (+0)
+  Biology-9 (-3)
+  Electrician-12 (+0)
+  Farming-15 (+3)
+  First Aid-12 (+0)
+  Meteorology-11 (-1)
+
+Name: Logan Mclaughlin
+ ST: 11
+ DX: 13
+ IQ: 10
+ HT: 13
+ HP: 12
+ WILL: 12
+ PER: 13
+ FP: 15
+ Points: 157
+ Skills:
+  Administration-10 (+0)
+  Animal Handling-10 (+0)
+  Biology-8 (-2)
+  Farming-13 (+3)
+  First Aid-11 (+1)
+  Freight Handling-10 (+0)
+  Meteorology-9 (-1)
+
+Name: Juan Crosby
+ ST: 11
+ DX: 10
+ IQ: 13
+ HT: 15
+ HP: 12
+ WILL: 16
+ PER: 13
+ FP: 17
+ Points: 166
+ Skills:
+  Administration-13 (+0)
+  Animal Handling-13 (+0)
+  Biology-10 (-3)
+  Electrician-14 (+1)
+  Farming-15 (+2)
+  First Aid-14 (+1)
+  Freight Handling-12 (-1)
+  Meteorology-13 (+0)
+
+Name: Nathan Campbell
+ ST: 10
+ DX: 11
+ IQ: 13
+ HT: 13
+ HP: 12
+ WILL: 18
+ PER: 14
+ FP: 13
+ Points: 167
+ Skills:
+  Administration-13 (+0)
+  Animal Handling-12 (-1)
+  Biology-11 (-2)
+  Electrician-13 (+0)
+  Farming-16 (+3)
+  First Aid-13 (+0)
+  Freight Handling-12 (-1)
+
+Name: Cody Bentley
+ ST: 15
+ DX: 11
+ IQ: 10
+ HT: 12
+ HP: 15
+ WILL: 12
+ PER: 14
+ FP: 15
+ Points: 154
+ Skills:
+  Administration-10 (+0)
+  Biology-8 (-2)
+  Electrician-10 (+0)
+  Farming-13 (+3)
+  First Aid-10 (+0)
+  Freight Handling-10 (+0)
+  Meteorology-10 (+0)
+
+Name: Dylan Boyd
+ ST: 17
+ DX: 13
+ IQ: 9
+ HT: 9
+ HP: 19
+ WILL: 12
+ PER: 11
+ FP: 11
+ Points: 161
+ Skills:
+  Accounting-7 (-2)
+  Administration-9 (+0)
+  Animal Handling-10 (+1)
+  Biology-7 (-2)
+  Electrician-10 (+1)
+  Farming-10 (+1)
+  First Aid-10 (+1)
+  Freight Handling-8 (-1)
+  Meteorology-9 (+0)
+
+Name: William Finch
+ ST: 11
+ DX: 12
+ IQ: 13
+ HT: 9
+ HP: 12
+ WILL: 15
+ PER: 18
+ FP: 11
+ Points: 166
+ Skills:
+  Accounting-12 (-1)
+  Animal Handling-13 (+0)
+  Electrician-13 (+0)
+  Farming-16 (+3)
+  Freight Handling-12 (-1)
+
+Name: Nathaniel Scott
+ ST: 12
+ DX: 11
+ IQ: 13
+ HT: 11
+ HP: 14
+ WILL: 13
+ PER: 15
+ FP: 13
+ Points: 152
+ Skills:
+  Accounting-12 (-1)
+  Biology-10 (-3)
+  Electrician-14 (+1)
+  Farming-15 (+2)
+  First Aid-14 (+1)
+  Meteorology-13 (+0)
+
+Name: Jacob Fuller
+ ST: 11
+ DX: 13
+ IQ: 10
+ HT: 15
+ HP: 11
+ WILL: 10
+ PER: 12
+ FP: 18
+ Points: 161
+ Skills:
+  Accounting-8 (-2)
+  Electrician-10 (+0)
+  Farming-13 (+3)
+  First Aid-11 (+1)
+  Freight Handling-9 (-1)
+  Meteorology-10 (+0)
+
+Name: Anthony Foster
+ ST: 10
+ DX: 12
+ IQ: 10
+ HT: 15
+ HP: 12
+ WILL: 11
+ PER: 13
+ FP: 19
+ Points: 159
+ Skills:
+  Accounting-9 (-1)
+  Animal Handling-10 (+0)
+  Biology-9 (-1)
+  Farming-15 (+5)
+  First Aid-10 (+0)
+  Freight Handling-9 (-1)
+  Meteorology-10 (+0)
+
+Name: Michael Jackson
+ ST: 17
+ DX: 11
+ IQ: 10
+ HT: 12
+ HP: 19
+ WILL: 12
+ PER: 10
+ FP: 14
+ Points: 154
+ Skills:
+  Animal Handling-10 (+0)
+  Biology-7 (-3)
+  Electrician-11 (+1)
+  Farming-13 (+3)
+  Freight Handling-9 (-1)
+
+Name: Jesus Thomas
+ ST: 10
+ DX: 10
+ IQ: 14
+ HT: 14
+ HP: 12
+ WILL: 15
+ PER: 16
+ FP: 15
+ Points: 164
+ Skills:
+  Accounting-13 (-1)
+  Administration-13 (-1)
+  Biology-11 (-3)
+  Electrician-14 (+0)
+  Farming-17 (+3)
+  First Aid-14 (+0)
+  Meteorology-13 (-1)
+
+Name: Isaac Adams
+ ST: 11
+ DX: 10
+ IQ: 15
+ HT: 12
+ HP: 12
+ WILL: 16
+ PER: 16
+ FP: 13
+ Points: 165
+ Skills:
+  Animal Handling-14 (-1)
+  Biology-13 (-2)
+  Electrician-15 (+0)
+  Farming-17 (+2)
+  First Aid-16 (+1)
+  Freight Handling-14 (-1)
+  Meteorology-15 (+0)
+
+Name: Jacob Holland
+ ST: 11
+ DX: 13
+ IQ: 10
+ HT: 12
+ HP: 12
+ WILL: 13
+ PER: 14
+ FP: 13
+ Points: 153
+ Skills:
+  Accounting-8 (-2)
+  Administration-10 (+0)
+  Animal Handling-11 (+1)
+  Biology-7 (-3)
+  Electrician-9 (-1)
+  Farming-12 (+2)
+  Meteorology-10 (+0)
+
+Name: Carson Williams
+ ST: 12
+ DX: 13
+ IQ: 11
+ HT: 10
+ HP: 14
+ WILL: 13
+ PER: 13
+ FP: 13
+ Points: 156
+ Skills:
+  Administration-10 (-1)
+  Animal Handling-11 (+0)
+  Biology-8 (-3)
+  Electrician-11 (+0)
+  Farming-15 (+4)
+  Freight Handling-10 (-1)
+
+Name: Alan Green
+ ST: 14
+ DX: 11
+ IQ: 11
+ HT: 11
+ HP: 14
+ WILL: 15
+ PER: 15
+ FP: 14
+ Points: 167
+ Skills:
+  Accounting-9 (-2)
+  Administration-10 (-1)
+  Animal Handling-11 (+0)
+  Biology-9 (-2)
+  Electrician-12 (+1)
+  Farming-14 (+3)
+  First Aid-11 (+0)
+  Freight Handling-10 (-1)
+  Meteorology-10 (-1)
+
