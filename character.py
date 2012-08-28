@@ -4,6 +4,8 @@ import operator
 import random
 import sys
 import time
+import pickle
+import matplotlib.pyplot as plt
 
 """
 GURPS is a trademark of Steve Jackson Games, and its rules and art are copyrighted 
@@ -82,7 +84,7 @@ class Skill():
         dieRoll = list()
         for i in range(3):
             dieRoll.append(random.randint(1,6))
-        return  (self.SkillMod + self.AtributeValue) - sum(dieRoll)
+        return  (self.SkillMod + self.AtributeValue) - sum(dieRoll) + mods
 
     def Print(self):
         print "%s-%d (%+d)" %(self.Name, self.SkillMod + self.AtributeValue, self.SkillMod)
@@ -294,13 +296,34 @@ class CharSheet():
                 if selecton <= i[1]:
                     return i[0].title()
 
+x=list()
+for i in range(25):
+    x.append(CharSheet(5))
+    x[i].Roll('data/farmerTemplate.json',50,50)
+    #x[i].Print()
 
-x = list()
-for i in range(100):
-    x.append(CharSheet(8))
-    x[i].Roll('data/farmerTemplate.json',50,100)
-
-
-for i in x:
-    i.Print()
-    print
+oddsList = list()
+odds = float(0)
+oddsSub = float(0)
+runs=float(0)
+runsSub=float(0)
+food = 0
+for i in range(12*5):
+    oddsSub = float(0)
+    runsSub=float(0)
+    for j in x:
+        tmp = j.Skills["Farming"].Check(0)
+        if(tmp<0):
+            oddsSub = oddsSub*runsSub/(runsSub+1)
+        else:
+            food += 1
+            oddsSub = 1/(runsSub+1) + oddsSub*runsSub/(runsSub+1)
+        runsSub+=1
+    oddsList.append(oddsSub*100)
+    odds = oddsSub/(runs+1) + odds*runs/(runs+1)
+    runs+=1
+print "%.2f%%"%(odds*100)
+print "Food: %d"%(food)
+plt.hist(oddsList,range(-1,101,1))
+plt.ylim(0,12*5)
+plt.show()
