@@ -207,6 +207,7 @@ class CharSheet():
                     selection = i
                     break
 
+            # Update skill or add a new one
             if(selection in self.Skills):
                 self.Skills[selection].ModPoints(1)
             else:
@@ -241,11 +242,29 @@ class CharSheet():
         print " Skills:"      
         sortedSkills = sorted(self.Skills.iteritems(), key=operator.itemgetter(0))
         for i in sortedSkills:
-            print " ",i[1].GetPrint()
+            print " ",i[1].GetPrint()   
+
+    def PrintWiki(self):
+        print "!!!",self.name
+        wikiName = self.name.replace(' ',"_").replace(',','')
+        print "((Colony:NPC:Farmer:%s|SubPage))"%(wikiName)
+        print "||ST| %3d" % (self.ST)
+        print "DX| %3d" % (self.DX)
+        print "IQ| %3d" % (self.IQ)
+        print "HT| %3d" % (self.HT)
+        print "HP| %3d" % (self.HP)
+        print "WILL| %3d" % (self.WILL)
+        print "PER| %3d" % (self.PER)
+        print "FP| %3d" % (self.FP)
+        print "Points| %3d||" % (self.Points)
+        print "*Skills:"      
+        sortedSkills = sorted(self.Skills.iteritems(), key=operator.itemgetter(0))
+        for i in sortedSkills:
+            print "**",i[1].GetPrint()
 
 
     def GenerateName(self,gender="male"):
-        self.name = self.ParseNameFile('data/firstnames.csv',gender) + " " + self.ParseNameFile('data/lastnames.csv')
+        self.name = self.ParseNameFile('data/lastnames.csv') + ", " + self.ParseNameFile('data/firstnames.csv',gender)
 
     def ParseNameFile(self,namesFile,gender="male"):
         with open(namesFile,'r') as namesFile:
@@ -296,11 +315,14 @@ class CharSheet():
 
 
 x = list()
-for i in range(100):
-    x.append(CharSheet(8))
-    x[i].Roll('data/farmerTemplate.json',50,100)
+for i in range(10):
+    x.append(CharSheet(5))
+    x[i].Roll('data/workerTemplate.json',50,100)
 
+
+x = sorted(x, key=operator.attrgetter('name'))
 
 for i in x:
-    i.Print()
+    i.PrintWiki()
+    # i.Print()
     print
