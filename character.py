@@ -82,7 +82,7 @@ class Skill():
         dieRoll = list()
         for i in range(3):
             dieRoll.append(random.randint(1,6))
-        return  (self.SkillMod + self.AtributeValue) - sum(dieRoll)
+        return  (self.SkillMod + self.AtributeValue) - sum(dieRoll) + mods
 
     def Print(self):
         print "%s-%d (%+d)" %(self.Name, self.SkillMod + self.AtributeValue, self.SkillMod)
