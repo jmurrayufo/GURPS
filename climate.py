@@ -8,7 +8,7 @@ dateLandFall = datetime(2075,9,9)
 
 dateMissionEnd = datetime(2080,5,26)
 
-offsetDays = timedelta(1)
+offsetDays = timedelta(2)
 
 timeToday = timedelta(hours=20,minutes=1,seconds=0)
 
@@ -37,8 +37,11 @@ def Weather(date,wtype=0):
     assert type(date) == type(datetime(1,1,1)),"Date must be of type Datetime. Is of type %s" %(type(date))
     assert type(wtype) == type(int()),"Wtype MUST be of type int, is of type %s."%(type(wtype))
 
-    hourProgress = date.time().minute*60 + date.time().second
+    hourProgress = date.minute*60 + date.second
     hourProgress /= 60.*60.
+
+    yearProgress = date-date.replace(month=1,day=1,hour=0,minute=0,second=0)
+    yearProgress = yearProgress.total_seconds()/31557600.0
 
     if(wtype==0):
         jumpValue=0
@@ -52,7 +55,9 @@ def Weather(date,wtype=0):
     random.seed(date.replace(minute=0,second=0) + timedelta(hours=1))
     random.jumpahead(jumpValue)
     b=random.random()
-    print "Weather(date):",Cosine_Interpolate(a,b,hourProgress)
+    print "Weather(date):",date
+    print Cosine_Interpolate(a,b,hourProgress)
+    print "yearProgress",yearProgress
 
 def Cosine_Interpolate(a, b, x):
     ft = x * 3.1415927
@@ -62,11 +67,11 @@ def Cosine_Interpolate(a, b, x):
 
 ### Output ###
 
-print "Arrived:", dateLandFall.date()
-print "  Today:", (dateLandFall + offsetDays).date()
-print "    Now:", timeToday
-print "Mission Timer:",missionElapsed
-print "Days Remaining:",(dateMissionEnd - dateLandFall).days
+# print "Arrived:", dateLandFall.date()
+# print "  Today:", (dateLandFall + offsetDays).date()
+# print "    Now:", timeToday
+# print "Mission Timer:",missionElapsed
+# print "Days Remaining:",(dateMissionEnd - dateLandFall).days
 
 # print "Moon 1 Phase",sin(2*pi*missionElapsed/(moon1Period * 24 * 60 * 60))
 
