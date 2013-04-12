@@ -1,0 +1,16 @@
+{
+    "TL": 10,
+    "Name": "Laser Rifle",
+    "Damage": "6d(2) Burn",
+    "Acc": 12,
+    "Range": "700/2100",
+    "Weight": "8/Dp",
+    "RoF": 10,
+    "Shots": "83(5)",
+    "ST": 7,
+    "Bulk": -4,
+    "Rcl": 1,
+    "Cost": 8000,
+    "LC": 2,
+    "Notes": "Page 177"
+}
