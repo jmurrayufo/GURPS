@@ -135,6 +135,9 @@ class CharSheet( ):
     def __str__(self):
         return self.Name
 
+    def __repr__(self):
+        return {"name":self.Name}
+
     def GetAtributeValue( self, attribStr ):
         assert( type( attribStr ) == type( str( ) ) )
 
@@ -171,6 +174,12 @@ class CharSheet( ):
         for i in sortedSkills:
             print " ",i[1].GetPrint()
 
+class CharSheetEncoder(json.JSONEncoder):
+    # Much work to be done here!
+    def default(self,obj):
+        assert( type( obj ) == type( CharSheet( ) ) )
+        return obj.__dict__
+
 # Register out exit routine so that the function holds for user input at the end. This
 #   makes for cleaner debugging. 
 def ExitPrompt():
@@ -183,11 +192,9 @@ atexit.register(ExitPrompt)
 # main() more or less...
 player = CharSheet()
 print player.GetAtributeValue("name")
-print json.dumps({"name":"greg"})
 
-# fp = open("output.json","w")
-# json.dump(player,fp)
-# fp.close()
+fp = open("output.json","w")
+json.dump( player, fp, cls=CharSheetEncoder, indent=1)
+fp.close()
 
-print player.__dict__
 print "It works!"
