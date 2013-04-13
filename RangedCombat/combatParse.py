@@ -187,16 +187,11 @@ class RangedAttackCalculator():
             selection()
 
    def PromptEnterAttributes( self ):      
-      
-
       print "Answer the prompts!"
       print "Pressing enter will skip the step and leave the current value in place!"
 
       for i in self.PromptMenu:
          i[1]( i[2], i[3] )
-
-
-
 
    def PromptChangeGenericInt( self, attribName, prettyName = None ):
       if( prettyName == None ):
