@@ -3,6 +3,7 @@ import re
 import types
 import time
 import glob
+import os
 
 
 class Weapon( ):
@@ -291,12 +292,12 @@ class RangedAttackCalculator():
          try:
             tmp = input(">")
          except NameError:
-            print "NameError: %s must be an int"%( attribName )
+            print "NameError: Weapon Selection must be an int"
             continue
          except SyntaxError:
             break
          if( type( tmp ) != types.IntType ):
-            print "TypeError: %s must be an int"%( attribName )
+            print "TypeError: Weapon Selection must be an int"
             continue
          try:
             self.Weapon = self.WeaponList[tmp]
@@ -334,7 +335,7 @@ class RangedAttackCalculator():
 
    def PrintOptions( self ):
       print "\n\n\n   ===Selected Options==="
-      print "      ===Base Stats==="
+      print "       ===Base Stats==="
       print "    DX:    %2d         Skill:    %2d"%( self.DX, self.Skill )
       print "       ===Situation==="
       print "    SM:  %4.1f         Range:  %4.1f"%( self.SM, self.Range )
@@ -518,6 +519,14 @@ class RangedAttackCalculator():
       print "Press enter to accept and use a score of 0"
       raw_input()
       return 0
+
+os.system('cls')
+print "Welcome to the Ranged Combat Calculator!"
+print "There is no load/save functionality at the moment (sorry!)"
+print "This program uses a lot of screen space, so I suggest you expand your window"
+print " before you continue."
+print "Press Enter to continue..."
+raw_input()
 
 
 UI = RangedAttackCalculator()
