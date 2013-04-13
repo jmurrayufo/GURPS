@@ -106,7 +106,7 @@ class RangedAttackCalculator():
       self.SM = 2
       self.Range = 0
       self.Speed = 0
-      self.HitLoc = "None"
+      self.HitLoc = "Torso"
       self.DarkFog = 0
       self.CanSee = True
       self.KnowLoc = True
@@ -521,6 +521,7 @@ class RangedAttackCalculator():
       return 0
 
 os.system('cls')
+
 print "Welcome to the Ranged Combat Calculator!"
 print "There is no load/save functionality at the moment (sorry!)"
 print "This program uses a lot of screen space, so I suggest you expand your window"
@@ -528,6 +529,7 @@ print " before you continue."
 print "Press Enter to continue..."
 raw_input()
 
+os.system('cls')
 
 UI = RangedAttackCalculator()
 
