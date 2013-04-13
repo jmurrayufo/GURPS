@@ -1,0 +1,16 @@
+{
+    "TL": 10,
+    "Name": "Sonic Stund Pistol",
+    "Damage": "HT-3(5) aff",
+    "Acc": 3,
+    "Range": "30/100",
+    "Weight": "1.8/Dp",
+    "RoF": 1,
+    "Shots": "66(5)",
+    "ST": 4,
+    "Bulk": -2,
+    "Rcl": 1,
+    "Cost": 650,
+    "LC": 4,
+    "Notes": ""
+}
