@@ -355,6 +355,13 @@ class RangedAttackCalculator():
    def HelpUserWithMath( self ):
       print "This section has yet to be done"
 
+   def PrintErrorGuide( self ):
+      """
+      Try to find errors in the users numbers and display them!
+      """
+      # Known issues:
+         # Shots fired can exceed the RoF of the Weapon AND the Shots in the weapon
+
    def PrintGunDetails( self ):
       print 
       try:
