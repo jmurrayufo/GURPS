@@ -155,7 +155,9 @@ class RangedAttackCalculator():
          ("Quit",exit),
          ("Change Attribute",self.PromptSelectAttribute ),
          ("Enter ALL Attributes",self.PromptEnterAttributes ),
-         ("Change Weapon",self.PromptChangeWeapon )
+         ("Change Weapon",self.PromptChangeWeapon ),
+         ("Walk Through Math",self.HelpUserWithMath),
+         ("Print Gun Details",self.PrintGunDetails)
          ]
       while True:
          # Print out the current stats and such
@@ -349,6 +351,20 @@ class RangedAttackCalculator():
       print "       ===Result==="
       print "FINAL RESULT: >>> %d <<<"%( self.Mod )
 
+   def HelpUserWithMath( self ):
+      print "This section has yet to be done"
+
+   def PrintGunDetails( self ):
+      print 
+      try:
+         self.Weapon.PrintDetailed()
+      except AttributeError:
+         print "You need to select a gun first!"
+
+      print "Hit enter to return to main menu..."
+      raw_input()
+
+
    def UpdateWeaponsList( self ):
       # Object Fields
       self.WeaponList = list()
@@ -503,11 +519,6 @@ class RangedAttackCalculator():
       raw_input()
       return 0
 
-
-
-
-
-files = ["laserrifle.json"]
 
 UI = RangedAttackCalculator()
 
