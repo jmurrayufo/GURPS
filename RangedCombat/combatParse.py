@@ -97,6 +97,7 @@ class Weapon( ):
       print " Notes:",       self.Notes
 
 class RangedAttackCalculator():
+
    def __init__( self ):
       # User input Fields
       self.DX = 0
@@ -115,12 +116,34 @@ class RangedAttackCalculator():
       self.Bracing = False
       self.Shock = 0
       self.AllOutAttack = False
-      self.MoveAndAttack = False
+      self.MoveAndAttack = 0
       self.PopUpAttack = False
       self.MiscBonus = 0
 
       # Object Fields
       self.Mod = None
+
+
+      self.PromptMenu = [
+         ("DX", self.PromptChangeGenericInt, "DX", None),
+         ("Skill", self.PromptChangeGenericInt, "Skill", None),
+         ("SM", self.PromptChangeGenericFloat, "SM", None),
+         ("Range", self.PromptChangeGenericFloat, "Range", None),
+         ("Speed", self.PromptChangeGenericFloat, "Speed", None),
+         ("DarkFog", self.PromptChangeGenericInt, "DarkFog", None),
+         ("CanSee", self.PromptChangeGenericBool, "CanSee", None),
+         ("KnowLoc", self.PromptChangeGenericBool, "KnowLoc", None),
+         ("Concealment", self.PromptChangeGenericBool, "Concealment", None),
+         ("HitLoc", self.PromptChangeHitLoc, None, None),
+         ("RoundsAiming", self.PromptChangeGenericInt, "RoundsAiming", None),
+         ("ShotsFired", self.PromptChangeGenericInt, "ShotsFired", None),
+         ("Bracing", self.PromptChangeGenericBool, "Bracing", None),
+         ("Shock", self.PromptChangeGenericInt, "Shock", None),
+         ("AllOutAttack", self.PromptChangeGenericBool, "AllOutAttack", None),
+         ("MoveAndAttack", self.PromptChangeGenericInt, "MoveAndAttack", None),
+         ("PopUpAttack", self.PromptChangeGenericBool, "PopUpAttack", None),
+         ("MiscBonus", self.PromptChangeGenericInt, "MiscBonus", None)
+         ]
 
       self.UpdateWeaponsList()
 
@@ -160,10 +183,17 @@ class RangedAttackCalculator():
          if( type( selection ) == types.FunctionType or types.InstanceType):
             selection()
 
-   def PromptEnterAttributes( self ):
-      print "\n\nPromptEnterAttributes() needs to be writen!"
-      print "Press enter to continue"
-      raw_input()
+   def PromptEnterAttributes( self ):      
+      
+
+      print "Answer the prompts!"
+      print "Pressing enter will skip the step and leave the current value in place!"
+
+      for i in self.PromptMenu:
+         i[1]( i[2], i[3] )
+
+
+
 
    def PromptChangeGenericInt( self, attribName, prettyName = None ):
       if( prettyName == None ):
@@ -237,8 +267,10 @@ class RangedAttackCalculator():
             print "[%2d] %s"% ( idx, val )
          try:
             selection = input(">")
-         except (SyntaxError, NameError):
+         except NameError:
             continue
+         except SyntaxError:
+            break
 
          try:
             self.HitLoc = menu[selection]
@@ -272,29 +304,9 @@ class RangedAttackCalculator():
          break
 
    def PromptSelectAttribute( self ):
-      menu = [
-         ("DX", self.PromptChangeGenericInt, "DX", None),
-         ("Skill", self.PromptChangeGenericInt, "Skill", None),
-         ("SM", self.PromptChangeGenericFloat, "SM", None),
-         ("Range", self.PromptChangeGenericFloat, "Range", None),
-         ("Speed", self.PromptChangeGenericFloat, "Speed", None),
-         ("DarkFog", self.PromptChangeGenericInt, "DarkFog", None),
-         ("CanSee", self.PromptChangeGenericBool, "CanSee", None),
-         ("KnowLoc", self.PromptChangeGenericBool, "KnowLoc", None),
-         ("Concealment", self.PromptChangeGenericBool, "Concealment", None),
-         ("HitLoc", self.PromptChangeHitLoc, None),
-         ("RoundsAiming", self.PromptChangeGenericInt, "RoundsAiming", None),
-         ("ShotsFired", self.PromptChangeGenericInt, "ShotsFired", None),
-         ("Bracing", self.PromptChangeGenericBool, "Bracing", None),
-         ("Shock", self.PromptChangeGenericInt, "Shock", None),
-         ("AllOutAttack", self.PromptChangeGenericBool, "AllOutAttack", None),
-         ("MoveAndAttack", self.PromptChangeGenericBool, "MoveAndAttack", None),
-         ("PopUpAttack", self.PromptChangeGenericBool, "PopUpAttack", None),
-         ("MiscBonus", self.PromptChangeGenericInt, "MiscBonus", None)
-         ]
       while True:   
          print "\n\n\n=== Attributes ==="
-         for idx,val in enumerate( menu ):
+         for idx,val in enumerate( self.PromptMenu ):
             print "[%2d] %s"% ( idx, val[0] )
          # Get User Input
 
@@ -304,17 +316,17 @@ class RangedAttackCalculator():
             return
 
          try:
-            funcCall = menu[selection][1]
+            funcCall = self.PromptMenu[selection][1]
          except IndexError:
             continue
 
          if( type( funcCall ) == types.FunctionType 
             or type(funcCall ) == types.InstanceType 
             or type( funcCall ) == types.MethodType ):
-            funcCall(menu[selection][2])
+            funcCall(self.PromptMenu[selection][2])
             break
          if( funcCall == None ):
-            print "\n\nPromptChange%s() needs to be writen!"%( menu[selection][0] )
+            print "\n\nPromptChange%s() needs to be writen!"%( self.PromptMenu[selection][0] )
             print "Press enter to continue"
             raw_input()
 
@@ -331,11 +343,11 @@ class RangedAttackCalculator():
       print "       HitLoc: %6s         Weapon: %s"%( self.HitLoc, self.Weapon )
       print " RoundsAiming:     %2d     ShotsFired: %d"%( self.RoundsAiming, self.ShotsFired )
       print "      Bracing:  %5s   AllOutAttack: %5s"%( self.Bracing, self.AllOutAttack )
-      print "MoveAndAttack:  %5s    PopUpAttack: %s"%( self.MoveAndAttack, self.PopUpAttack )
+      print "MoveAndAttack:     %2d    PopUpAttack: %s"%( self.MoveAndAttack, self.PopUpAttack )
       print "       ===GM Choices==="
       print "MiscBonus:",  self.MiscBonus
       print "       ===Result==="
-      print "FINAL RESULT: >> %d <<"%( self.Mod )
+      print "FINAL RESULT: >>> %d <<<"%( self.Mod )
 
    def UpdateWeaponsList( self ):
       # Object Fields
@@ -367,18 +379,18 @@ class RangedAttackCalculator():
       self.Mod += self.CalcHitLocation( self.HitLoc )
       self.Mod += self.CalcVisionEffects( self.CanSee,       self.KnowLoc, 
                                           self.DarkFog, self.Concealment )
-      # Weapon
-         # Gun Acc.
-         # Weapon Bulk
-         # Recoil
-      # Rounds Aiming
-      # Shots Fired
-      # Bracing
-      # Shock
-      # Att Out Attack
-      # Move Attack
-      # Pop-Up Attack
-      # Misc Bonus
+      self.Mod += self.CalcWeaponMods( self.RoundsAiming, self.PopUpAttack, 
+                                       self.MoveAndAttack )
+      if( self.Bracing ):
+         self.Mod += 1
+      self.Mod += self.Shock
+      if( self.AllOutAttack ):
+         # TODO: This only includes the Determinded attack from page 365, the suppression attack is different...
+         self.Mod += 1
+      self.Mod += self.MiscBonus
+      self.Mod += self.CalcRateOfFireBonus( self.ShotsFired )
+      # TODO:
+         # Calculate Rate of Fire table for the player
 
    def CalcSpeedAndRange( self, distance, speed ):
       ranges = (
@@ -450,6 +462,47 @@ class RangedAttackCalculator():
        tmp = -2
 
       return max(-10,tmp + argDarkFog)
+
+   def CalcWeaponMods( self, argAcc, argPopup, argMoveAndAttack ):
+      if( self.Weapon == None ):
+         return 0
+      retVal = 0
+      
+      if( argAcc ):
+         if( argAcc >= 1 ):
+            retVal += self.Weapon.Acc
+         if( argAcc >= 2 ):
+            retVal += 1
+         if( argAcc >= 3 ):
+            retVal += 1
+      
+      if( argPopup ):
+         retVal += -2
+      
+      retVal += self.Weapon.Bulk * argMoveAndAttack
+      
+      return retVal
+
+   def CalcRateOfFireBonus( self, argShotsFired ):
+      shotsTbl = (
+         (4,0),
+         (8,1),
+         (12,2),
+         (16,3),
+         (24,4),
+         (49,5),
+         (99,6)
+         )
+
+      for i in shotsTbl:
+         if argShotsFired <= i[0]:
+            return i[1]
+
+      print "WARNING! Shots Fired exceeds legal limits!"
+      print "Press enter to accept and use a score of 0"
+      raw_input()
+      return 0
+
 
 
 
