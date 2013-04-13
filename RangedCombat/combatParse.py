@@ -2,12 +2,16 @@ import json
 import re
 import types
 import time
+import glob
 
 
 class Weapon( ):
 
    # Parse and generator
-   def __init__( self, jsonTable ):
+   def __init__( self, jsonFile ):
+      with open( jsonFile, 'r' ) as fp:
+         jsonTable = json.load(fp)   
+
       self.TL     = jsonTable['TL']
       self.Name   = jsonTable['Name']
       self.Damage = self.ParseDamage( jsonTable['Damage'] )
@@ -93,19 +97,19 @@ class Weapon( ):
       print " Notes:",       self.Notes
 
 class RangedAttackCalculator():
-   def __init__( self, WeaponObj ):
+   def __init__( self ):
       # User input Fields
       self.DX = 0
       self.Skill = 0
       self.SM = 2
       self.Range = 0
       self.Speed = 0
-      self.HitLoc = None
+      self.HitLoc = "None"
       self.DarkFog = 0
       self.CanSee = True
       self.KnowLoc = True
       self.Concealment = False
-      self.Weapon = WeaponObj
+      self.Weapon = None
       self.RoundsAiming = 0
       self.ShotsFired = 1
       self.Bracing = False
@@ -118,15 +122,21 @@ class RangedAttackCalculator():
       # Object Fields
       self.Mod = None
 
-   # User Interaction
+      self.UpdateWeaponsList()
+
+   # ********************************
+   # ******* User Interaction *******
+   # ********************************
    def Main( self ):
       menu = [
          ("Quit",exit),
          ("Change Attribute",self.PromptSelectAttribute ),
-         ("Enter ALL Attributes",self.PromptEnterAttributes )
+         ("Enter ALL Attributes",self.PromptEnterAttributes ),
+         ("Change Weapon",self.PromptChangeWeapon )
          ]
       while True:
          # Print out the current stats and such
+         self.CalculateBaseScore()
          self.PrintOptions()
 
          # Get User Input
@@ -216,13 +226,51 @@ class RangedAttackCalculator():
             continue
          break
 
-   def PromptChangeWeapon( self, dummyVar ):
-      print "\n\nPromptChangeWeapon needs to be writen!"
-      print "Press enter to continue"
-      raw_input()
+   def PromptChangeHitLoc( self, *dummyArgs1, **dummyArgs2):
+      attribName = "HitLoc"
+      menu = [ "Arm","Eye","Face","Foot","Groin","Hand","Leg",
+         "Neck","None","Skull","Torso","Vitals" ]
+      while True:
+         print "\n%s = %s"%( attribName, getattr( self, attribName ) )
+         print "Enter New %s"%( attribName )
+         for idx,val in enumerate( menu ):
+            print "[%2d] %s"% ( idx, val )
+         try:
+            selection = input(">")
+         except (SyntaxError, NameError):
+            continue
 
+         try:
+            self.HitLoc = menu[selection]
+         except IndexError:
+            continue
+         break
 
-   # Attribute Modification Prompts
+   def PromptChangeWeapon( self ):
+      while True:
+         self.UpdateWeaponsList()
+         print "\n\n\n   ===Select a Weapon==="
+         print "Note: Weapons list has been reloaded from HDD. Reselect weapon to refresh"
+         for idx,val in enumerate( self.WeaponList ):
+            print "[%d] %s"%( idx, val.__str__( ) )
+
+         try:
+            tmp = input(">")
+         except NameError:
+            print "NameError: %s must be an int"%( attribName )
+            continue
+         except SyntaxError:
+            break
+         if( type( tmp ) != types.IntType ):
+            print "TypeError: %s must be an int"%( attribName )
+            continue
+         try:
+            self.Weapon = self.WeaponList[tmp]
+         except IndexError:
+            print "IndexError: Select a valid entry!"
+            continue
+         break
+
    def PromptSelectAttribute( self ):
       menu = [
          ("DX", self.PromptChangeGenericInt, "DX", None),
@@ -234,8 +282,7 @@ class RangedAttackCalculator():
          ("CanSee", self.PromptChangeGenericBool, "CanSee", None),
          ("KnowLoc", self.PromptChangeGenericBool, "KnowLoc", None),
          ("Concealment", self.PromptChangeGenericBool, "Concealment", None),
-         ("HitLoc", None, None),
-         ("Weapon", None, None),
+         ("HitLoc", self.PromptChangeHitLoc, None),
          ("RoundsAiming", self.PromptChangeGenericInt, "RoundsAiming", None),
          ("ShotsFired", self.PromptChangeGenericInt, "ShotsFired", None),
          ("Bracing", self.PromptChangeGenericBool, "Bracing", None),
@@ -288,16 +335,127 @@ class RangedAttackCalculator():
       print "       ===GM Choices==="
       print "MiscBonus:",  self.MiscBonus
       print "       ===Result==="
-      print "FINAL RESULT:",  self.Mod
+      print "FINAL RESULT: >> %d <<"%( self.Mod )
+
+   def UpdateWeaponsList( self ):
+      # Object Fields
+      self.WeaponList = list()
+
+      files = glob.glob('*.json')
+
+      # Init functionality
+      for i in files:
+         try:
+            self.WeaponList.append(Weapon(i))
+         except:
+            print "\nError, file \"%s\" was not parsed."%(i)
+            print "Hit enter to continue parsing other files"
+            raw_input()
+
+
+
+   # ************************************
+   # ******* Calculator Functions *******
+   # ************************************
+
+   def CalculateBaseScore( self ):
+      self.Mod = 0
+      self.Mod += self.DX
+      self.Mod += self.Skill
+      self.Mod += self.CalcSizeModifier( self.SM )
+      self.Mod += self.CalcSpeedAndRange( self.Range, self.Speed )
+      self.Mod += self.CalcHitLocation( self.HitLoc )
+      self.Mod += self.CalcVisionEffects( self.CanSee,       self.KnowLoc, 
+                                          self.DarkFog, self.Concealment )
+      # Weapon
+         # Gun Acc.
+         # Weapon Bulk
+         # Recoil
+      # Rounds Aiming
+      # Shots Fired
+      # Bracing
+      # Shock
+      # Att Out Attack
+      # Move Attack
+      # Pop-Up Attack
+      # Misc Bonus
+
+   def CalcSpeedAndRange( self, distance, speed ):
+      ranges = (
+         (2, 0 ),(3, -1 ),(5, -2 ),(7, -3 ),(10, -4 ),
+         (15, -5 ),(20, -6 ),(30, -7 ),(50, -8 ),(70, -9 ),
+         (100, -10 ),(150, -11 ),(200, -12 ),(300, -13 ),
+         (500, -14 ),(700, -15 ),(1000, -16 ),(1500, -17 ),
+         (2000, -18 ),(3000, -19 ),(5000, -20 ),(7000, -21 ),
+         (10000, -22 ),(15000, -23 ),(20000, -24 ),(30000, -25 ),
+         (50000, -26 ),(70000, -27 ),(100000, -28 ),(150000, -29 ),
+         (200000, -30 )
+         )
+      for i in ranges:
+         if distance + speed < i[0]:
+            return i[1]
+      print "WARNING! Speed and Range are outside of legal values!"
+      print "Press enter to accept and use a score of -30"
+      raw_input()
+      return -30
+
+   def CalcSizeModifier( self, size ):
+      sizeTbl = (
+         (0.006, -15),(0.009, -14),(0.014, -13),(0.019, -12),(0.028, -11),(0.042, -10),
+         (0.056, -9),(0.083, -8),(0.139, -7),(0.222, -6),(0.333, -5),(0.500, -4),
+         (0.667, -3),(1, -2),(1.5, -1),(2, 0),(3, 1),(5, 2),(7, 3),(10, 4),(15, 5),
+         (20, 6),(30, 7),(50, 8),(70, 9),(100, 10),(150, 11),(200, 12),(300, 13),
+         (500, 14),(700, 15),(1000,  16),(1500,  17),(2000,  18),(3000,  19),(5000,  20),
+         (7000,  21),(10000, 22),(15000, 23),(20000, 24),(30000, 25),(50000, 26),
+         (70000, 27),(100000, 28),(150000, 29),(200000, 30)
+         )
+      for i in sizeTbl:
+         if size < i[0]:
+            return i[1]
+      print "WARNING! Size is outside of legal values!"
+      print "Press enter to accept and use a score of -15"
+      raw_input()
+      return -15
+
+   def CalcHitLocation( self, location ):
+      hitLocDict = {
+         "Arm":-2,
+         "Eye":-9,
+         "Face":-5,
+         "Foot":-4,
+         "Groin":-3,
+         "Hand":-4,
+         "Leg":-2,
+         "Neck":-5,
+         "None":0,
+         "Skull":-7,
+         "Torso":0,
+         "Vitals":-3,
+         }
+      try:
+         return hitLocDict[location]
+      except KeyError:
+         print "WARNING! Hit location has an invalid key!"
+         print "Press enter to accept and use a score of -10"
+         raw_input()
+         return -10
+
+   def CalcVisionEffects( self, argCanSee, argKnowLoc, argDarkFog, argConcealment ):
+      tmp = 0
+      if( not argCanSee and not argKnowLoc ):
+       tmp = -6
+      elif( not argCanSee and argKnowLoc ):
+       tmp = -4
+      elif( argConcealment ):
+       tmp = -2
+
+      return max(-10,tmp + argDarkFog)
+
+
 
 
 files = ["laserrifle.json"]
 
-with open( files[0], 'r' ) as fp:
-    tmp = json.load(fp)
-
-tmp = Weapon(tmp)
-
-UI = RangedAttackCalculator( tmp )
+UI = RangedAttackCalculator()
 
 UI.Main()
