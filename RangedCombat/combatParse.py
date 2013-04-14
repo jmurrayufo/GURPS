@@ -131,13 +131,13 @@ class RangedAttackCalculator():
          ("SM", self.PromptChangeGenericFloat, "SM", "SM = Size of target in yards"),
          ("Range", self.PromptChangeGenericFloat, "Range", "Range = Distance to target, in yards"),
          ("Speed", self.PromptChangeGenericFloat, "Speed", "Speed = Relative speed of target in yards/s"),
-         ("DarkFog", self.PromptChangeGenericInt, "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \n-9 <= Darkness and Fog <= 0"),
+         ("DarkFog", self.PromptChangeGenericInt, "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
          ("CanSee", self.PromptChangeGenericBool, "Can See", "Can See = Can you see the target?"),
          ("KnowLoc", self.PromptChangeGenericBool, "Know Location", "Know Location = Do you know EXACTLY where the target is?"),
          ("Concealment", self.PromptChangeGenericBool, "Concealment", "Concealment = Does the target have partial concealment?"),
          ("HitLoc", self.PromptChangeHitLoc, None, None),
          ("RoundsAiming", self.PromptChangeGenericInt, "Rounds Aiming", "Rounds Aiming = How many previous rounds have you spend aiming?"),
-         ("ShotsFired", self.PromptChangeGenericInt, "Shots Fired", "Shots Fired = How many shots do you plan to file?"),
+         ("ShotsFired", self.PromptChangeGenericInt, "Shots Fired", "Shots Fired = How many shots do you plan to fire?"),
          ("Bracing", self.PromptChangeGenericBool, "Bracing", "Bracing = Are you currently bracing your weapon?"),
          ("Shock", self.PromptChangeGenericInt, "Shock", "Shock = Modifier if you took damage sense your last turn."),
          ("AllOutAttack", self.PromptChangeGenericBool, "All-Out Attack", "All-Out Attack = Are you attacking without regard to defense?" ),
@@ -687,7 +687,9 @@ class RangedAttackCalculator():
       raw_input()
       return 0
 
-os.system('cls')
+# TODO: This doesn't work on OSx
+if( os.name == 'nt'):
+   os.system('cls')
 
 print "/\\"
 for i in range(24):
@@ -698,7 +700,8 @@ print " before you continue. Expand to see the complete ruler above for best res
 print "Press Enter to continue..."
 raw_input()
 
-os.system('cls')
+if( os.name == 'nt'):
+   os.system('cls')
 
 UI = RangedAttackCalculator()
 
