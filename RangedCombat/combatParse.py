@@ -158,7 +158,8 @@ class RangedAttackCalculator():
          ("Enter ALL Attributes",self.PromptEnterAttributes ),
          ("Change Weapon",self.PromptChangeWeapon ),
          ("Walk Through Math",self.HelpUserWithMath),
-         ("Print Gun Details",self.PrintGunDetails)
+         ("Print Gun Details",self.PrintGunDetails),
+         ("Save",self.PromptSaveSettings)
          ]
       while True:
          # Print out the current stats and such
@@ -185,6 +186,23 @@ class RangedAttackCalculator():
 
          if( type( selection ) == types.FunctionType or types.InstanceType):
             selection()
+
+
+   def PromptSaveSettings( self ):
+      print "\nEnter file name to save as."
+      fileName = raw_input(">")
+
+      fileName = "saves/"+fileName + ".json"
+
+      savedata = dict()
+      savedata['DX'] = self.DX
+
+      print savedata
+
+      with open( fileName, 'w' ) as fp:
+         saveJson = json.dump( savedata, fp )
+         print saveJson
+
 
    def PromptEnterAttributes( self ):      
       print "Answer the prompts!"
