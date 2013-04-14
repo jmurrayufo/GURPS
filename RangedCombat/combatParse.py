@@ -19,7 +19,7 @@ class Weapon( ):
       self.Acc    = jsonTable['Acc']
       self.Range  = self.ParseRange( jsonTable['Range'] )
       self.Weight = self.ParseWeight( jsonTable['Weight'] )
-      self.Rof    = jsonTable['RoF']
+      self.RoF    = jsonTable['RoF']
       self.Shots  = self.ParseShots( jsonTable['Shots'] )
       self.ST     = jsonTable['ST']
       self.Bulk   = jsonTable['Bulk']
@@ -88,7 +88,7 @@ class Weapon( ):
       print "   Acc:",       self.Acc
       print "Range :",       self.Range
       print "Weight:",       self.Weight
-      print "   Rof:",       self.Rof
+      print "   RoF:",       self.RoF
       print " Shots:",       self.Shots
       print "    ST:",       self.ST
       print "  Bulk:",       self.Bulk
@@ -103,9 +103,9 @@ class RangedAttackCalculator():
       # User input Fields
       self.DX = 0
       self.Skill = 0
-      self.SM = 2
-      self.Range = 0
-      self.Speed = 0
+      self.SM = 2.0
+      self.Range = 0.0
+      self.Speed = 0.0
       self.HitLoc = "Torso"
       self.DarkFog = 0
       self.CanSee = True
@@ -155,10 +155,11 @@ class RangedAttackCalculator():
       menu = [
          ("Quit",exit),
          ("Change Attribute",self.PromptSelectAttribute ),
-         ("Change Weapon",self.PromptChangeWeapon ),
          ("Enter ALL Attributes",self.PromptEnterAttributes ),
-         ("Print Gun Details",self.PrintGunDetails),
          ("Walk Through Math",self.HelpUserWithMath),
+         ("Check me for errors",self.PrintErrorGuide),
+         ("Change Weapon",self.PromptChangeWeapon ),
+         ("Print Gun Details",self.PrintGunDetails),
          ("Save",self.PromptSaveSettings),
          ("Load",self.PromptLoadSettings)
          ]
@@ -455,14 +456,68 @@ class RangedAttackCalculator():
       print "FINAL RESULT: >>> %d <<<"%( self.Mod )
 
    def HelpUserWithMath( self ):
+      """
+      Walk the user through math choices step by step
+      """
       print "This section has yet to be done"
 
    def PrintErrorGuide( self ):
       """
       Try to find errors in the users numbers and display them!
       """
-      # Known issues:
-         # Shots fired can exceed the RoF of the Weapon AND the Shots in the weapon
+      def ErrorPrint( check, errorStr):
+         if( check ):
+            print "\nERROR:",errorStr
+            print "Press Enter to acknowledge error."
+            raw_input()
+
+      def WarningPrint( check, errorStr ):
+         if( check ):
+            print "\nWARNING:",errorStr
+
+      ErrorPrint( self.DX < 1, "DX < 1" )
+      WarningPrint( self.DX > 18, "DX > 18, this is a LOT of DX")
+
+      WarningPrint( self.Skill >= 10, "Skill is > 10, did you enter effective skill rather then base?")
+
+      ErrorPrint( self.SM <= 0, "SM <=0, SM is a measure of size, NOT the modifier itself.")
+
+      WarningPrint( self.Range == 0.0, "Range = 0, Are you standing on your target? Adjacent targets are range 1")
+      ErrorPrint( self.Range < 0.0, "Range < 0, Negative length implies non-euclidean space. Go Play Call Of Cthulhu....")
+
+      ErrorPrint( self.Speed < 0.0, "Speed < 0, Use speed NOT velocity")
+
+      ErrorPrint( self.DarkFog > 0, "DarkFod > 0. These are negative modifiers only! You cannot have positive values.")
+      ErrorPrint( self.DarkFog < -9, "DarkFog < -9, TOTAL Darkness/Fog is a -9, you cannot be worse!")
+
+      WarningPrint( self.CanSee and not self.KnowLoc, "You can see you target but you don't know their location? Fix Can See or Know Location" )
+      WarningPrint( not self.CanSee and self.Concealment, "Not being able to see a target will ignore Concealment condition.")
+
+      ErrorPrint( self.RoundsAiming < 0, "You cannot spend negative rounds aiming")
+      # TODO: This warning is not REALLY true. Sniper rifles need to aim for many rounds to get their bonus (per page 412). We need to handle scopes...
+      WarningPrint( self.RoundsAiming > 3, "Spending more then 3 rounds aiming gives no further benefit...")
+
+      ErrorPrint( self.Weapon == None, "You need to select a weapon!")
+
+      ErrorPrint( self.Weapon and self.ShotsFired > self.Wepaon.Shots[0], "Shots fired is more then max ammo in your weapon.")
+      ErrorPrint( self.Weapon and self.ShotsFired > self.Weapon.RoF, "Shots fired exceeds Rate of Fire of your weapon.")
+      ErrorPrint( self.Weapon and self.ShotsFired < 1, "Shots fired < 1" )
+      WarningPrint( self.ShotsFired > 9000, "THATS OVER 9000!!!!!!!!")
+
+      ErrorPrint( self.Bracing and ( self.MoveAndAttack or self.PopUpAttack ), "You cannot brace while Moving or Popping up!" )
+
+      ErrorPrint( self.Shock > 0, "Shock > 0, this cannot be a bonus!")
+      ErrorPrint( self.Shock < -4, "Shock < -4, this is the worst case effect of shock damage")
+
+      WarningPrint( self.AllOutAttack and self.MoveAndAttack, "You can only move half your movement when All Out Attacking AND moving.")
+
+      ErrorPrint( self.MoveAndAttack < 0, "Move and Attack < 0, Negative distance implies non-euclidean space. Go Play Call Of Cthulhu....")      
+
+      ErrorPrint( self.PopUpAttack and self.RoundsAiming, "You cannot Pop Up Attack AND aim.")
+
+      print "\nError checks complete!"
+      print "Press enter to continue..."
+      raw_input()
 
    def PrintGunDetails( self ):
       print 
