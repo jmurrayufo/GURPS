@@ -474,6 +474,9 @@ class RangedAttackCalculator():
       def WarningPrint( check, errorStr ):
          if( check ):
             print "\nWARNING:",errorStr
+      print "\n\n\n   ===Begin Error Checking==="
+      print "WARNINGs will not block, and will only be displayed."
+      print "ERRORs will block and force you to hit enter to move on."
 
       ErrorPrint( self.DX < 1, "DX < 1" )
       WarningPrint( self.DX > 18, "DX > 18, this is a LOT of DX")
@@ -490,7 +493,7 @@ class RangedAttackCalculator():
       ErrorPrint( self.DarkFog > 0, "DarkFod > 0. These are negative modifiers only! You cannot have positive values.")
       ErrorPrint( self.DarkFog < -9, "DarkFog < -9, TOTAL Darkness/Fog is a -9, you cannot be worse!")
 
-      WarningPrint( self.CanSee and not self.KnowLoc, "You can see you target but you don't know their location? Fix Can See or Know Location" )
+      WarningPrint( self.CanSee and not self.KnowLoc, "You can see you target but you don't know their location? \n  Fix \"Can See\" or \"Know Location\"" )
       WarningPrint( not self.CanSee and self.Concealment, "Not being able to see a target will ignore Concealment condition.")
 
       ErrorPrint( self.RoundsAiming < 0, "You cannot spend negative rounds aiming")
@@ -499,9 +502,10 @@ class RangedAttackCalculator():
 
       ErrorPrint( self.Weapon == None, "You need to select a weapon!")
 
-      ErrorPrint( self.Weapon and self.ShotsFired > self.Wepaon.Shots[0], "Shots fired is more then max ammo in your weapon.")
-      ErrorPrint( self.Weapon and self.ShotsFired > self.Weapon.RoF, "Shots fired exceeds Rate of Fire of your weapon.")
-      ErrorPrint( self.Weapon and self.ShotsFired < 1, "Shots fired < 1" )
+      if( self.Weapon ):
+         ErrorPrint(  self.ShotsFired > self.Weapon.Shots[0], "Shots fired is more then max ammo of your weapon.")
+         ErrorPrint(  self.ShotsFired > self.Weapon.RoF, "Shots fired exceeds Rate of Fire of your weapon.")
+         ErrorPrint(  self.ShotsFired < 1, "Shots fired < 1" )
       WarningPrint( self.ShotsFired > 9000, "THATS OVER 9000!!!!!!!!")
 
       ErrorPrint( self.Bracing and ( self.MoveAndAttack or self.PopUpAttack ), "You cannot brace while Moving or Popping up!" )
@@ -685,10 +689,12 @@ class RangedAttackCalculator():
 
 os.system('cls')
 
-print "Welcome to the Ranged Combat Calculator!"
-print "There is no load/save functionality at the moment (sorry!)"
+print "/\\"
+for i in range(24):
+   print "||"
+print "\\/"
 print "This program uses a lot of screen space, so I suggest you expand your window"
-print " before you continue."
+print " before you continue. Expand to see the complete ruler above for best results. "
 print "Press Enter to continue..."
 raw_input()
 
