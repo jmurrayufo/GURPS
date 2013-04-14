@@ -155,10 +155,10 @@ class RangedAttackCalculator():
       menu = [
          ("Quit",exit),
          ("Change Attribute",self.PromptSelectAttribute ),
-         ("Enter ALL Attributes",self.PromptEnterAttributes ),
          ("Change Weapon",self.PromptChangeWeapon ),
-         ("Walk Through Math",self.HelpUserWithMath),
+         ("Enter ALL Attributes",self.PromptEnterAttributes ),
          ("Print Gun Details",self.PrintGunDetails),
+         ("Walk Through Math",self.HelpUserWithMath),
          ("Save",self.PromptSaveSettings),
          ("Load",self.PromptLoadSettings)
          ]
