@@ -124,11 +124,11 @@ class RangedAttackCalculator():
       # Object Fields
       self.Mod = None
 
-
+      # (GetAttr name, function to use, name to print, help for user)
       self.PromptMenu = [
          ("DX", self.PromptChangeGenericInt, "DX", None),
          ("Skill", self.PromptChangeGenericInt, "Skill", None),
-         ("SM", self.PromptChangeGenericFloat, "SM", None),
+         ("SM", self.PromptChangeGenericFloat, "SM", "SM = Size of target in yards"),
          ("Range", self.PromptChangeGenericFloat, "Range", None),
          ("Speed", self.PromptChangeGenericFloat, "Speed", None),
          ("DarkFog", self.PromptChangeGenericInt, "DarkFog", None),
@@ -159,7 +159,8 @@ class RangedAttackCalculator():
          ("Change Weapon",self.PromptChangeWeapon ),
          ("Walk Through Math",self.HelpUserWithMath),
          ("Print Gun Details",self.PrintGunDetails),
-         ("Save",self.PromptSaveSettings)
+         ("Save",self.PromptSaveSettings),
+         ("Load",self.PromptLoadSettings)
          ]
       while True:
          # Print out the current stats and such
@@ -205,16 +206,85 @@ class RangedAttackCalculator():
          raw_input()
          return
 
-
       # Prepare object for saving. 
-      savedata = dict()
-      savedata['DX'] = self.DX
+      saveData = dict()
+      saveData['DX'] = self.DX
+      saveData['Skill '] = self.Skill
+      saveData['SM '] = self.SM
+      saveData['Range'] = self.Range
+      saveData['Speed'] = self.Speed 
+      saveData['HitLoc'] = self.HitLoc
+      saveData['DarkFog'] = self.DarkFog
+      saveData['CanSee'] = self.CanSee
+      saveData['KnowLoc'] = self.KnowLoc
+      saveData['Concealment'] = self.Concealment 
+      saveData['RoundsAiming'] = self.RoundsAiming
+      saveData['ShotsFired'] = self.ShotsFired
+      saveData['Bracing'] = self.Bracing
+      saveData['Shock'] = self.Shock
+      saveData['AllOutAttack'] = self.AllOutAttack
+      saveData['MoveAndAttack'] = self.MoveAndAttack
+      saveData['PopUpAttack'] = self.PopUpAttack
+      saveData['MiscBonus'] = self.MiscBonus
 
-      print savedata
+      print saveData
 
       with open( fileName, 'w' ) as fp:
-         saveJson = json.dump( savedata, fp )
+         saveJson = json.dump( saveData, fp )
          print saveJson
+
+   def PromptLoadSettings( self ):
+      savedFileList = glob.glob(".\\Save\\*.json")
+      print savedFileList
+
+      while True:
+         print "\n\n\n   ===Select a File==="
+         for idx,val in enumerate( savedFileList ):
+            print "[%d] %s"%( idx, val.__str__( ) )
+
+         try:
+            tmp = input(">")
+         except NameError:
+            print "NameError: File Selection must be an int"
+            continue
+         except SyntaxError:
+            return
+         if( type( tmp ) != types.IntType ):
+            print "TypeError: File Selection must be an int"
+            continue
+         try:
+            savedFile = savedFileList[tmp]
+         except IndexError:
+            print "IndexError: Select a valid entry!"
+            continue
+         break
+
+      with open( savedFile, 'r' ) as fp:
+         saveData = json.load(fp)
+      self.DX = saveData['DX']
+      self.Skill = saveData['Skill ']
+      self.SM = saveData['SM ']
+      self.Range = saveData['Range']
+      self.Speed  = saveData['Speed']
+      self.HitLoc = saveData['HitLoc']
+      self.DarkFog = saveData['DarkFog']
+      self.CanSee = saveData['CanSee']
+      self.KnowLoc = saveData['KnowLoc']
+      self.Concealment  = saveData['Concealment']
+      self.RoundsAiming = saveData['RoundsAiming']
+      self.ShotsFired = saveData['ShotsFired']
+      self.Bracing = saveData['Bracing']
+      self.Shock = saveData['Shock']
+      self.AllOutAttack = saveData['AllOutAttack']
+      self.MoveAndAttack = saveData['MoveAndAttack']
+      self.PopUpAttack = saveData['PopUpAttack']
+      self.MiscBonus = saveData['MiscBonus']
+
+      print "\nLoaded settings from file",savedFile
+      print "WARNING: Weapon select is NOT saved or loaded. Please reselect your weapon!"
+      print "Press enter to continue"
+      raw_input()
+
 
 
    def PromptEnterAttributes( self ):      
