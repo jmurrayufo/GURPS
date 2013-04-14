@@ -189,11 +189,24 @@ class RangedAttackCalculator():
 
 
    def PromptSaveSettings( self ):
+      # Get user input for where to save the file
       print "\nEnter file name to save as."
       fileName = raw_input(">")
+      fileName = "Save/"+fileName + ".json"
 
-      fileName = "saves/"+fileName + ".json"
+      # Do we have a save directory?
+      if( not os.path.exists('Save') ):
+         os.mkdir("Save")
 
+      # Is it just a file?
+      if( not os.path.isdir('Save') ):
+         print "Error! Cannot save as \"./Save\" isn't a directory!"
+         print "Press enter to continue"
+         raw_input()
+         return
+
+
+      # Prepare object for saving. 
       savedata = dict()
       savedata['DX'] = self.DX
 
