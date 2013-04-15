@@ -448,6 +448,8 @@ class RangedAttackCalculator():
       Walk the user through math choices step by step
       """
       print "This section has yet to be done"
+      print "Press enter to continue..."
+      raw_input()
 
    def PrintErrorGuide( self ):
       """
