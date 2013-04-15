@@ -1,15 +1,19 @@
-import json
-import re
-import types
-import time
 import glob
+import json
+import logging
 import os
+import re
+import time
+import types
+import atexit
 
+version = '0.0.1'
 
 class Weapon( ):
 
    # Parse and generator
    def __init__( self, jsonFile ):
+      logger.debug('Ceated new Weapon instance')
       with open( jsonFile, 'r' ) as fp:
          jsonTable = json.load(fp)
 
@@ -33,6 +37,9 @@ class Weapon( ):
 
    # Data Process
    def GenericToCleanList( self, inputTuple ):
+      """
+      Convert any generic object, tuple or list into a clean list.
+      """
       retVal = list()
       for i in inputTuple:
          try:
@@ -51,6 +58,7 @@ class Weapon( ):
             else:
                retVal.append(i)
          except:
+            logger.critical('Unable to append items to list')
             raise
       return retVal
 
@@ -72,12 +80,12 @@ class Weapon( ):
    def PrintDetailed( self ):
       print "  Name:",       self.Name
       print "    TL:",       self.TL
-      print "Damage:",       self.Damage
+      print "Damage: %s (%.1f) %s"%( self.Damage[0], self.Damage[1], self.Damage[2] )
       print "   Acc:",       self.Acc
-      print "Range :",       self.Range
-      print "Weight:",       self.Weight
+      print "Range : %d/%d"%( self.Range[0], self.Range[1] )
+      print "Weight: %.1f/%s"%( self.Weight[0], self.Weight[1] )
       print "   RoF:",       self.RoF
-      print " Shots:",       self.Shots
+      print " Shots: %d(%d)"%( self.Shots[0], self.Shots[1] )
       print "    ST:",       self.ST
       print "  Bulk:",       self.Bulk
       print "Recoil:",       self.Recoil
@@ -88,6 +96,7 @@ class Weapon( ):
 class RangedAttackCalculator():
 
    def __init__( self ):
+      logger.debug('Ceated new RangedAttackCalculator instance')
       # User input Fields
       self.DX = 0
       self.Skill = 0
@@ -136,6 +145,8 @@ class RangedAttackCalculator():
 
       self.UpdateWeaponsList()
 
+      logger.debug('__init__ completed')
+
    # ********************************
    # ******* User Interaction *******
    # ********************************
@@ -152,6 +163,7 @@ class RangedAttackCalculator():
          ("Load",self.PromptLoadSettings)
          ]
       while True:
+         logger.debug('Printed main menu')
          # Print out the current stats and such
          self.CalculateBaseScore()
          self.PrintOptions()
@@ -169,9 +181,11 @@ class RangedAttackCalculator():
          try:
             selection = menu[selection][1]
          except IndexError:
+            logger.warning('User entered value that exceeds menu size')
             continue
 
          if(selection == exit):
+            logger.info('Leaving Main loop forever (begin exit and shutdown)')
             break
 
          if( type( selection ) == types.FunctionType or types.InstanceType):
@@ -179,6 +193,8 @@ class RangedAttackCalculator():
 
 
    def PromptSaveSettings( self ):
+
+      logger.debug('Begin attempt to save file.')
       # Get user input for where to save the file
       print "\nEnter file name to save as."
       fileName = raw_input(">")
@@ -186,10 +202,12 @@ class RangedAttackCalculator():
 
       # Do we have a save directory?
       if( not os.path.exists('Save') ):
+         logger.warning('Save directory did not exist, attempt to create it')
          os.mkdir("Save")
 
       # Is it just a file?
       if( not os.path.isdir('Save') ):
+         logger.critical('Save was a file, and cannot be a directory!')
          print "Error! Cannot save as \"./Save\" isn't a directory!"
          print "Press enter to continue"
          raw_input()
@@ -219,10 +237,13 @@ class RangedAttackCalculator():
       print saveData
 
       with open( fileName, 'w' ) as fp:
+         logger.debug('File Saving...')
          saveJson = json.dump( saveData, fp )
          print saveJson
+      logger.debug('File Saved')
 
    def PromptLoadSettings( self ):
+      logger.debug('Begin attempt to load file.')
       savedFileList = glob.glob(".\\Save\\*.json")
       print savedFileList
 
@@ -237,6 +258,7 @@ class RangedAttackCalculator():
             print "NameError: File Selection must be an int"
             continue
          except SyntaxError:
+            logger.debug('File was not loaded')
             return
          if( type( tmp ) != types.IntType ):
             print "TypeError: File Selection must be an int"
@@ -268,7 +290,8 @@ class RangedAttackCalculator():
       self.MoveAndAttack = saveData['MoveAndAttack']
       self.PopUpAttack = saveData['PopUpAttack']
       self.MiscBonus = saveData['MiscBonus']
-
+      
+      logger.debug('File loading complete')
       print "\nLoaded settings from file",savedFile
       print "WARNING: Weapon select is NOT saved or loaded. Please reselect your weapon!"
       print "Press enter to continue"
@@ -280,8 +303,12 @@ class RangedAttackCalculator():
       print "Answer the prompts!"
       print "Pressing enter will skip the step and leave the current value in place!"
 
+      logger.debug('Entering ALL attributes')
+
       for i in self.PromptMenu:
          i[1]( i[0], i[2], i[3] )
+
+      logger.debug('Attributes completed')
 
    def PromptChangeGenericInt( self, attribName, prettyName = None, helpStr = None ):
       if( prettyName == None ):
@@ -375,6 +402,12 @@ class RangedAttackCalculator():
    def PromptChangeWeapon( self ):
       while True:
          self.UpdateWeaponsList()
+         if( len( self.WeaponList ) == 0 ):
+            logger.error('Attempted to load weapons w/o a populated list')
+            print "Error: No weapons found in Weapons directory!"
+            print "Press enter to continue..."
+            raw_input()
+            break
          print "\n\n\n   ===Select a Weapon==="
          print "Note: Weapons list has been reloaded from HDD. Reselect weapon to refresh"
          for idx,val in enumerate( self.WeaponList ):
@@ -447,9 +480,13 @@ class RangedAttackCalculator():
       """
       Walk the user through math choices step by step
       """
+
+      logger.debug('Starting to assist user with math')
       print "This section has yet to be done"
       print "Press enter to continue..."
       raw_input()
+
+      logger.debug('Finished assisting user with math')
 
    def PrintErrorGuide( self ):
       """
@@ -464,6 +501,10 @@ class RangedAttackCalculator():
       def WarningPrint( check, errorStr ):
          if( check ):
             print "\nWARNING:",errorStr
+
+
+      logger.debug('Starting Error Check')
+
       print "\n\n\n   ===Begin Error Checking==="
       print "WARNINGs will not block, and will only be displayed."
       print "ERRORs will block and force you to hit enter to move on."
@@ -496,6 +537,8 @@ class RangedAttackCalculator():
          ErrorPrint(  self.ShotsFired > self.Weapon.Shots[0], "Shots fired is more then max ammo of your weapon.")
          ErrorPrint(  self.ShotsFired > self.Weapon.RoF, "Shots fired exceeds Rate of Fire of your weapon.")
          ErrorPrint(  self.ShotsFired < 1, "Shots fired < 1" )
+      else:
+         logger.debug('No weapon selected')
       WarningPrint( self.ShotsFired > 9000, "THATS OVER 9000!!!!!!!!")
 
       ErrorPrint( self.Bracing and ( self.MoveAndAttack or self.PopUpAttack ), "You cannot brace while Moving or Popping up!" )
@@ -512,12 +555,14 @@ class RangedAttackCalculator():
       print "\nError checks complete!"
       print "Press enter to continue..."
       raw_input()
+      logger.debug('Finished Error Check')
 
    def PrintGunDetails( self ):
       print 
       try:
          self.Weapon.PrintDetailed()
       except AttributeError:
+         logger.error('Attmepted to print a gun w/o selecting one first!')
          print "You need to select a gun first!"
 
       print "Hit enter to return to main menu..."
@@ -525,19 +570,27 @@ class RangedAttackCalculator():
 
 
    def UpdateWeaponsList( self ):
+
+      logger.debug('Start updating the weapons list')
       # Object Fields
       self.WeaponList = list()
 
-      files = glob.glob('*.json')
+      files = glob.glob('.\\Weapons\\*.json')
 
       # Init functionality
       for i in files:
          try:
             self.WeaponList.append(Weapon(i))
          except:
+            logger.warning('Failed to create a Weapon() instance out of file %s'%(i))
             print "\nError, file \"%s\" was not parsed."%(i)
             print "Hit enter to continue parsing other files"
             raw_input()
+
+      if( len(self.WeaponList ) == 0 ):
+         logger.error('No weapons loaded')
+
+      logger.debug('Finished updating the weapons list')
 
 
 
@@ -546,6 +599,9 @@ class RangedAttackCalculator():
    # ************************************
 
    def CalculateBaseScore( self ):
+
+      logger.debug('Started to calculate the base score')
+
       self.Mod = 0
       self.Mod += self.DX
       self.Mod += self.Skill
@@ -567,6 +623,8 @@ class RangedAttackCalculator():
       # TODO:
          # Calculate Rate of Fire table for the player
 
+      logger.debug('Finished calculating the base score')
+
    def CalcSpeedAndRange( self, distance, speed ):
       ranges = (
          (2, 0 ),(3, -1 ),(5, -2 ),(7, -3 ),(10, -4 ),
@@ -578,13 +636,24 @@ class RangedAttackCalculator():
          (50000, -26 ),(70000, -27 ),(100000, -28 ),(150000, -29 ),
          (200000, -30 )
          )
+
+      if( speed < 0 or distance < 0 ):
+         logger.error('Negative distance or speed')
+         logger.error('Speed: %f'%(speed))
+         logger.error('Distance: %f'%(distance))
+         return -9000
+
+
       for i in ranges:
          if distance + speed < i[0]:
             return i[1]
+
+      logger.warning('Speed: %f Range: %f exdeed legal values'%(speed,distance))
+
       print "WARNING! Speed and Range are outside of legal values!"
-      print "Press enter to accept and use a score of -30"
+      print "Press enter to accept and use a score of -9000"
       raw_input()
-      return -30
+      return -9000
 
    def CalcSizeModifier( self, size ):
       sizeTbl = (
@@ -596,13 +665,19 @@ class RangedAttackCalculator():
          (7000,  21),(10000, 22),(15000, 23),(20000, 24),(30000, 25),(50000, 26),
          (70000, 27),(100000, 28),(150000, 29),(200000, 30)
          )
+
+      if( size <= 0 ):
+         logger.error('Zero or Negative size')
+         logger.error('Size: %f'%(size))
+         return -9000
+
       for i in sizeTbl:
          if size < i[0]:
             return i[1]
       print "WARNING! Size is outside of legal values!"
-      print "Press enter to accept and use a score of -15"
+      print "Press enter to accept and use a score of 30"
       raw_input()
-      return -15
+      return 30
 
    def CalcHitLocation( self, location ):
       hitLocDict = {
@@ -621,6 +696,7 @@ class RangedAttackCalculator():
       try:
          return hitLocDict[location]
       except KeyError:
+         logger.critical('HitLocation is outside of hitLocDict bounds!')
          print "WARNING! Hit location has an invalid key!"
          print "Press enter to accept and use a score of -10"
          raw_input()
@@ -629,16 +705,21 @@ class RangedAttackCalculator():
    def CalcVisionEffects( self, argCanSee, argKnowLoc, argDarkFog, argConcealment ):
       tmp = 0
       if( not argCanSee and not argKnowLoc ):
-       tmp = -6
+         tmp = -6
       elif( not argCanSee and argKnowLoc ):
-       tmp = -4
+         tmp = -4
       elif( argConcealment ):
-       tmp = -2
+         tmp = -2
+
+      if( argDarkFog < -9 ):
+         logger.error('Darkness/Fog value bellow minimums')
+         logger.error('argDarkFog: %f'%(argDarkFog))
 
       return max(-10,tmp + argDarkFog)
 
    def CalcWeaponMods( self, argAcc, argPopup, argMoveAndAttack ):
       if( self.Weapon == None ):
+         logger.error('Cannot calculate with a Weapon of None')
          return 0
       retVal = 0
       
@@ -677,22 +758,49 @@ class RangedAttackCalculator():
       raw_input()
       return 0
 
-# TODO: This doesn't work on OSx
-if( os.name == 'nt'):
-   os.system('cls')
+def GlobalCleanup():
+   logger.info('***** Logging Terminated *****')
 
-print "/\\"
-for i in range(24):
-   print "||"
-print "\\/"
-print "This program uses a lot of screen space, so I suggest you expand your window"
-print " before you continue. Expand to see the complete ruler above for best results. "
-print "Press Enter to continue..."
-raw_input()
+if __name__ == '__main__':
+   # Setup and format the logging for the application
+   logger = logging.getLogger('Test')
+   logger.setLevel( logging.DEBUG )
+   fh = logging.FileHandler('debug.log')
+   fh.setLevel( logging.DEBUG )
+   formatter = logging.Formatter('%(asctime)s - %(levelname)7s - %(funcName)s@%(lineno)d: %(message)s')
+   fh.setFormatter(formatter)
+   logger.addHandler(fh)
 
-if( os.name == 'nt'):
-   os.system('cls')
+   # Legal logging levels are: 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'
 
-UI = RangedAttackCalculator()
+   logger.info('***** Logging Initiated  *****')
+   logger.info('******************************')
+   logger.info('******************************')
+   logger.info('******************************')
+   logger.info('******************************')
+   logger.info('******************************')
+   logger.info('Logging started on version: %s'%(version))
 
-UI.Main()
+   atexit.register(GlobalCleanup)
+
+   logger.info('OS: %s'%(os.name))
+
+   # TODO: This doesn't work on OSx
+   if( os.name == 'nt'):
+      os.system('cls')
+
+   print "/\\"
+   for i in range(24):
+      print "||"
+   print "\\/"
+   print "This program uses a lot of screen space, so I suggest you expand your window"
+   print " before you continue. Expand to see the complete ruler above for best results. "
+   print "Press Enter to continue..."
+   raw_input()
+
+   if( os.name == 'nt'):
+      os.system('cls')
+
+   UI = RangedAttackCalculator()
+
+   UI.Main()
