@@ -10,7 +10,6 @@ class Weapon( ):
 
    # Parse and generator
    def __init__( self, jsonFile ):
-      print "Start on",jsonFile
       with open( jsonFile, 'r' ) as fp:
          jsonTable = json.load(fp)
 
@@ -531,12 +530,12 @@ class RangedAttackCalculator():
 
       # Init functionality
       for i in files:
-         # try:
-         self.WeaponList.append(Weapon(i))
-         # except:
-         #    print "\nError, file \"%s\" was not parsed."%(i)
-         #    print "Hit enter to continue parsing other files"
-         #    raw_input()
+         try:
+            self.WeaponList.append(Weapon(i))
+         except:
+            print "\nError, file \"%s\" was not parsed."%(i)
+            print "Hit enter to continue parsing other files"
+            raw_input()
 
 
 
