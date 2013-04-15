@@ -34,7 +34,7 @@ with open( fileName ,'w' ) as fp:
     jsonDict['Range']['Min'] = input('>')
 
     print "\nEnter maximum range"
-    jsonDict['Range']['Min'] = input('>')
+    jsonDict['Range']['Max'] = input('>')
 
     print "\n**Weight subsection**"
     jsonDict['Weight'] = OrderedDict()
