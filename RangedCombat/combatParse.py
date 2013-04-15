@@ -10,8 +10,9 @@ class Weapon( ):
 
    # Parse and generator
    def __init__( self, jsonFile ):
+      print "Start on",jsonFile
       with open( jsonFile, 'r' ) as fp:
-         jsonTable = json.load(fp)   
+         jsonTable = json.load(fp)
 
       self.TL     = jsonTable['TL']
       self.Name   = jsonTable['Name']
@@ -57,28 +58,16 @@ class Weapon( ):
 
 
    def ParseDamage( self, inputStr ):
-      matchStr = "^(?:((?:\d+d|HT)(?:[x+-]\d+)?)(?:\((\d+(?:\.\d+)?|inf)\))?)(?: (.+))?"
-      tmp = re.search( matchStr, inputStr )
-      tmp = self.GenericToCleanList( tmp.groups() )
-      return tmp
+      return ( inputStr['Base'], inputStr['Divisor'], inputStr['Type'] )
 
    def ParseRange( self, inputStr ):
-      matchStr = "^(\d+)/?(\d+)?"
-      tmp = re.search( matchStr, inputStr )
-      tmp = self.GenericToCleanList( tmp.groups() )
-      return tmp
+      return ( inputStr['Min'], inputStr['Max'] )
 
    def ParseWeight( self, inputStr ):
-      matchStr = "^(\d+)/?(\w+)?"
-      tmp = re.search( matchStr, inputStr )
-      tmp = self.GenericToCleanList( tmp.groups() )
-      return tmp
+      return ( inputStr['Base'], inputStr['Misc'] ) 
 
    def ParseShots( self, inputStr ):
-      matchStr = "^(\d+)(?:\((\d+\.?\d*)\))?"
-      tmp = re.search( matchStr, inputStr )
-      tmp = self.GenericToCleanList( tmp.groups() )
-      return tmp
+      return ( inputStr['Base'], inputStr['Reload'] )
 
    # Output and access functions
    def PrintDetailed( self ):
@@ -542,12 +531,12 @@ class RangedAttackCalculator():
 
       # Init functionality
       for i in files:
-         try:
-            self.WeaponList.append(Weapon(i))
-         except:
-            print "\nError, file \"%s\" was not parsed."%(i)
-            print "Hit enter to continue parsing other files"
-            raw_input()
+         # try:
+         self.WeaponList.append(Weapon(i))
+         # except:
+         #    print "\nError, file \"%s\" was not parsed."%(i)
+         #    print "Hit enter to continue parsing other files"
+         #    raw_input()
 
 
 
