@@ -98,8 +98,8 @@ class RangedAttackCalculator():
    def __init__( self ):
       logger.debug('Ceated new RangedAttackCalculator instance')
       # User input Fields
-      self.DX = 0
-      self.Skill = 0
+      self.DX = 10
+      self.Skill = 1
       self.SM = 2.0
       self.Range = 0.0
       self.Speed = 0.0
@@ -115,6 +115,7 @@ class RangedAttackCalculator():
       self.Shock = 0
       self.AllOutAttack = False
       self.MoveAndAttack = 0
+      self.ChangeFacing = False
       self.PopUpAttack = False
       self.MiscBonus = 0
 
@@ -139,6 +140,7 @@ class RangedAttackCalculator():
          ("Shock", self.PromptChangeGenericInt, "Shock", "Shock = Modifier if you took damage sense your last turn."),
          ("AllOutAttack", self.PromptChangeGenericBool, "All-Out Attack", "All-Out Attack = Are you attacking without regard to defense?" ),
          ("MoveAndAttack", self.PromptChangeGenericInt, "Move And Attack", "Move and Attack = Are you moving and attacking in the same round?"),
+         ("ChangeFacing", self.PromptChangeGenericBool, "Change Facing", "Have you changes the direction you are facing by more then one hex diretion?"),
          ("PopUpAttack", self.PromptChangeGenericBool, "Pop-Up Attack", "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
          ("MiscBonus", self.PromptChangeGenericInt, "Misc Bonus", "Misc Bonus = Has you DM given you any other +/- modifiers?")
          ]
@@ -231,6 +233,7 @@ class RangedAttackCalculator():
       saveData['Shock'] = self.Shock
       saveData['AllOutAttack'] = self.AllOutAttack
       saveData['MoveAndAttack'] = self.MoveAndAttack
+      saveData['ChangeFacing'] = self.ChangeFacing
       saveData['PopUpAttack'] = self.PopUpAttack
       saveData['MiscBonus'] = self.MiscBonus
 
@@ -243,6 +246,13 @@ class RangedAttackCalculator():
       logger.debug('File Saved')
 
    def PromptLoadSettings( self ):
+      def SafeLoad( savedData, attribute, default=None ):
+         try:
+            return saveData[attribute]
+         except KeyError:
+            logger.error('Tried to load attribute %s from file, no such attribute found'%(attribute))
+            return default
+
       logger.debug('Begin attempt to load file.')
       savedFileList = glob.glob(".\\Save\\*.json")
       print savedFileList
@@ -272,24 +282,25 @@ class RangedAttackCalculator():
 
       with open( savedFile, 'r' ) as fp:
          saveData = json.load(fp)
-      self.DX = saveData['DX']
-      self.Skill = saveData['Skill ']
-      self.SM = saveData['SM ']
-      self.Range = saveData['Range']
-      self.Speed  = saveData['Speed']
-      self.HitLoc = saveData['HitLoc']
-      self.DarkFog = saveData['DarkFog']
-      self.CanSee = saveData['CanSee']
-      self.KnowLoc = saveData['KnowLoc']
-      self.Concealment  = saveData['Concealment']
-      self.RoundsAiming = saveData['RoundsAiming']
-      self.ShotsFired = saveData['ShotsFired']
-      self.Bracing = saveData['Bracing']
-      self.Shock = saveData['Shock']
-      self.AllOutAttack = saveData['AllOutAttack']
-      self.MoveAndAttack = saveData['MoveAndAttack']
-      self.PopUpAttack = saveData['PopUpAttack']
-      self.MiscBonus = saveData['MiscBonus']
+      self.DX = SafeLoad( saveData, 'DX', 10 )
+      self.Skill = SafeLoad( saveData, 'Skill ', 0 )
+      self.SM = SafeLoad( saveData, 'SM ', 2 )
+      self.Range = SafeLoad( saveData, 'Range', 1 )
+      self.Speed  = SafeLoad( saveData, 'Speed', 0 )
+      self.HitLoc = SafeLoad( saveData, 'HitLoc', 'Torso;' )
+      self.DarkFog = SafeLoad( saveData, 'DarkFog', 0 )
+      self.CanSee = SafeLoad( saveData, 'CanSee', True )
+      self.KnowLoc = SafeLoad( saveData, 'KnowLoc', True )
+      self.Concealment  = SafeLoad( saveData, 'Concealment', True )
+      self.RoundsAiming = SafeLoad( saveData, 'RoundsAiming', 0 )
+      self.ShotsFired = SafeLoad( saveData, 'ShotsFired', 1 )
+      self.Bracing = SafeLoad( saveData, 'Bracing', False )
+      self.Shock = SafeLoad( saveData, 'Shock', 0 )
+      self.AllOutAttack = SafeLoad( saveData, 'AllOutAttack', True )
+      self.MoveAndAttack = SafeLoad( saveData, 'MoveAndAttack', False )
+      self.ChangeFacing = SafeLoad( saveData, 'ChangeFacing', False )
+      self.PopUpAttack = SafeLoad( saveData, 'PopUpAttack', False )
+      self.MiscBonus = SafeLoad( saveData, 'MiscBonus', 0 )
       
       logger.debug('File loading complete')
       print "\nLoaded settings from file",savedFile
@@ -471,6 +482,7 @@ class RangedAttackCalculator():
       print " RoundsAiming:     %2d     ShotsFired: %d"%( self.RoundsAiming, self.ShotsFired )
       print "      Bracing:  %5s   AllOutAttack: %5s"%( self.Bracing, self.AllOutAttack )
       print "MoveAndAttack:     %2d    PopUpAttack: %s"%( self.MoveAndAttack, self.PopUpAttack )
+      print "Change Facing:  %5s"%( self.ChangeFacing )
       print "       ===GM Choices==="
       print "MiscBonus:",  self.MiscBonus
       print "       ===Result==="
@@ -543,6 +555,8 @@ class RangedAttackCalculator():
 
       ErrorPrint( self.Bracing and ( self.MoveAndAttack or self.PopUpAttack ), "You cannot brace while Moving or Popping up!" )
 
+      ErrorPrint( self.ChangeFacing and self.MoveAndAttack ), "Moving gives you a free change of facing!"
+
       ErrorPrint( self.Shock > 0, "Shock > 0, this cannot be a bonus!")
       ErrorPrint( self.Shock < -4, "Shock < -4, this is the worst case effect of shock damage")
 
@@ -611,7 +625,7 @@ class RangedAttackCalculator():
       self.Mod += self.CalcVisionEffects( self.CanSee,       self.KnowLoc, 
                                           self.DarkFog, self.Concealment )
       self.Mod += self.CalcWeaponMods( self.RoundsAiming, self.PopUpAttack, 
-                                       self.MoveAndAttack )
+                                       self.MoveAndAttack, self.ChangeFacing )
       if( self.Bracing ):
          self.Mod += 1
       self.Mod += self.Shock
@@ -717,7 +731,7 @@ class RangedAttackCalculator():
 
       return max(-10,tmp + argDarkFog)
 
-   def CalcWeaponMods( self, argAcc, argPopup, argMoveAndAttack ):
+   def CalcWeaponMods( self, argAcc, argPopup, argMoveAndAttack, argChangeFacing ):
       if( self.Weapon == None ):
          logger.error('Cannot calculate with a Weapon of None')
          return 0
@@ -734,7 +748,8 @@ class RangedAttackCalculator():
       if( argPopup ):
          retVal += -2
       
-      retVal += self.Weapon.Bulk * argMoveAndAttack
+      if( argMoveAndAttack or argChangeFacing ):
+         retVal += self.Weapon.Bulk
       
       return retVal
 
