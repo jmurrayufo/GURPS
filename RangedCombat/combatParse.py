@@ -802,5 +802,9 @@ if __name__ == '__main__':
       os.system('cls')
 
    UI = RangedAttackCalculator()
-
-   UI.Main()
+   
+   try:
+      UI.Main()
+   except BaseException,e:
+       logger.exception(e)
+       raise
