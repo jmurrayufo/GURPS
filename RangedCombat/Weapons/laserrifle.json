@@ -1,0 +1,29 @@
+{
+    "TL": 10,
+    "Name": "Laser Rifle",
+    "Damage": {
+        "Base": "6d",
+        "Divisor": 2,
+        "Type":"Burn"
+    },
+    "Acc": 12,
+    "Range": {
+        "Min":700,
+        "Max":2100
+    },
+    "Weight": {
+        "Base": 8.0,
+        "Misc": "Dp"
+    },
+    "RoF": 10,
+    "Shots": {
+        "Base": 83,
+        "Reload": 5
+    },
+    "ST": 7,
+    "Bulk": -4,
+    "Rcl": 1,
+    "Cost": 8000,
+    "LC": 2,
+    "Notes": "Page 116"
+}
