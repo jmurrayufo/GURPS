@@ -450,7 +450,7 @@ class RangedAttackCalculator():
          if( type( funcCall ) == types.FunctionType 
             or type(funcCall ) == types.InstanceType 
             or type( funcCall ) == types.MethodType ):
-            funcCall(self.PromptMenu[selection][2])
+            funcCall(self.PromptMenu[selection][0])
             break
          if( funcCall == None ):
             print "\n\nPromptChange%s() needs to be writen!"%( self.PromptMenu[selection][0] )
