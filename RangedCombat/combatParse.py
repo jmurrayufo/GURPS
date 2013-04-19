@@ -94,6 +94,29 @@ class Weapon( ):
       print " Notes:",       self.Notes
 
 class RangedAttackCalculator():
+   # Class Globals
+   # (Name,Type,Default,PrettyName,HelpString)
+   CalcAttributes = [         
+      ("DX",            int,     10,      "DX",                None),
+      ("Skill",         int,     1,       "Skill",             "Skill = Base skill, NOT effective"),
+      ("SM",            float,   2.0,     "SM",                "SM = Size of target in yards"),
+      ("Range",         float,   1.0,     "Range",             "Range = Distance to target, in yards"),
+      ("Speed",         float,   1.0,     "Speed",             "Speed = Relative speed of target in yards/s"),
+      ("DarkFog",       int,     0,       "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
+      ("CanSee",        bool,    True,    "Can See",           "Can See = Can you see the target?"),
+      ("KnowLoc",       bool,    True,    "Know Location",     "Know Location = Do you know EXACTLY where the target is?"),
+      ("Concealment",   bool,    False,   "Concealment",       "Concealment = Does the target have partial concealment?"),
+      ("RoundsAiming",  int,     0,       "Rounds Aiming",     "Rounds Aiming = How many previous rounds have you spend aiming?"),
+      ("ShotsFired",    int,     1,       "Shots Fired",       "Shots Fired = How many shots do you plan to fire?"),
+      ("Bracing",       bool,    False,   "Bracing",           "Bracing = Are you currently bracing your weapon?"),
+      ("Shock",         int,     0,       "Shock",             "Shock = Modifier if you took damage sense your last turn."),
+      ("AllOutAttack",  bool,    False,   "All-Out Attack",    "All-Out Attack = Are you attacking without regard to defense?" ),
+      ("MoveAndAttack", int,     0,       "Move And Attack",   "Move and Attack = Are you moving and attacking in the same round?"),
+      ("ChangeFacing",  bool,    False,   "Change Facing",     "Have you changes the direction you are facing by more then one hex diretion?"),
+      ("PopUpAttack",   bool,    False,   "Pop-Up Attack",     "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
+      ("MiscBonus",     int,     0,       "Misc Bonus",        "Misc Bonus = Has you DM given you any other +/- modifiers?"),
+      ("HitLoc",        'Cust',  None,    None,                None)
+   ]
 
    def __init__( self ):
       logger.debug('Ceated new RangedAttackCalculator instance')
