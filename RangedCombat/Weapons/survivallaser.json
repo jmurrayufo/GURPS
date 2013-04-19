@@ -1,0 +1,29 @@
+{
+    "TL": 10,
+    "Name": "Survival Laser",
+    "Damage": {
+        "Base": "4d(2) Burn",
+        "Divisor": 2,
+        "Type":"aff"
+    },
+    "Acc": 12,
+    "Range": {
+        "Min":300,
+        "Max":900
+    },
+    "Weight": {
+        "Base": 3.3,
+        "Misc": "2C"
+    },
+    "RoF": 6,
+    "Shots": {
+        "Base": 56,
+        "Reload": 3
+    },
+    "ST": 6,
+    "Bulk": -3,
+    "Rcl": 1,
+    "Cost": 2400,
+    "LC": 3,
+    "Notes": "UT Page 116"
+}
