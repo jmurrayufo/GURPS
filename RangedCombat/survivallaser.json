@@ -1,0 +1,16 @@
+{
+    "TL": 10,
+    "Name": "Survival Laser",
+    "Damage": "4d(2) Burn",
+    "Acc": 12,
+    "Range": "300/900",
+    "Weight": "3.3/2C",
+    "RoF": 6,
+    "Shots": "56(3)",
+    "ST": 6,
+    "Bulk": -3,
+    "Rcl": 1,
+    "Cost": 2400,
+    "LC": 3,
+    "Notes": "Page 1"
+}

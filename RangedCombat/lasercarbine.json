@@ -1,0 +1,16 @@
+{
+    "TL": 10,
+    "Name": "Laser Carbine",
+    "Damage": "5d(2) Burn",
+    "Acc": 12,
+    "Range": "500/1500",
+    "Weight": "5.6/2C",
+    "RoF": 10,
+    "Shots": "28(3)",
+    "ST": 5,
+    "Bulk": -3,
+    "Rcl": 1,
+    "Cost": 4600,
+    "LC": 2,
+    "Notes": "UT Page 116"
+}
