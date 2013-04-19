@@ -94,29 +94,6 @@ class Weapon( ):
       print " Notes:",       self.Notes
 
 class RangedAttackCalculator():
-   # Class Globals
-   # (Name,Type,Default,PrettyName,HelpString)
-   CalcAttributes = [         
-      ("DX",            int,     10,      "DX",                None),
-      ("Skill",         int,     1,       "Skill",             "Skill = Base skill, NOT effective"),
-      ("SM",            float,   2.0,     "SM",                "SM = Size of target in yards"),
-      ("Range",         float,   1.0,     "Range",             "Range = Distance to target, in yards"),
-      ("Speed",         float,   1.0,     "Speed",             "Speed = Relative speed of target in yards/s"),
-      ("DarkFog",       int,     0,       "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
-      ("CanSee",        bool,    True,    "Can See",           "Can See = Can you see the target?"),
-      ("KnowLoc",       bool,    True,    "Know Location",     "Know Location = Do you know EXACTLY where the target is?"),
-      ("Concealment",   bool,    False,   "Concealment",       "Concealment = Does the target have partial concealment?"),
-      ("RoundsAiming",  int,     0,       "Rounds Aiming",     "Rounds Aiming = How many previous rounds have you spend aiming?"),
-      ("ShotsFired",    int,     1,       "Shots Fired",       "Shots Fired = How many shots do you plan to fire?"),
-      ("Bracing",       bool,    False,   "Bracing",           "Bracing = Are you currently bracing your weapon?"),
-      ("Shock",         int,     0,       "Shock",             "Shock = Modifier if you took damage sense your last turn."),
-      ("AllOutAttack",  bool,    False,   "All-Out Attack",    "All-Out Attack = Are you attacking without regard to defense?" ),
-      ("MoveAndAttack", int,     0,       "Move And Attack",   "Move and Attack = Are you moving and attacking in the same round?"),
-      ("ChangeFacing",  bool,    False,   "Change Facing",     "Have you changes the direction you are facing by more then one hex diretion?"),
-      ("PopUpAttack",   bool,    False,   "Pop-Up Attack",     "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
-      ("MiscBonus",     int,     0,       "Misc Bonus",        "Misc Bonus = Has you DM given you any other +/- modifiers?"),
-      ("HitLoc",        'Cust',  None,    None,                None)
-   ]
 
    def __init__( self ):
       logger.debug('Ceated new RangedAttackCalculator instance')
@@ -145,28 +122,28 @@ class RangedAttackCalculator():
       # Object Fields
       self.Mod = None
 
-      # (GetAttr name, function to use, name to print, help for user)
-      self.PromptMenu = [
-         ("DX", self.PromptChangeGenericInt, "DX", None),
-         ("Skill", self.PromptChangeGenericInt, "Skill", "Skill = Base skill, NOT effective"),
-         ("SM", self.PromptChangeGenericFloat, "SM", "SM = Size of target in yards"),
-         ("Range", self.PromptChangeGenericFloat, "Range", "Range = Distance to target, in yards"),
-         ("Speed", self.PromptChangeGenericFloat, "Speed", "Speed = Relative speed of target in yards/s"),
-         ("DarkFog", self.PromptChangeGenericInt, "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
-         ("CanSee", self.PromptChangeGenericBool, "Can See", "Can See = Can you see the target?"),
-         ("KnowLoc", self.PromptChangeGenericBool, "Know Location", "Know Location = Do you know EXACTLY where the target is?"),
-         ("Concealment", self.PromptChangeGenericBool, "Concealment", "Concealment = Does the target have partial concealment?"),
-         ("HitLoc", self.PromptChangeHitLoc, None, None),
-         ("RoundsAiming", self.PromptChangeGenericInt, "Rounds Aiming", "Rounds Aiming = How many previous rounds have you spend aiming?"),
-         ("ShotsFired", self.PromptChangeGenericInt, "Shots Fired", "Shots Fired = How many shots do you plan to fire?"),
-         ("Bracing", self.PromptChangeGenericBool, "Bracing", "Bracing = Are you currently bracing your weapon?"),
-         ("Shock", self.PromptChangeGenericInt, "Shock", "Shock = Modifier if you took damage sense your last turn."),
-         ("AllOutAttack", self.PromptChangeGenericBool, "All-Out Attack", "All-Out Attack = Are you attacking without regard to defense?" ),
-         ("MoveAndAttack", self.PromptChangeGenericInt, "Move And Attack", "Move and Attack = Are you moving and attacking in the same round?"),
-         ("ChangeFacing", self.PromptChangeGenericBool, "Change Facing", "Have you changes the direction you are facing by more then one hex diretion?"),
-         ("PopUpAttack", self.PromptChangeGenericBool, "Pop-Up Attack", "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
-         ("MiscBonus", self.PromptChangeGenericInt, "Misc Bonus", "Misc Bonus = Has you DM given you any other +/- modifiers?")
-         ]
+      # (Name,Type,Default,PrettyName,HelpString)
+      self.CalcAttributes = [         
+         ("DX",            int,     10,      "DX",                None),
+         ("Skill",         int,     1,       "Skill",             "Skill = Base skill, NOT effective"),
+         ("SM",            float,   2.0,     "SM",                "SM = Size of target in yards"),
+         ("Range",         float,   1.0,     "Range",             "Range = Distance to target, in yards"),
+         ("Speed",         float,   1.0,     "Speed",             "Speed = Relative speed of target in yards/s"),
+         ("DarkFog",       int,     0,       "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
+         ("CanSee",        bool,    True,    "Can See",           "Can See = Can you see the target?"),
+         ("KnowLoc",       bool,    True,    "Know Location",     "Know Location = Do you know EXACTLY where the target is?"),
+         ("Concealment",   bool,    False,   "Concealment",       "Concealment = Does the target have partial concealment?"),
+         ("RoundsAiming",  int,     0,       "Rounds Aiming",     "Rounds Aiming = How many previous rounds have you spend aiming?"),
+         ("ShotsFired",    int,     1,       "Shots Fired",       "Shots Fired = How many shots do you plan to fire?"),
+         ("Bracing",       bool,    False,   "Bracing",           "Bracing = Are you currently bracing your weapon?"),
+         ("Shock",         int,     0,       "Shock",             "Shock = Modifier if you took damage sense your last turn."),
+         ("AllOutAttack",  bool,    False,   "All-Out Attack",    "All-Out Attack = Are you attacking without regard to defense?" ),
+         ("MoveAndAttack", int,     0,       "Move And Attack",   "Move and Attack = Are you moving and attacking in the same round?"),
+         ("ChangeFacing",  bool,    False,   "Change Facing",     "Have you changes the direction you are facing by more then one hex diretion?"),
+         ("PopUpAttack",   bool,    False,   "Pop-Up Attack",     "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
+         ("MiscBonus",     int,     0,       "Misc Bonus",        "Misc Bonus = Has you DM given you any other +/- modifiers?"),
+         ("HitLoc",        self.PromptChangeHitLoc,  None,    None,                None)
+      ]  
 
       self.UpdateWeaponsList()
 
@@ -331,67 +308,48 @@ class RangedAttackCalculator():
       print "Press enter to continue"
       raw_input()
 
+   def PromptSelectAttribute( self ):
+      while True:   
+         print "\n\n\nPress enter w/o selecting a value to return to main menu"
+         print "=== Attributes ==="
+         for idx,val in enumerate( self.CalcAttributes ):
+            print "[%2d] %s"% ( idx, val[3] )
+         # Get User Input
+         try:
+            selection = input(">")
+         except SyntaxError:
+            return
 
+         # (Name,Type,Default,PrettyName,HelpString)
+         # PromptChangeGenericType( self, attribName, attrType, prettyName = None, helpStr = None ):
+         try:
+            tableLine = self.CalcAttributes[selection]
+         except IndexError:
+            continue
+
+         self.PromptChangeGenericType( tableLine[0], tableLine[1], tableLine[3], tableLine[4] )
 
    def PromptEnterAttributes( self ):      
-      print "Answer the prompts!"
+      print "\n\n\nAnswer the prompts!"
       print "Pressing enter will skip the step and leave the current value in place!"
 
       logger.debug('Entering ALL attributes')
 
-      for i in self.PromptMenu:
-         i[1]( i[0], i[2], i[3] )
+      # (Name,Type,Default,PrettyName,HelpString)
+      for i in self.CalcAttributes:
+         self.PromptChangeGenericType( i[0], i[1], i[3], i[4] )
 
       logger.debug('Attributes completed')
 
-   def PromptChangeGenericInt( self, attribName, prettyName = None, helpStr = None ):
+   def PromptChangeGenericType( self, attribName, attrType, prettyName = None, helpStr = None ):
       if( prettyName == None ):
          prettyName = attribName
-      while True:
-         print "\n%s = %d"%( attribName, getattr( self, attribName ) )
-         if( helpStr ):
-            print helpStr
-         print "Enter New %s"%( attribName )
-         try:
-            tmp = input(">")
-         except NameError:
-            print "NameError: %s must be an int"%( attribName )
-            continue
-         except SyntaxError:
-            break
-         if( type( tmp ) != types.IntType ):
-            print "TypeError: %s must be an int"%( attribName )
-            continue
-         setattr( self, attribName, tmp )
-         break
 
-   def PromptChangeGenericFloat( self, attribName, prettyName = None, helpStr = None ):
-      if( prettyName == None ):
-         prettyName = attribName
-      while True:
-         print "\n%s = %.1f"%( attribName, getattr( self, attribName ) )
-         if( helpStr ):
-            print helpStr
-         print "Enter New %s"%( attribName )
-         try:
-            tmp = input(">")
-         except NameError:
-            print "NameError: %s must be a float"%( attribName )
-            continue
-         except SyntaxError:
-            break
-         if( type( tmp ) != types.FloatType ):
-            try: 
-               tmp = float( tmp )
-            except:
-               print "TypeError: %s must be an float"%( attribName )
-               continue
-         setattr( self, attribName, tmp )
-         break
 
-   def PromptChangeGenericBool( self, attribName, prettyName = None, helpStr = None ):
-      if( prettyName == None ):
-         prettyName = attribName
+      if( type(attrType) == types.MethodType ):
+         attrType( prettyName, helpStr )
+         return
+
       reTrueStr = "^[yYtT1]"
       reFalseStr = "^[nNfF0]"
       while True:
@@ -400,18 +358,30 @@ class RangedAttackCalculator():
             print helpStr
          print "Enter New %s"%( attribName )
          tmp = raw_input(">")
+         # Empty Lines Break
          if( len( tmp ) == 0 ):
             break
-         if( re.search( reTrueStr, tmp ) ):
-            setattr( self, attribName, True )
-         elif( re.search( reFalseStr, tmp ) ):
-            setattr( self, attribName, False )
-         else:
-            print "InputError: Invalid entry"
-            continue
+
+         if( attrType == int or attrType == float):
+            try:
+               # Case the value into the correct type!
+               tmp = attrType(tmp)
+            except ValueError:
+               continue
+            setattr( self, attribName, tmp )
+            break
+
+         if( attrType == bool):
+            if( re.search( reTrueStr, tmp ) ):
+               setattr( self, attribName, True )
+            elif( re.search( reFalseStr, tmp ) ):
+               setattr( self, attribName, False )
+            else:
+               print "InputError: Invalid entry"
+               continue
          break
 
-   def PromptChangeHitLoc( self, *dummyArgs1, **dummyArgs2):
+   def PromptChangeHitLoc( self, attribName, attrType, prettyName = None, helpStr = None ):
       attribName = "HitLoc"
       menu = [ "Arm","Eye","Face","Foot","Groin","Hand","Leg",
          "Neck","Skull","Torso","Vitals" ]
@@ -463,33 +433,6 @@ class RangedAttackCalculator():
             print "IndexError: Select a valid entry!"
             continue
          break
-
-   def PromptSelectAttribute( self ):
-      while True:   
-         print "\n\n\n=== Attributes ==="
-         for idx,val in enumerate( self.PromptMenu ):
-            print "[%2d] %s"% ( idx, val[0] )
-         # Get User Input
-
-         try:
-            selection = input(">")
-         except SyntaxError:
-            return
-
-         try:
-            funcCall = self.PromptMenu[selection][1]
-         except IndexError:
-            continue
-
-         if( type( funcCall ) == types.FunctionType 
-            or type(funcCall ) == types.InstanceType 
-            or type( funcCall ) == types.MethodType ):
-            funcCall(self.PromptMenu[selection][0])
-            break
-         if( funcCall == None ):
-            print "\n\nPromptChange%s() needs to be writen!"%( self.PromptMenu[selection][0] )
-            print "Press enter to continue"
-            raw_input()
 
    def PrintOptions( self ):
       print "\n\n\n   ===Selected Options==="
