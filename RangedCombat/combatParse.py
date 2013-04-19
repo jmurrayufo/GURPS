@@ -7,7 +7,7 @@ import time
 import types
 import atexit
 
-version = '0.0.1'
+version = '0.0.2'
 
 class Weapon( ):
 
