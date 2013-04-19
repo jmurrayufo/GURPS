@@ -83,7 +83,8 @@ class Dice():
 class Dice2():
    """
    Dice2 is a more advanced version of Dice. This takes only one argument on
-      on creation. A string 
+      on creation. A string that describes any basic math formula and basic dice 
+      expression.
    """
    def __init__( self, diceExpression='1d20' ):
       self.DieStr = diceExpression
