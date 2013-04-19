@@ -2,8 +2,8 @@ import json
 from collections import OrderedDict
 
 print "Name of file"
-fileName = raw_input( ">" ) + '.json'
-with open( fileName ,'w' ) as fp:
+fileName = raw_input( ">" ) 
+with open( "\\Weapons\\"+fileName + ".json" ,'w' ) as fp:
     jsonDict = OrderedDict()
 
     print "\nEnter TL"
