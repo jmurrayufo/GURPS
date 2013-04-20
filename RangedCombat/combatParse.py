@@ -97,30 +97,6 @@ class RangedAttackCalculator():
 
    def __init__( self ):
       logger.debug('Ceated new RangedAttackCalculator instance')
-      # User input Fields
-      self.DX = 10
-      self.Skill = 1
-      self.SM = 2.0
-      self.Range = 0.0
-      self.Speed = 0.0
-      self.HitLoc = "Torso"
-      self.DarkFog = 0
-      self.CanSee = True
-      self.KnowLoc = True
-      self.Concealment = False
-      self.Weapon = None
-      self.RoundsAiming = 0
-      self.ShotsFired = 1
-      self.Bracing = False
-      self.Shock = 0
-      self.AllOutAttack = False
-      self.MoveAndAttack = 0
-      self.ChangeFacing = False
-      self.PopUpAttack = False
-      self.MiscBonus = 0
-
-      # Object Fields
-      self.Mod = None
 
       # (Name,Type,Default,PrettyName,HelpString)
       self.CalcAttributes = [         
@@ -128,7 +104,7 @@ class RangedAttackCalculator():
          ("Skill",         int,     1,       "Skill",             "Skill = Base skill, NOT effective"),
          ("SM",            float,   2.0,     "SM",                "SM = Size of target in yards"),
          ("Range",         float,   1.0,     "Range",             "Range = Distance to target, in yards"),
-         ("Speed",         float,   1.0,     "Speed",             "Speed = Relative speed of target in yards/s"),
+         ("Speed",         float,   0.0,     "Speed",             "Speed = Relative speed of target in yards/s"),
          ("DarkFog",       int,     0,       "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
          ("CanSee",        bool,    True,    "Can See",           "Can See = Can you see the target?"),
          ("KnowLoc",       bool,    True,    "Know Location",     "Know Location = Do you know EXACTLY where the target is?"),
@@ -142,8 +118,16 @@ class RangedAttackCalculator():
          ("ChangeFacing",  bool,    False,   "Change Facing",     "Have you changes the direction you are facing by more then one hex diretion?"),
          ("PopUpAttack",   bool,    False,   "Pop-Up Attack",     "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
          ("MiscBonus",     int,     0,       "Misc Bonus",        "Misc Bonus = Has you DM given you any other +/- modifiers?"),
-         ("HitLoc",        self.PromptChangeHitLoc,  None,    None,                None)
+         ("HitLoc",        self.PromptChangeHitLoc,  "Torso",     "Hit Location",   None),
+         ("Weapon",        self.PromptChangeWeapon,  None,        "Weapon",         "Weapon Help String default")
       ]  
+
+      for i in self.CalcAttributes:
+         setattr( self, i[0], i[2] )
+
+      # Object Fields
+      self.Mod = None
+      self.Weapon = None
 
       self.UpdateWeaponsList()
 
@@ -403,7 +387,7 @@ class RangedAttackCalculator():
             continue
          break
 
-   def PromptChangeWeapon( self ):
+   def PromptChangeWeapon( self, *pargs ):
       while True:
          self.UpdateWeaponsList()
          if( len( self.WeaponList ) == 0 ):
