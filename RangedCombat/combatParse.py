@@ -7,7 +7,7 @@ import time
 import types
 import atexit
 
-version = '0.0.2'
+version = '0.0.3'
 
 class Weapon( ):
 
@@ -99,7 +99,7 @@ class RangedAttackCalculator():
       logger.debug('Ceated new RangedAttackCalculator instance')
 
       # (Name,Type,Default,PrettyName,HelpString)
-      self.CalcAttributes = [         
+      self.CalcAttributes = [
          ("DX",            int,     10,      "DX",                None),
          ("Skill",         int,     1,       "Skill",             "Skill = Base skill, NOT effective"),
          ("SM",            float,   2.0,     "SM",                "SM = Size of target in yards"),
@@ -171,7 +171,7 @@ class RangedAttackCalculator():
             continue
 
          if(selection == exit):
-            logger.info('Leaving Main loop forever (begin exit and shutdown)')
+            logger.info('******* Leaving Main loop on user selected exit *******')
             break
 
          if( type( selection ) == types.FunctionType or types.InstanceType):
@@ -201,25 +201,14 @@ class RangedAttackCalculator():
 
       # Prepare object for saving. 
       saveData = dict()
-      saveData['DX'] = self.DX
-      saveData['Skill '] = self.Skill
-      saveData['SM '] = self.SM
-      saveData['Range'] = self.Range
-      saveData['Speed'] = self.Speed 
-      saveData['HitLoc'] = self.HitLoc
-      saveData['DarkFog'] = self.DarkFog
-      saveData['CanSee'] = self.CanSee
-      saveData['KnowLoc'] = self.KnowLoc
-      saveData['Concealment'] = self.Concealment 
-      saveData['RoundsAiming'] = self.RoundsAiming
-      saveData['ShotsFired'] = self.ShotsFired
-      saveData['Bracing'] = self.Bracing
-      saveData['Shock'] = self.Shock
-      saveData['AllOutAttack'] = self.AllOutAttack
-      saveData['MoveAndAttack'] = self.MoveAndAttack
-      saveData['ChangeFacing'] = self.ChangeFacing
-      saveData['PopUpAttack'] = self.PopUpAttack
-      saveData['MiscBonus'] = self.MiscBonus
+
+      # (Name,Type,Default,PrettyName,HelpString)
+      # self.CalcAttributes = [
+      for i in self.CalcAttributes:
+         if( i[0] == 'Weapon' ):
+            print "skip!"
+            continue
+         saveData[ i[0] ] = getattr( self, i[0], i[2] )
 
       print saveData
 
@@ -239,7 +228,12 @@ class RangedAttackCalculator():
 
       logger.debug('Begin attempt to load file.')
       savedFileList = glob.glob(".\\Save\\*.json")
-      print savedFileList
+      if( len( savedFileList ) == 0 ):
+         logger.error('No files found in the save directory from the glob.glob')
+         print "No files in the Save directory!"
+         print "Press enter to continue..."
+         raw_input()
+         return
 
       while True:
          print "\n\n\n   ===Select a File==="
@@ -248,15 +242,14 @@ class RangedAttackCalculator():
 
          try:
             tmp = input(">")
+         # Non-Int entry
          except NameError:
             print "NameError: File Selection must be an int"
             continue
+         # Blank entry
          except SyntaxError:
             logger.debug('File was not loaded')
             return
-         if( type( tmp ) != types.IntType ):
-            print "TypeError: File Selection must be an int"
-            continue
          try:
             savedFile = savedFileList[tmp]
          except IndexError:
@@ -266,25 +259,8 @@ class RangedAttackCalculator():
 
       with open( savedFile, 'r' ) as fp:
          saveData = json.load(fp)
-      self.DX = SafeLoad( saveData, 'DX', 10 )
-      self.Skill = SafeLoad( saveData, 'Skill ', 0 )
-      self.SM = SafeLoad( saveData, 'SM ', 2 )
-      self.Range = SafeLoad( saveData, 'Range', 1 )
-      self.Speed  = SafeLoad( saveData, 'Speed', 0 )
-      self.HitLoc = SafeLoad( saveData, 'HitLoc', 'Torso;' )
-      self.DarkFog = SafeLoad( saveData, 'DarkFog', 0 )
-      self.CanSee = SafeLoad( saveData, 'CanSee', True )
-      self.KnowLoc = SafeLoad( saveData, 'KnowLoc', True )
-      self.Concealment  = SafeLoad( saveData, 'Concealment', True )
-      self.RoundsAiming = SafeLoad( saveData, 'RoundsAiming', 0 )
-      self.ShotsFired = SafeLoad( saveData, 'ShotsFired', 1 )
-      self.Bracing = SafeLoad( saveData, 'Bracing', False )
-      self.Shock = SafeLoad( saveData, 'Shock', 0 )
-      self.AllOutAttack = SafeLoad( saveData, 'AllOutAttack', True )
-      self.MoveAndAttack = SafeLoad( saveData, 'MoveAndAttack', False )
-      self.ChangeFacing = SafeLoad( saveData, 'ChangeFacing', False )
-      self.PopUpAttack = SafeLoad( saveData, 'PopUpAttack', False )
-      self.MiscBonus = SafeLoad( saveData, 'MiscBonus', 0 )
+      for i in self.CalcAttributes:
+         setattr( self, i[0], SafeLoad( saveData, i[0], i[2] ) )
       
       logger.debug('File loading complete')
       print "\nLoaded settings from file",savedFile
