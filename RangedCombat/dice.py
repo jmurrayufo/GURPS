@@ -1,6 +1,10 @@
 import random
 import re
 import numpy
+import time
+import readline
+
+_DEBUG = False
 
 class Dice():
    def __init__( self, n=1, s=6 ):
@@ -80,6 +84,7 @@ class Dice():
          return ( passVal, result, passMargin )
       else:
          return passMargin
+
 class Dice2():
    """
    Dice2 is a more advanced version of Dice. This takes only one argument on
@@ -126,10 +131,6 @@ class Dice2():
       except ValueError:
          print "Never"
 
-
-
-
-
 def DieEvaluator( diceExpression ):   
    def funcRoll( matchobj ):
       n=int( matchobj.group( 1 ) )
@@ -139,14 +140,17 @@ def DieEvaluator( diceExpression ):
          retval += random.randint(1,s)
       return str(retval)
 
-   # print "\nBegin eval"
+   if(_DEBUG): print "\nBegin eval"
    while True:
-      # print "Loop on:",diceExpression
+      if(_DEBUG): 
+         print "Loop on:",diceExpression
+         time.sleep(1)
+
 
       # Remove parenthesis with only numbers inside of them
       matchStr = "\(\d+\)"
       if( re.search( matchStr, diceExpression ) ):
-         #print "Peren:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Peren:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -155,22 +159,32 @@ def DieEvaluator( diceExpression ):
       # Evaluate correct dice stings
       matchStr = "(\d+)d(\d+)"
       if( re.search( matchStr, diceExpression ) ):
-         # print "Dice:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Dice:",re.search( matchStr, diceExpression ).group(0)
          diceExpression = re.sub( matchStr, funcRoll, diceExpression, count=1 )
          continue
 
       # Append '6' onto hanging d's
-      matchStr = "\d+d"
+      matchStr = "(\d+d)[^0-9]?"
+      # matchStr = "(\d+d)(?:[^0-9])"
       if( re.search( matchStr, diceExpression ) ): 
-         # print "d Fix:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Nd Fix:",re.search( matchStr, diceExpression ).group(1)
+         replStr = re.search( matchStr, diceExpression ).group(1)
+         diceExpression = re.sub( replStr, replStr+'6', diceExpression, count=1 )
+         continue
+
+      # Prepend '1' infront of hanging d's
+      matchStr = "d\d+"
+      # matchStr = "(\d+d)(?:[^0-9])"
+      if( re.search( matchStr, diceExpression ) ): 
+         if(_DEBUG): print "dN Fix:",re.search( matchStr, diceExpression ).group(0)
          replStr = re.search( matchStr, diceExpression ).group(0)
-         diceExpression = re.sub( matchStr, replStr+'6' , diceExpression, count=1 )
-         continue     
+         diceExpression = re.sub( replStr, '1'+replStr, diceExpression, count=1 )
+         continue
 
       # Exponents
       matchStr = "\d+\^\d+"
       if( re.search( matchStr, diceExpression ) ):
-         #print "Exponent:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Exponent:",re.search( matchStr, diceExpression ).group(0)
          replStr = re.sub( "\^", "**", re.search( matchStr, diceExpression ).group(0) )
          replStr = eval( replStr )
          replStr = str( replStr )
@@ -180,7 +194,7 @@ def DieEvaluator( diceExpression ):
       # Multiplication
       matchStr = "\d+[*xX]\d+"
       if( re.search( matchStr, diceExpression ) ):
-         #print "Multi:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Multi:",re.search( matchStr, diceExpression ).group(0)
          replStr = re.sub( "x", "*", re.search( matchStr, diceExpression ).group(0) )
          replStr = re.sub( "X", "*", re.search( matchStr, diceExpression ).group(0) )
          replStr = eval( replStr )
@@ -191,7 +205,7 @@ def DieEvaluator( diceExpression ):
       # Dor-vision
       matchStr = "\d+\/\d+"
       if( re.search( matchStr, diceExpression ) ):
-         #print "Divide:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Divide:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -200,7 +214,7 @@ def DieEvaluator( diceExpression ):
       # Addition
       matchStr = "\d+\+\d+"
       if( re.search( matchStr, diceExpression ) ):
-         #print "Add:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Add:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -209,7 +223,7 @@ def DieEvaluator( diceExpression ):
       # Surb-Traction
       matchStr = "\d+\-\d+"
       if( re.search( matchStr, diceExpression ) ):
-         #print "Sub:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print "Sub:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -217,16 +231,30 @@ def DieEvaluator( diceExpression ):
       # We only get here when we have nothing left to parse!
       break
 
+   if(_DEBUG): print "Return:", diceExpression
    return diceExpression
 
-
-
-
+def PromptDice():
+   old_tmp = ''
+   print "?: help"
+   print "q: quit"
+   while True:
+      tmp = raw_input(">")
+      if( tmp in ['q','Q','quit','exit'] ):
+         break
+      if( tmp in ['h','H','-?','?'] ):
+         print "Enter any valid dice expression to evaluate it."
+         print "  Extra text is ignored, math is evaluated."
+         print "Enter blank string to repeat last entry."
+         print "Enter 'q' to quit."
+         continue
+         
+      if( len( tmp ) == 0 ):
+         print ">",old_tmp
+         tmp = old_tmp
+      old_tmp = tmp
+      print DieEvaluator( tmp )
 
 if __name__ == '__main__':
-   print "Testing the dice roller!"
-   d=Dice2('1d20')
-   # print d
-   for i in range(1000):
-      d.Roll()
-   d.PrintStats()
+   PromptDice()
+
