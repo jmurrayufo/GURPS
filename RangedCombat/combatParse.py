@@ -211,8 +211,7 @@ class RangedAttackCalculator():
       if( not os.path.isdir('Save') ):
          logger.critical('Save was a file, and cannot be a directory!')
          print "Error! Cannot save as \"./Save\" isn't a directory!"
-         print "Press enter to continue"
-         raw_input()
+         input_pause( "Press enter to continue..." )
          return
 
       # Prepare object for saving. 
@@ -305,8 +304,8 @@ class RangedAttackCalculator():
       logger.debug('File loading complete')
       print "\nLoaded settings from file",savedFile
       print "WARNING: Weapon select is NOT saved or loaded. Please reselect your weapon!"
-      print "Press enter to continue"
-      raw_input()
+      input_pause( "Press enter to continue" )
+      
 
    def PromptSelectAttribute( self ):
       while True:   
@@ -409,8 +408,7 @@ class RangedAttackCalculator():
          if( len( self.WeaponList ) == 0 ):
             logger.error('Attempted to load weapons w/o a populated list')
             print "Error: No weapons found in Weapons directory!"
-            print "Press enter to continue..."
-            raw_input()
+            input_pause( "Press enter to continue" )
             break
          print "\n\n\n   ===Select a Weapon==="
          print "Note: Weapons list has been reloaded from HDD. Reselect weapon to refresh"
@@ -461,8 +459,7 @@ class RangedAttackCalculator():
 
       logger.debug('Starting to assist user with math')
       print "This section has yet to be done"
-      print "Press enter to continue..."
-      raw_input()
+      input_pause( "Press enter to continue" )
 
       logger.debug('Finished assisting user with math')
 
@@ -473,8 +470,7 @@ class RangedAttackCalculator():
       def ErrorPrint( check, errorStr):
          if( check ):
             print "\nERROR:",errorStr
-            print "Press Enter to acknowledge error."
-            raw_input()
+            input_pause( "Press enter to continue" )
 
       def WarningPrint( check, errorStr ):
          if( check ):
@@ -521,7 +517,7 @@ class RangedAttackCalculator():
 
       ErrorPrint( self.Bracing and ( self.MoveAndAttack or self.PopUpAttack ), "You cannot brace while Moving or Popping up!" )
 
-      ErrorPrint( self.ChangeFacing and self.MoveAndAttack ), "Moving gives you a free change of facing!"
+      ErrorPrint( self.ChangeFacing and self.MoveAndAttack , "Moving gives you a free change of facing!" )
 
       ErrorPrint( self.Shock > 0, "Shock > 0, this cannot be a bonus!")
       ErrorPrint( self.Shock < -4, "Shock < -4, this is the worst case effect of shock damage")
@@ -533,8 +529,7 @@ class RangedAttackCalculator():
       ErrorPrint( self.PopUpAttack and self.RoundsAiming, "You cannot Pop Up Attack AND aim.")
 
       print "\nError checks complete!"
-      print "Press enter to continue..."
-      raw_input()
+      input_pause( "Press enter to continue..." )
       logger.debug('Finished Error Check')
 
    def PrintGunDetails( self ):
@@ -545,8 +540,7 @@ class RangedAttackCalculator():
          logger.error('Attmepted to print a gun w/o selecting one first!')
          print "You need to select a gun first!"
 
-      print "Hit enter to return to main menu..."
-      raw_input()
+      input_pause( "Press enter to return to main menu..." )
 
 
    def UpdateWeaponsList( self ):
@@ -564,8 +558,7 @@ class RangedAttackCalculator():
          except:
             logger.warning('Failed to create a Weapon() instance out of file %s'%(i))
             print "\nError, file \"%s\" was not parsed."%(i)
-            print "Hit enter to continue parsing other files"
-            raw_input()
+            input_pause( "Press enter to continue..." )
 
       if( len(self.WeaponList ) == 0 ):
          logger.error('No weapons loaded')
@@ -631,8 +624,8 @@ class RangedAttackCalculator():
       logger.warning('Speed: %f Range: %f exdeed legal values'%(speed,distance))
 
       print "WARNING! Speed and Range are outside of legal values!"
-      print "Press enter to accept and use a score of -9000"
-      raw_input()
+      print "Value will default to -9000"
+      input_pause( "Press enter to continue..." )
       return -9000
 
    def CalcSizeModifier( self, size ):
@@ -655,8 +648,8 @@ class RangedAttackCalculator():
          if size < i[0]:
             return i[1]
       print "WARNING! Size is outside of legal values!"
-      print "Press enter to accept and use a score of 30"
-      raw_input()
+      print "Value will default to 30"
+      input_pause( "Press enter to continue..." )
       return 30
 
    def CalcHitLocation( self, location ):
@@ -678,8 +671,8 @@ class RangedAttackCalculator():
       except KeyError:
          logger.critical('HitLocation is outside of hitLocDict bounds!')
          print "WARNING! Hit location has an invalid key!"
-         print "Press enter to accept and use a score of -10"
-         raw_input()
+         print "Value will default to -10"
+         input_pause( "Press enter to continue..." )
          return -10
 
    def CalcVisionEffects( self, argCanSee, argKnowLoc, argDarkFog, argConcealment ):
@@ -735,9 +728,13 @@ class RangedAttackCalculator():
             return i[1]
 
       print "WARNING! Shots Fired exceeds legal limits!"
-      print "Press enter to accept and use a score of 0"
-      raw_input()
+      print "Value will default to 0"
+      input_pause( "Press enter to continue..." )
       return 0
+
+def input_pause( inputStr="Press enter to continue..." ):
+   print inputStr
+   raw_input()
 
 def GlobalCleanup():
    logger.info('***** Logging Terminated *****')
