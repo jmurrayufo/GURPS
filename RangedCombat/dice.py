@@ -2,6 +2,7 @@ import random
 import re
 import numpy
 import time
+import readline
 
 _DEBUG = False
 
@@ -83,6 +84,7 @@ class Dice():
          return ( passVal, result, passMargin )
       else:
          return passMargin
+
 class Dice2():
    """
    Dice2 is a more advanced version of Dice. This takes only one argument on
@@ -128,10 +130,6 @@ class Dice2():
          print "Last Fail:",tmp.index(1)
       except ValueError:
          print "Never"
-
-
-
-
 
 def DieEvaluator( diceExpression ):   
    def funcRoll( matchobj ):
@@ -236,15 +234,27 @@ def DieEvaluator( diceExpression ):
    if(_DEBUG): print "Return:", diceExpression
    return diceExpression
 
-
-
+def PromptDice():
+   old_tmp = ''
+   print "?: help"
+   print "q: quit"
+   while True:
+      tmp = raw_input(">")
+      if( tmp in ['q','Q','quit','exit'] ):
+         break
+      if( tmp in ['h','H','-?','?'] ):
+         print "Enter any valid dice expression to evaluate it."
+         print "  Extra text is ignored, math is evaluated."
+         print "Enter blank string to repeat last entry."
+         print "Enter 'q' to quit."
+         continue
+         
+      if( len( tmp ) == 0 ):
+         print ">",old_tmp
+         tmp = old_tmp
+      old_tmp = tmp
+      print DieEvaluator( tmp )
 
 if __name__ == '__main__':
-   d = Dice2('1d20')
-   d.Roll()
-   d.Roll()
-   d.Roll()
-   d.Roll()
-   d.Roll()
-   d.PrintStats()
+   PromptDice()
 
