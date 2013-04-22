@@ -96,7 +96,7 @@ class Weapon( ):
 class RangedAttackCalculator():
 
    def __init__( self ):
-      logger.debug('Ceated new RangedAttackCalculator instance')
+      logger.debug('Begin')
 
       # (Name,Type,Default,PrettyName,HelpString)
       self.CalcAttributes = [
@@ -119,7 +119,8 @@ class RangedAttackCalculator():
          ("PopUpAttack",   bool,    False,   "Pop-Up Attack",     "Pop-Up Attack = Are you doing a Pop-Up Attack?"),
          ("MiscBonus",     int,     0,       "Misc Bonus",        "Misc Bonus = Has you DM given you any other +/- modifiers?"),
          ("HitLoc",        self.PromptChangeHitLoc,  "Torso",     "Hit Location",   None),
-         ("Weapon",        self.PromptChangeWeapon,  None,        "Weapon",         "Weapon Help String default")
+         ("Weapon",        self.PromptChangeWeapon,  None,        "Weapon",         "Weapon Help String default"),
+         ("Advantages",    dict,    {},      "Advantages",        "List of Advantages that your character has that effect ranged comba")
       ]  
 
       for i in self.CalcAttributes:
@@ -131,7 +132,7 @@ class RangedAttackCalculator():
 
       self.UpdateWeaponsList()
 
-      logger.debug('__init__ completed')
+      logger.debug('Completed')
 
    # ********************************
    # ******* User Interaction *******
