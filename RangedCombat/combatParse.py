@@ -230,8 +230,7 @@ class RangedAttackCalculator():
       if( len( savedFileList ) == 0 ):
          logger.error('No files found in the save directory from the glob.glob')
          print "No files in the Save directory!"
-         print "Press enter to continue..."
-         raw_input()
+         input_pause( "Press enter to continue..." )
          return
 
       while True:
@@ -264,7 +263,7 @@ class RangedAttackCalculator():
       logger.debug('File loading complete')
       print "\nLoaded settings from file",savedFile
       print "WARNING: Weapon select is NOT saved or loaded. Please reselect your weapon!"
-      input_pause( "Press enter to continue" )
+      input_pause( "Press enter to continue..." )
       
 
    def PromptSelectAttribute( self ):
@@ -733,8 +732,7 @@ if __name__ == '__main__':
    print "\\/"
    print "This program uses a lot of screen space, so I suggest you expand your window"
    print " before you continue. Expand to see the complete ruler above for best results. "
-   print "Press Enter to continue..."
-   raw_input()
+   input_pause( "Press enter to continue..." )
 
    if( os.name == 'nt'):
       os.system('cls')
