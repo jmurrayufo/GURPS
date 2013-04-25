@@ -187,13 +187,13 @@ class CharSheet( ):
       if( attribute == "HT" ):
          return Point( self.HTp, 10 ) + 10
       if( attribute == "HP" ):
-         return Point( self.HPp,  2 ) + self.GetAttrValue( 'ST' )  
+         return Point( self.HPp,  2 ) + self.GetAttrValue( 'ST' )
       if( attribute == "WILL" ):
-         return Point( self.WILLp, 5 ) + self.GetAttrValue( 'IQ' )  
+         return Point( self.WILLp, 5 ) + self.GetAttrValue( 'IQ' )
       if( attribute == "PER" ):
-         return Point( self.PERp, 5 ) + self.GetAttrValue( 'IQ' )  
+         return Point( self.PERp, 5 ) + self.GetAttrValue( 'IQ' )
       if( attribute == "FP" ):
-         return Point( self.FPp, 3 ) + self.GetAttrValue( 'HT' )  
+         return Point( self.FPp, 3 ) + self.GetAttrValue( 'HT' )
 
 
    def Print(self):
@@ -251,15 +251,15 @@ if __name__ == '__main__':
    john = CharSheet()
    john.Name = 'John'
 
-   # with open("data/gameref/skills.csv",'r') as fp:
-   #     skillreader = csv.reader( fp, delimiter=',')
-   #     # Gobble header
-   #     header = skillreader.next()
-   #     for idx,val in enumerate( skillreader ):
-   #         if( len( val ) == 5):
-   #             john.AddSkill( val )
-   #         else:
-   #             pass
+   with open("data/gameref/skills.csv",'r') as fp:
+       skillreader = csv.reader( fp, delimiter=',')
+       # Gobble header
+       header = skillreader.next()
+       for idx,val in enumerate( skillreader ):
+           if( len( val ) == 5):
+               john.AddSkill( val )
+           else:
+               pass
 
    # print john
 
