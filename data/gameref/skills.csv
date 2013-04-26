@@ -1,0 +1,296 @@
+Skill, Attribute, Difficulty, Defaults(; sep), page
+Accounting,IQ,H,IQ-6;Finance-4;Mathematics (Statistics)-5;Merchant-5,174
+Acrobatics,DX,H,DX-6,174
+Acting,IQ,A,IQ-5;Performance-2;Public Speaking-5,174
+Administration,IQ,A,IQ-5;Merchant-3,174
+Aerobatics,DX,H,DX-6,174
+Airshipman/TL,IQ,E,IQ-4,185
+Alchemy/TL,IQ,VH,None,174
+Animal Handling†,IQ,A,IQ-5,175
+Anthropology†,IQ,H,IQ-6;Paleontology(Paleoanthropology)-2;Sociology-3,175
+Aquabatics,DX,H,DX-6,174
+Archaeology,IQ,H,IQ-6,176
+Architecture/TL,IQ,A,IQ-5;Engineer (Civil)-4,176
+Area Knowledge†,IQ,E,IQ-4;Geography(Regional)-3*,176
+Armoury/TL†,IQ,A,IQ-5;Engineer(same)-4,178
+Artillery/TL†,IQ,A,IQ-5,178
+Artist†,IQ,H,IQ-6,179
+Astronomy/TL,IQ,H,IQ-6,179
+Autohypnosis,Will,H,Meditation-4,179
+Axe/Mace,DX,A,Flail-4;Two-Handed Axe/Mace-3,208
+Battlesuit/TL,DX,A,DX-5;Diving Suit-4;NBC Suit-2;Vacc Suit-2,192
+Beam Weapons/TL†,DX,E,DX-4,179
+Bicycling,DX,E,DX-4;Driving(Motorcycle)-4,80
+Bioengineering/TL†,IQ,H,Biology-5,180
+Biology/TL†,IQ,VH,IQ-6;Naturalist-6,180
+Blind Fighting,Per,VH,None,180
+Blowpipe,DX,H,DX-6,180
+Boating/TL†,DX,A,DX-5;IQ-5,180
+Body Control,HT,VH,None,181
+Body Language,Per,A,Detect Lies-4;Psychology-4,181
+Body Sense,DX,H,DX-6;Acrobatics-3,181
+Bolas,DX,A,None,181
+Bow,DX,A,DX-5,182
+Boxing,DX,A,None,182
+Brain Hacking/TL,IQ,H,Special,182
+Brainwashing/TL,IQ,H,Special,182
+Brawling,DX,E,None,182
+Breaking Blow,IQ,H,None,182
+Breath Control,HT,H,None,182
+Broadsword,DX,A,Force Sword-4;Rapier-4;Saber-4;Shortsword-2;Two-Handed Sword-4,208
+Camouflage,IQ,E,IQ-4;Survival-2,183
+Captivate,Will,H,None,191
+Carousing,HT,E,HT-4,183
+Carpentry,IQ,E,IQ-4,183
+Cartography/TL,IQ,A,IQ-5;Geography (any)-2;Mathematics (Surveying)-2;Navigation (any)-4,183
+Chemistry/TL,IQ,H,IQ-6;Alchemy-3,183
+Climbing,DX,A,DX-5,183
+Cloak,DX,A,DX-5;Net-4;Shield (any)-4,184
+#Combat Art or Sport,DX,Varies,Special,184
+Computer Hacking/TL,IQ,VH,None,184
+Computer Operation/TL,IQ,E,IQ-4,184
+Computer Programming/TL,IQ,H,None,184
+Connoisseur†,IQ,A,IQ-5*,185
+Cooking,IQ,A,IQ-5;Housekeeping-5,185
+Counterfeiting/TL,IQ,H,IQ-6;Forgery-2,185
+Crewman/TL,IQ,E,IQ-4,185
+Criminology/TL,IQ,A,IQ-5;Psychology-4,186
+Crossbow,DX,E,DX-4,186
+Cryptography/TL,IQ,H,Mathematics(Cryptology)-5,186
+Current Affairs/TL†,IQ,E,IQ-4;Research-4,186
+Dancing,DX,A,DX-5,187
+Detect Lies,Per,H,Per-6;Body Language-4;Psychology-4,187
+Diagnosis/TL,IQ,H,IQ-6;First Aid-8;Physician-4;Veterinary-5,187
+Diplomacy,IQ,H,IQ-6;Politics-6,187
+Disguise/TL†,IQ,A,IQ-5;Makeup-3,187
+Diving Suit/TL,DX,A,DX-5;Battlesuit-4;NBC Suit-4;Scuba-2;Vacc Suit-4,192
+Dreaming,Will,H,Will-6,188
+Driving/TL†,DX,A,DX-5;IQ-5,188
+Dropping,DX,A,DX-3;Throwing-4,189
+Economics,IQ,H,IQ-6;Finance-3;Market Analysis-5;Merchant-6,189
+Electrician/TL,IQ,A,IQ-5;Engineer(Electrical)-3,189
+Electronics,IQ,A,IQ-5;Electronics Operation/TL† Repair (same)-5;Engineer (Electronics)-5,189
+Electronics Repair/TL†,IQ,A,IQ-5;Electronics Operation (same)-3;Engineer (Electronics)-3,190
+Engineer/TL†,IQ,H,Special,190
+Enthrallment,Will,H,None,191
+Environment Suit/TL,DX,A,DX-5*,192
+Erotic Art,DX,A,DX-5;Acrobatics-5,192
+Escape,DX,H,DX-6,192
+Esoteric Medicine,Per,H,Per-6,192
+Exorcism,Will,H,Will-6;Religious Ritual (any)-3;Ritual Magic (any)-3;Theology (any)-3,193
+Expert Skill†,IQ,H,None,193
+Explosives/TL†,IQ,A,IQ-5*,194
+Falconry,IQ,A,IQ-5;Animal Handling(Raptors)-3,194
+Farming/TL,IQ,A,IQ-5;Biology-5;Gardening-3,194
+Fast-Draw†,DX,E,None,194
+Fast-Talk,IQ,A,IQ-5;Acting-5,195
+Filch,DX,A,DX-5;Pickpocket-4;Sleight of Hand-4,195
+Finance,IQ,H,Accounting-4;Economics-3;Merchant-6,195
+Fire Eating,DX,A,None,195
+First Aid/TL,IQ,E,IQ-4;Esoteric Medicine;Physician;Veterinary-4,195
+Fishing,Per,E,Per-4,195
+Flail,DX,H,Axe/Mace-4;Two-Handed Flail-3,208
+Flight,HT,A,HT-5,195
+Flying Leap,IQ,H,None,196
+Force Sword,DX,A,Any Sword-3,208
+Force Whip,DX,A,Kusari-3;Monowire Whip-3;Whip-3,209
+Forced Entry,DX,E,None,196
+Forensics/TL,IQ,H,IQ-6;Criminology-4,196
+Forgery/TL,IQ,H,IQ-6;Counterfeiting-2,196
+Fortune-Telling†,IQ,A,IQ-5;Fast-Talk-3;Occultism-3,196
+Forward Observer/TL,IQ,A,IQ-5;Artillery (any)-5*,196
+Free Fall,DX,A,DX-5;HT-5,197
+Freight Handling/TL,IQ,A,IQ-5,197
+Gambling,IQ,A,IQ-5;Mathematics(Statistics)-5,197
+Games†,IQ,E,IQ-4,197
+Gardening,IQ,E,IQ-4;Farming-3,197
+Garrote,DX,E,DX-4,197
+Geography/TL†,IQ,H,IQ-6*,198
+Geology/TL†,IQ,H,IQ-6;Geography(Physical)-4;Prospecting-5,198
+Gesture,IQ,E,IQ-4,198
+Group Performance†,IQ,A,IQ-5*,198
+Gunner/TL†,DX,E,DX-4,198
+Guns/TL†,DX,E,DX-4,198
+Hazardous Materials/TL†,IQ,A,IQ-5,199
+Heraldry,IQ,A,IQ-5;Savoir-Faire(High Society)-3,199
+Herb Lore/TL,IQ,VH,None,199
+Hidden Lore†,IQ,A,None,199
+Hiking,HT,A,HT-5,200
+History†,IQ,H,IQ-6,200
+Hobby Skill/IQ,IQ,E,IQ-4,200
+Hobby Skill/DX,DX,E,DX-4,200
+Holdout,IQ,A,IQ-5;Sleight of Hand-3,200
+Housekeeping,IQ,E,IQ-4,200
+Hypnotism,IQ,H,None,201
+Immovable Stance,DX,H,None,201
+Innate Attack†,DX,E,DX-4,201
+Intelligence Analysis/TL,IQ,H,IQ-6;Strategy (any)-6,201
+Interrogation,IQ,A,IQ-5;Psychology-4;Intimidation-3,202
+Intimidation,Will,A,Will-5;Acting-3,202
+Invisibility,Art,IQ,VH,None,202
+Jeweler/TL,IQ,H,IQ-6;Smith (Copper)-4;Smith (Lead and Tin)-4,203
+Jitte/Sai,DX,A,Force Sword-4;Main-Gauche-4;Shortsword-3,208
+Judo,DX,H,None,203
+Jumping,DX,E,None,203
+Karate,DX,H,None,203
+Kiai,HT,H,None,203
+Knife,DX,E,Force Sword-3;Main-Gauche-3;Shortsword-3,208
+Knot-Tying,DX,E,DX-4;Climbing-4;Seamanship-4,203
+Kusari,DX,H,Force Whip-3;Monowire Whip-3;Two-Handed Flail-4;Whip-3,209
+Lance,DX,A,DX-5;Spear-3,204
+Lasso,DX,A,None,204
+Law†,IQ,H,IQ-6,204
+Leadership,IQ,A,IQ-5,204
+Leatherworking,DX,E,DX-4,205
+Lifting,HT,A,None,205
+Light Walk,DX,H,None,205
+Linguistics,IQ,H,None,205
+Lip Reading,Per,A,Per-10,205
+Liquid Projector/TL†,DX,E,DX-4,205
+Literature,IQ,H,IQ-6,205
+Lockpicking/TL,IQ,A,IQ-5,206
+Machinist/TL,IQ,A,IQ-5;Mechanic (any)-5,206
+Main-Gauche,DX,A,Jitte/Sai-4;Knife-4;Rapier-3;Saber-3;Smallsword-3,208
+Makeup/TL,IQ,E,IQ-4;Disguise-2,206
+Market Analysis,IQ,H,IQ-6;Economics-5;Merchant-4,207
+Masonry,IQ,E,IQ-4,207
+Mathematics/TL†,IQ,H,IQ-6*,207
+Mechanic/TL†,IQ,A,IQ-5;Engineer (same)-4;Machinist-5,207
+Meditation,Will,H,Will-6;Autohypnosis-4,207
+#Melee Weapon,DX,Varies,Special,208
+Mental Strength,Will,E,None,209
+Merchant,IQ,A,IQ-5;Finance-6;Market Analysis-4,209
+Metallurgy/TL,IQ,H,Chemistry-5;Jeweler-8;Smith (any)-8,209
+Meteorology/TL†,IQ,A,IQ-5,209
+Mimicry†,IQ,H,IQ-6*,210
+Mind Block,Will,A,Will-5;Meditation-5,210
+Monowire Whip,DX,H,Force Whip-3;Kusari-3;Whip-3,209
+Mount,DX,A,DX-5,210
+Musical Composition,IQ,H,Musical Instrument-2;Poetry-2 (for song),210
+Musical Influence,IQ,VH,None,210
+Musical Instrument†,IQ,H,Special,211
+Naturalist†,IQ,H,IQ-6;Biology-3,211
+Navigation/TL†,IQ,A,Special,211
+NBC Suit/TL,DX,A,DX-5;Battlesuit-2;Diving Suit-4;Vacc Suit-2,192
+Net,DX,H,Cloak-5,211
+Observation,Per,A,Per-5;Shadowing-5,211
+Occultism,IQ,A,IQ-5,212
+Packing,IQ,A,IQ-5;Animal Handling(Equines)-5,212
+Paleontology/TL†,IQ,H,Biology-4*,212
+Panhandling,IQ,E,IQ-4;Fast Talk-2;Public Speaking-3,212
+Parachuting/TL,DX,E,DX-4,212
+Parry Missile Weapons,DX,H,None,212
+Performance,IQ,A,IQ-5;Acting-2;Public Speaking-2,212
+Persuade,Will,H,None,191
+Pharmacy/TL†,IQ,H,IQ-6*,213
+Philosophy†,IQ,H,IQ-6,213
+Photography/TL,IQ,A,IQ-5;Electronics Operation (Media)-5,213
+Physician/TL,IQ,H,IQ-7;First Aid-11;Veterinary-5,213
+Physics/TL,IQ,VH,IQ-6,213
+Physiology/TL†,IQ,H,IQ-6;Diagnosis-5;Physician-5;Surgery-5,213
+Pickpocket,DX,H,DX-6;Filch-5;Sleight of Hand-4,213
+Piloting/TL†,DX,A,IQ-6,214
+Poetry,IQ,A,IQ-5;Writing-5,214
+Poisons/TL,IQ,H,IQ-6;Chemistry-5;Pharmacy (any)-3;Physician-3,214
+Polearm,DX,A,Spear-4;Staff-4;Two-Handed Axe/Mace-4,208
+Politics,IQ,A,IQ-5;Diplomacy-5,215
+Power Blow,Will,H,None,215
+Pressure Points,IQ,H,None,215
+Pressure Secrets,IQ,VH,None,215
+Professional Skill/DX,DX,A,Special,215
+Professional Skill/IQ,IQ,A,Special,215
+Propaganda/TL,IQ,A,IQ-5;Merchant-5;Psychology-4,216
+Prospecting/TL,IQ,A,IQ-5;Geology (any)-4,216
+Psychology,IQ,H,IQ-6;Sociology-4,216
+Public Speaking,IQ,A,IQ-5;Acting-5;Performance-2;Politics-5,216
+Push,DX,H,None,216
+Rapier,DX,A,Broadsword-4;Main-Gauche-3;Saber-3;Smallsword-3,208
+Religious Ritual†,IQ,H,Ritual Magic (same)-6;Theology (same)-4,217
+Research/TL,IQ,A,IQ-5;Writing-3,217
+Riding†,DX,A,DX-5;Animal Handling(same)-3,217
+Ritual Magic†,IQ,VH,Religious Ritual (same)-6,218
+Running,HT,A,HT-5,218
+Saber,DX,A,Broadsword-4;Main-Gauche-3;Rapier-3;Shortsword-4;Smallsword-3,208
+Savoir-Faire†,IQ,E,IQ-4*,218
+Scrounging,Per,E,Per-4,218
+Scuba/TL,IQ,A,IQ-5;Diving Suit-2,219
+Seamanship/TL,IQ,E,IQ-4,185
+Search,Per,A,Per-5;Criminology-5,219
+Sewing/TL,DX,E,DX-4,219
+Sex Appeal,HT,A,HT-3,219
+Shadowing,IQ,A,IQ-5;Observation-5;Stealth-4 (on foot only),219
+Shield†,DX,E,DX-4,220
+Shiphandling/TL†,IQ,H,IQ-6*,220
+Shortsword,DX,A,Broadsword-2;Force Sword-4;Jitte/Sai-3;Knife-4;Saber-4;Smallsword-4;Tonfa-3,209
+Singing,HT,E,HT-4,220
+Skating,HT,H,HT-6,220
+Skiing,HT,H,HT-6,221
+Sleight of Hand,DX,H,Filch-5,221
+Sling,DX,H,DX-6,221
+Smallsword,DX,A,Main-Gauche-3;Rapier-3;Saber-3;Shortsword-4,208
+Smith/TL†,IQ,A,IQ-5*,221
+Smuggling,IQ,A,IQ-5,221
+Sociology,IQ,H,IQ-6;Anthropology-3;Psychology-4,221
+Soldier/TL IQ A IQ-5 221
+Spacer/TL IQ E IQ-4 185
+Spear DX A Polearm-4, Staff-2 208
+Spear Thrower DX A DX-5, Thrown Weapon  222
+(Spear)-4
+Speed-Reading IQ A None 222
+Sports DX A Special 222
+Staff DX A Polearm-4, Spear-2 208
+Stage Combat DX A Combat Art or Sport-2,  222
+an actual combat skill-3,
+Performance-3
+Stealth DX A DX-5, IQ-5 222
+Strategy† IQ H IQ-6, Intelligence  222
+Analysis-6, Tactics-6
+Streetwise IQ A IQ-5 223
+Submarine/TL† DX A IQ-6 223
+Submariner/TL IQ E IQ-4 185
+Suggest Will H None 191
+Sumo Wrestling DX A None 223
+Surgery/TL IQ VH First Aid-12, Physician-5,  223
+Physiology-8, 
+Veterinary-5
+Survival† Per A Per-5, Naturalist  223
+(same planet)-3
+Sway Emotions Will H None 192
+Swimming HT E HT-4 224
+Symbol Drawing† IQ H Special 224
+Tactics IQ H IQ-6, Strategy (any)-6 224
+Teaching IQ A IQ-5 224
+Teamster† IQ A IQ-5, Animal Handling  225
+(same)-4, 
+Riding (same)-2
+Thaumatology IQ VH IQ-7 (magical settings only) 225
+Theology† IQ H IQ-6, Religious Ritual  226
+(same)-4
+Throwing DX A DX-3, Dropping-4 226
+Throwing Art DX H None 226
+Thrown Weapon† DX E DX-4* 226
+Tonfa DX A Shortsword-3 209
+Tracking Per A Per-5, Naturalist-5 226
+Traps/TL IQ A IQ-5, Lockpicking-3 226
+Two-Handed Axe/MaceDX A Axe/Mace-3, Polearm-4, 208
+Two-Handed Flail-4
+Two-Handed Flail DX H Flail-3, Kusari-4,  208
+Two-Handed Axe/Mace-4
+Two-Handed Sword DX A Broadsword-4,  209
+Force Sword-4
+Typing DX E DX-4, any skill  228
+requiring typing-3
+Urban Survival Per A Per-5 228
+Vacc Suit/TL DX A DX-5, Battlesuit-2,  192
+Diving Suit-4, 
+NBC Suit-2
+Ventriloquism IQ H None 228
+Veterinary/TL IQ H Animal Handling (any)-6, 228
+Physician-5, Surgery-5
+Weather Sense IQ A IQ-5 209
+Weird Science IQ VH None 228
+Whip DX A Force Whip-3,  209
+Kusari-3, Monowire Whip-3
+Wrestling DX A None 228
+Writing IQ A IQ-5 228
+Zen Archery IQ VH None 228

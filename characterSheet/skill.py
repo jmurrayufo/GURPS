@@ -10,6 +10,7 @@ class Skill():
       
       # Type Error checking
       assert( points >= 0)
+      assert( csvLine[1] in ['IQ','HT','DX','Will','Per'] ), "Error on:"+csvLine[0]
       
       self.Name = csvLine[0]
       self.AtributeString = csvLine[1]
@@ -49,6 +50,7 @@ class Skill():
          self.SkillMod -= 3
       else:
          print "INVALID DIFFiCULTY!"
+         print self.Difficulty
          raise ValueError
 
 

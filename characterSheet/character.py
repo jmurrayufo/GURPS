@@ -1,10 +1,11 @@
 import math
 import types
+import skill
 
 class Character( ):
     
 
-   def __init__( self ):
+   def __init__( self, defaults = None ):
       self.Name   = "DEFAULT"
       self.STp     = 10
       self.DXp     = -20
@@ -55,7 +56,7 @@ class Character( ):
       """
       if( self.HasSkill( csvLine[0] ) ):
          return
-      self.Skills.append( Skill( csvLine, points ) )
+      self.Skills.append( skill.Skill( csvLine, points ) )
 
 
    def AddSkill( self, newSkill ):
