@@ -35,17 +35,17 @@ if __name__ == '__main__':
    john = CharSheet()
    john.Name = 'John'
 
-   # with open("data/gameref/skills.csv",'r') as fp:
-   #     skillreader = csv.reader( fp, delimiter=',')
-   #     # Gobble header
-   #     header = skillreader.next()
-   #     for idx,val in enumerate( skillreader ):
-   #         if( len( val ) == 5):
-   #             john.AddSkill( val )
-   #         else:
-   #             pass
+   with open("data/gameref/skills.csv",'r') as fp:
+       skillreader = csv.reader( fp, delimiter=',')
+       # Gobble header
+       header = skillreader.next()
+       for idx,val in enumerate( skillreader ):
+           if( len( val ) == 5):
+               john.AddSkillCSV( val )
+           else:
+               pass
 
-   # print john
+   print john
 
 
    john.Main()

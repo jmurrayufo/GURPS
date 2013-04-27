@@ -86,3 +86,27 @@ class Skill():
       else:
          return "%s-%d (%s%+d) [%d]" %(self.Name, self.SkillMod + caller.GetAttrValue( self.AtributeString ), self.AtributeString, self.SkillMod, self.Points)
          pass
+
+def Validator( csvLine=None ):
+
+   if( csvLine == None ):
+      print "FAILIURE: No Line"
+      return False
+
+   if( len(csvLine) and len(csvLine[0]) and csvLine[0][0] == '#' ):
+      print "FAILIURE: Comment: ",csvLine
+      return False
+
+   if( len( csvLine ) != 5 ):
+      print "FAILIURE: Not Lne(5) ",csvLine
+      return False
+
+   if( not ( csvLine[1] in ['IQ','HT','DX','Will','Per'] ) ):
+      print "FAILIURE: Stat: ",csvLine
+      return False
+
+   if( not ( csvLine[2] in ['E','A','H','VH'] ) ):
+      print "FAILIURE: Diff: ",csvLine
+      return False
+
+   return True

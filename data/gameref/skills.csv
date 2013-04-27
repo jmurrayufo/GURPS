@@ -127,7 +127,7 @@ Innate Attack†,DX,E,DX-4,201
 Intelligence Analysis/TL,IQ,H,IQ-6;Strategy (any)-6,201
 Interrogation,IQ,A,IQ-5;Psychology-4;Intimidation-3,202
 Intimidation,Will,A,Will-5;Acting-3,202
-Invisibility,Art,IQ,VH,None,202
+Invisibility Art,IQ,VH,None,202
 Jeweler/TL,IQ,H,IQ-6;Smith (Copper)-4;Smith (Lead and Tin)-4,203
 Jitte/Sai,DX,A,Force Sword-4;Main-Gauche-4;Shortsword-3,208
 Judo,DX,H,None,203
@@ -231,66 +231,48 @@ Smallsword,DX,A,Main-Gauche-3;Rapier-3;Saber-3;Shortsword-4,208
 Smith/TL†,IQ,A,IQ-5*,221
 Smuggling,IQ,A,IQ-5,221
 Sociology,IQ,H,IQ-6;Anthropology-3;Psychology-4,221
-Soldier/TL IQ A IQ-5 221
-Spacer/TL IQ E IQ-4 185
-Spear DX A Polearm-4, Staff-2 208
-Spear Thrower DX A DX-5, Thrown Weapon  222
-(Spear)-4
-Speed-Reading IQ A None 222
-Sports DX A Special 222
-Staff DX A Polearm-4, Spear-2 208
-Stage Combat DX A Combat Art or Sport-2,  222
-an actual combat skill-3,
-Performance-3
-Stealth DX A DX-5, IQ-5 222
-Strategy† IQ H IQ-6, Intelligence  222
-Analysis-6, Tactics-6
-Streetwise IQ A IQ-5 223
-Submarine/TL† DX A IQ-6 223
-Submariner/TL IQ E IQ-4 185
-Suggest Will H None 191
-Sumo Wrestling DX A None 223
-Surgery/TL IQ VH First Aid-12, Physician-5,  223
-Physiology-8, 
-Veterinary-5
-Survival† Per A Per-5, Naturalist  223
-(same planet)-3
-Sway Emotions Will H None 192
-Swimming HT E HT-4 224
-Symbol Drawing† IQ H Special 224
-Tactics IQ H IQ-6, Strategy (any)-6 224
-Teaching IQ A IQ-5 224
-Teamster† IQ A IQ-5, Animal Handling  225
-(same)-4, 
-Riding (same)-2
-Thaumatology IQ VH IQ-7 (magical settings only) 225
-Theology† IQ H IQ-6, Religious Ritual  226
-(same)-4
-Throwing DX A DX-3, Dropping-4 226
-Throwing Art DX H None 226
-Thrown Weapon† DX E DX-4* 226
-Tonfa DX A Shortsword-3 209
-Tracking Per A Per-5, Naturalist-5 226
-Traps/TL IQ A IQ-5, Lockpicking-3 226
-Two-Handed Axe/MaceDX A Axe/Mace-3, Polearm-4, 208
-Two-Handed Flail-4
-Two-Handed Flail DX H Flail-3, Kusari-4,  208
-Two-Handed Axe/Mace-4
-Two-Handed Sword DX A Broadsword-4,  209
-Force Sword-4
-Typing DX E DX-4, any skill  228
-requiring typing-3
-Urban Survival Per A Per-5 228
-Vacc Suit/TL DX A DX-5, Battlesuit-2,  192
-Diving Suit-4, 
-NBC Suit-2
-Ventriloquism IQ H None 228
-Veterinary/TL IQ H Animal Handling (any)-6, 228
-Physician-5, Surgery-5
-Weather Sense IQ A IQ-5 209
-Weird Science IQ VH None 228
-Whip DX A Force Whip-3,  209
-Kusari-3, Monowire Whip-3
-Wrestling DX A None 228
-Writing IQ A IQ-5 228
-Zen Archery IQ VH None 228
+Soldier/TL,IQ,A,IQ-5,221
+Spacer/TL,IQ,E,IQ-4,185
+Spear,DX,A,Polearm-4;Staff-2,208
+Spear Thrower,DX,A,DX-5;Thrown Weapon(Spear)-4,222
+Speed-Reading,IQ,A,None,222
+Sports,DX,A,Special,222
+Staff,DX,A,Polearm-4;Spear-2,208
+Stage Combat,DX,A,Combat Art-2;Sport-2;an actual combat skill-3;Performance-3,222
+Stealth,DX,A,DX-5;IQ-5,222
+Strategy†,IQ,H,IQ-6;Analysis-6;Tactics-6;Intelligence,222
+Streetwise,IQ,A,IQ-5,223
+Submarine/TL†,DX,A,IQ-6,223
+Submariner/TL,IQ,E,IQ-4,185
+Suggest,Will,H,None,191
+Sumo Wrestling,DX,A,None,223
+Surgery/TL,IQ,VH,First Aid-12;Physician-5;Physiology-8;Veterinary-5,223
+Survival†,Per,A,Per-5;Naturalist(same planet)-3,223
+Sway Emotions,Will,H,None,192
+Swimming,HT,E,HT-4,224
+Symbol Drawing†,IQ,H,Special,224
+Tactics,IQ,H,IQ-6;Strategy (any)-6,224
+Teaching,IQ,A,IQ-5,224
+Teamster†,IQ,A,IQ-5;Animal Handling(same)-4;Riding(same)-2,225
+Thaumatology,IQ,VH,IQ-7,225
+Theology†,IQ,H,IQ-6;Religious Ritual(same)-4,226
+Throwing,DX,A,DX-3;Dropping-4,226
+Throwing Art,DX,H,None,226
+Thrown Weapon†,DX,E,DX-4*,226
+Tonfa,DX,A,Shortsword-3,209
+Tracking,Per,A,Per-5;Naturalist-5,226
+Traps/TL,IQ,A,IQ-5;Lockpicking-3,226
+Two-Handed Axe/Mace,DX,A,Axe/Mace-3;Polearm-4;Two-Handed Flail-4,208
+Two-Handed Flail,DX,H,Flail-3;Kusari-4;Two-Handed Axe/Mace-4,208
+Two-Handed Sword,DX,A,Broadsword-4;Force Sword-4,209
+Typing,DX,E,DX-4;anyskill requiring typing-3,228
+Urban Survival,Per,A,Per-5,228
+Vacc Suit/TL,DX,A,DX-5;Battlesuit-2;Diving Suit-4;NBC Suit-2,192
+Ventriloquism,IQ,H,None,228
+Veterinary/TL,IQ,H,Animal Handling (any)-6;Physician-5;Surgery-5,228
+Weather Sense,IQ,A,IQ-5,209
+Weird Science,IQ,VH,None,228
+Whip,DX,A,Force Whip-3;Kusari-3;Monowire Whip-3,209
+Wrestling,DX,A,None,228
+Writing,IQ,A,IQ-5,228
+Zen Archery,IQ,VH,None,228
