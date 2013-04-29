@@ -7,14 +7,14 @@ class Character( ):
 
    def __init__( self, defaults = None ):
       self.Name   = "DEFAULT"
-      self.STp     = 10
-      self.DXp     = -20
-      self.IQp     = 20
+      self.STp     = 0
+      self.DXp     = 0
+      self.IQp     = 0
       self.HTp     = 0
       self.HPp     = 0
       self.WILLp   = 0
       self.PERp    = 0
-      self.FPp     = 20
+      self.FPp     = 0
       self.Skills = list( )
       self.Advantages = list( )
       self.Disadvantages = list( )
@@ -35,7 +35,7 @@ class Character( ):
 
       # Unimplemented
       self.PointsTotal   = 0
-      self.PointsUnspent = 0
+      self.PointsUnspent = 50
 
       self.CalcUpdatePointsTotals( )
 
@@ -108,7 +108,7 @@ class Character( ):
 
 
    def Print(self):
-      print "Name:",self.Name
+      print "\nName:",self.Name
       print "     ST: %2d [%3d]" % ( self.GetAttrValue( 'ST'), self.STp )
       print "     DX: %2d [%3d]" % ( self.GetAttrValue( 'DX' ), self.DXp )
       print "     IQ: %2d [%3d]" % ( self.GetAttrValue( 'IQ' ), self.IQp )
@@ -118,10 +118,11 @@ class Character( ):
       print "    PER: %2d [%3d]" % ( self.GetAttrValue( 'PER' ), self.PERp )
       print "     FP: %2d [%3d]" % ( self.GetAttrValue( 'FP' ), self.FPp )
       if( len( self.Skills ) ):
-         print " Skills:"      
+         print "\nSkills:"      
          sortedSkills = sorted(self.Skills, key=lambda x: x.Name)
          for i in sortedSkills:
             print " ",i.Print( self )
+      print "\nPoint Stats:"
       print "   Total Points: %3d"%( self.PointsTotal )
       print " Unspent Points: %3d"%( self.PointsUnspent )
 
@@ -133,6 +134,7 @@ class Character( ):
       mainMenu = (
          ( "Attributes", self.PormptAttributes ),
          ( "Skills", self.PromptSkills ),
+         ( "Points", self.PromptPoints ),
          ( "Save", None ),
          ( "Load", None ),
          ( "Quit", None )
@@ -140,6 +142,7 @@ class Character( ):
 
       while True:
          self.Print()
+         print "\nEnter menu selection"
          for idx,val in enumerate( mainMenu ):
             print "[%d] %s"%( idx + 1, val[0] )
             # print val[0]
@@ -177,11 +180,13 @@ class Character( ):
          )
 
       while True:
+         print "\n\n\nAttributes:"
          for idx,val in enumerate( attrMenu ):
             print "[%d] %s"%( idx + 1, val[2] )
 
          try:
             # Map selection back to true index
+            print "\nEnter attribute to modify"
             selection = input(">") - 1
          except (NameError):
             continue
@@ -201,7 +206,10 @@ class Character( ):
              )
 
          print "Enter the change in points..."
-         dPoints = input(">")
+         try:
+            dPoints = input(">")
+         except ( SyntaxError, NameError ):
+            continue
          setattr( self, selection[1], getattr( self, selection[1] ) + dPoints )
          self.PointsUnspent -= dPoints
          break
@@ -209,10 +217,10 @@ class Character( ):
 
    def PromptSkills( self ):
       skillMenu = (
-         ( "Add Skill From HDD", None ),
-         ( "Add Skill Manually", None ),
+         ( "Add Skill From HDD", self.PromptSkillAddHDD ),
+         ( "Modify Skill Points",self.PromptSkillModifyPoints ),
          ( "Find Default",       None ),
-         ( "Remove Skill",       None )
+         ( "Remove Skill",       self.PromptSkillDelete)
          ) 
 
       while True:
@@ -228,10 +236,153 @@ class Character( ):
             break
 
          try:
-            selection = skillMenu[selection]
+            selection = skillMenu[selection][1]
          except IndexError:
             continue
+
+         if( selection != None ):
+            selection()
+            continue
          break
+   
+   def PromptSkillAddHDD( self ):
+      matchStr = ""
+      skillList = list()
+      while True:
+         # Get User filter
+         print "\n\n"
+         print "Current Skills"
+         if( len( self.Skills ) ):
+            for i in self.Skills:
+               print " "+i.Print( self )
+         else: 
+            print " None"
+         print "\nEnter a valid regex filter for the skill to add"
+         print "A filter of \".\" will match everything"
+         matchStr = raw_input(">")
+         if( len( matchStr ) == 0 ):
+            break
+
+         # Get List from Selection
+         skillList = skill.Re2SkilTuple( "data/gameref/skills.csv", matchStr )
+
+         if( len( skillList ) == 0 ):
+            continue
+
+         # Filter vs Current Skills
+         for cur in self.Skills:
+            for idx,val in enumerate( skillList ):
+               if( val.Name == cur.Name ):
+                  del skillList[idx]
+                  break
+
+         # Display for selection
+         for idx,val in enumerate( skillList ):
+            print "[%d] %s"%( idx + 1, val )
+
+         print "\nSelect new skill"
+         try:
+            # Map selection back to true index
+            selection = input(">") - 1
+         except ( NameError, SyntaxError ):
+            continue
+
+         try:
+            selection = skillList[selection]
+         except IndexError:
+            continue
+
+
+         # Add what the user selects or exit
+         self.Skills.append( selection )
+
+
+   def PromptSkillModifyPoints( self ):
+      while True:
+         # Print out list of skills
+         print "\n\nCurrent Skills"
+         for idx,val in enumerate( self.Skills ):
+            print "[%d] %s"%( idx + 1, val.Print( self ) )
+
+         # Select Skill to Modify
+         print "\nSelect skill to modify points spent"
+         try:
+            # Map selection back to true index
+            selection = input(">") - 1
+         except ( NameError ):
+            continue
+         except ( SyntaxError ):
+            break
+
+         try:
+            print "Selection:",self.Skills[selection].Print(self)
+         except IndexError:
+            continue
+
+         print "\nEnter the delta of points"
+         try:
+            dPoints = input(">")
+         except ( NameError, SyntaxError ):
+            continue
+
+         if( type( dPoints ) != int ):
+            continue
+
+         self.PointsUnspent -= dPoints
+         self.Skills[selection].ModPoints( dPoints )
+
+
+   def PromptSkillFindDefault( self ):
+      print "Not implemented"
+
+
+   def PromptSkillDelete( self ):
+
+      if( len( self.Skills ) == 0 ):
+         print "No skills to delete!"
+         return
+      
+      while True:
+         print "\n"
+
+         # Print out list
+         for idx,val in enumerate( self.Skills ):
+            print "[%d] %s"%( idx + 1, val )
+
+         # Get user input         
+         print "\nEnter desired skill to delete"
+         print "Leave blank to exit"
+         try:
+            # Map selection back to true index
+            selection = input(">") - 1
+         except ( NameError ):
+            continue
+         except ( SyntaxError ):
+            break
+
+         # Get Selection
+         # Refund points
+         try:
+            self.PointsUnspent += self.Skills[selection].Points
+         except IndexError :
+            continue
+
+         # Delete
+         del self.Skills[selection]
+
+
+   def PromptPoints( self ):
+      while True:
+         print "\n\nCurrent Unspent Points:",self.PointsUnspent
+         print "Enter delta for unspent points"
+         try:
+            dPoints = input(">")
+         except ( NameError ):
+            continue
+         except ( SyntaxError ):
+            break
+         self.PointsUnspent += dPoints
+
 
 
    def CalcUpdatePointsTotals( self ):
@@ -247,3 +398,6 @@ class Character( ):
       self.PointsTotal += self.WILLp
       self.PointsTotal += self.PERp
       self.PointsTotal += self.FPp
+
+      for i in self.Skills:
+         self.PointsTotal += i.Points

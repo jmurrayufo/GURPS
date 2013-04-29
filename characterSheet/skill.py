@@ -1,3 +1,7 @@
+import re
+import csv
+import time
+
 class Skill():
 
    # Need to rework to allow a different style of input (a csv file line). And to understand defaults
@@ -26,8 +30,9 @@ class Skill():
    def __str__( self ):
       return "%s-%d (%+d) [%d]" %(self.Name, self.SkillMod, self.SkillMod, self.Points)
 
-   def __repr__( self ):
-      return self.__str__()
+   def __repr__( self ):      
+      return "%s" %(self.Name)
+
 
 
    def CalcSkillMod( self ):
@@ -90,23 +95,45 @@ class Skill():
 def Validator( csvLine=None ):
 
    if( csvLine == None ):
-      print "FAILIURE: No Line"
+      # print "FAILIURE: No Line"
       return False
 
    if( len(csvLine) and len(csvLine[0]) and csvLine[0][0] == '#' ):
-      print "FAILIURE: Comment: ",csvLine
+      # print "FAILIURE: Comment: ",csvLine
       return False
 
    if( len( csvLine ) != 5 ):
-      print "FAILIURE: Not Lne(5) ",csvLine
+      # print "FAILIURE: Not Lne(5) ",csvLine
       return False
 
    if( not ( csvLine[1] in ['IQ','HT','DX','Will','Per'] ) ):
-      print "FAILIURE: Stat: ",csvLine
+      # print "FAILIURE: Stat: ",csvLine
       return False
 
    if( not ( csvLine[2] in ['E','A','H','VH'] ) ):
-      print "FAILIURE: Diff: ",csvLine
+      # print "FAILIURE: Diff: ",csvLine
       return False
 
    return True
+
+def Re2SkilTuple( csvFile=None, matchStr="."):
+
+   retVal = list()
+
+   with open( csvFile, 'r' ) as fp:
+      skillreader = csv.reader( fp, delimiter=',' )
+      # Gobble header
+      header = skillreader.next()
+      for idx, val in enumerate( skillreader ):
+         if( Validator( val  ) ):
+            val = Skill( val )
+            try:  
+               if( re.search( matchStr, val.Name, re.IGNORECASE ) ):
+                  retVal.append( val )
+            except re.error:
+               print "\nREGEX ERROR! \"%s\" is not a valid regex!"%( matchStr )
+               print "Press enter to continue..."
+               raw_input()
+               return []
+
+   return retVal
