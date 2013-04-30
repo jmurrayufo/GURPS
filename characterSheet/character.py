@@ -2,6 +2,9 @@ import math
 import types
 import skill
 import os
+import collections
+import glob
+import json
 
 class Character( ):
     
@@ -36,7 +39,7 @@ class Character( ):
 
       # Unimplemented
       self.PointsTotal   = 0
-      self.PointsUnspent = 50
+      self.PointsUnspent = 0
 
       self.CalcUpdatePointsTotals( )
 
@@ -136,8 +139,9 @@ class Character( ):
          ( "Attributes", self.PormptAttributes ),
          ( "Skills", self.PromptSkills ),
          ( "Points", self.PromptPoints ),
-         ( "Save", None ),
-         ( "Load", None ),
+         ( "Save", self.PromptSave ),
+         ( "Load", self.PromptLoad ),
+         ( "Help", self.PromptHelp ),
          ( "Quit", None )
          )
 
@@ -225,6 +229,7 @@ class Character( ):
          ) 
 
       while True:
+         print "\n\nSelection option"
          for idx,val in enumerate( skillMenu ):
             print "[%d] %s"%( idx + 1, val[0] )
 
@@ -385,6 +390,111 @@ class Character( ):
             break
          self.PointsUnspent += dPoints
 
+
+   def PromptSave( self ):
+      print "\n\nEnter file name"
+      print "Leave blank to cancel"
+      fileName = raw_input(">")
+
+      if( len( fileName ) == 0 ):
+         return
+
+      if( not fileName.endswith('.json') ):
+         fileName = fileName + '.json'
+
+      with open( fileName, 'w' ) as fp:
+         mule = collections.OrderedDict()
+         mule['Name'] = self.Name
+         muleStats = collections.OrderedDict()
+         muleStats['STp'] = self.STp
+         muleStats['DXp'] = self.DXp
+         muleStats['IQp'] = self.IQp
+         muleStats['HTp'] = self.HTp
+         muleStats['HPp'] = self.HPp
+         muleStats['WILLp'] = self.WILLp
+         muleStats['PERp'] = self.PERp
+         muleStats['FPp'] = self.FPp
+         mule['Stats'] = muleStats
+
+         # Process Skills
+         muleSkills = list()
+         for i in self.Skills:
+            muleSkills.append( i.Save( ) )
+         mule['Skills'] = muleSkills
+         mule['Advantages'] = list( )
+         mule['Disadvantages'] = list( )
+         mule['Languages'] = list( )
+         mule['Cultures'] = list( )
+         mule['ReactionMods'] = list( )
+         mule['Height'] = self.Height
+         mule['Weight'] = self.Weight
+         mule['Age'] = self.Age
+         mule['PointsTotal'] = self.PointsTotal
+         mule['PointsUnspent'] = self.PointsUnspent
+         json.dump( mule, fp, indent=3 )
+
+
+   def PromptLoad( self ):
+      files = glob.glob("*.json")
+      print "\n\nSelect file to load\n"
+      for idx,val in enumerate(files):
+         print "[%d] %s"%(idx + 1,val)
+      print "\nEnter index to load, or blank to cancel"
+      try:
+         selection = input(">") - 1
+      except ( NameError, SyntaxError ):
+         return
+
+      print "\n***WARNING***"
+      print "Loading this file will delete all unsaved data!"
+      print "Continue?"
+      if( not raw_input(">") in ['y','Y','Yes','yes','1'] ):
+         print "Did not get a yes, exit load!"
+         print "Press enter to continue"
+         raw_input()
+         return
+
+
+      with open( files[selection], 'r' ) as fp:
+         data = json.load( fp )
+         self.STp = data['Stats']['STp']
+         self.DXp = data['Stats']['DXp']
+         self.IQp = data['Stats']['IQp']
+         self.HTp = data['Stats']['HTp']
+         self.HPp = data['Stats']['HPp']
+         self.WILLp = data['Stats']['WILLp']
+         self.PERp = data['Stats']['PERp']
+         self.FPp = data['Stats']['FPp']
+
+         # Process Skills
+         self.Skills = list()
+         for i in data['Skills']:
+            self.Skills.append( skill.Skill( i, format='json' ) )
+
+         self.Advantages = data['Advantages']
+         self.Disadvantages = data['Disadvantages']
+         self.Languages = data['Languages']
+         self.Cultures = data['Cultures']
+         self.ReactionMods = data['ReactionMods']
+         self.Height = data['Height']
+         self.Weight = data['Weight']
+         self.Age = data['Age']
+         self.PointsTotal = data['PointsTotal']
+         self.PointsUnspent = data['PointsUnspent']
+
+
+   def PromptHelp( self ):
+      print "\n\nHelp Screen"
+      print (
+            "TODO List:"
+            "\n   Rename Character"
+            "\n   Dis/Advantages"
+            "\n   Languages/Cultures"
+            "\n   Weight/Height"
+            "\n   Item Management"
+            )
+      print "\nPress enter to continue..."
+      raw_input()
 
 
    def CalcUpdatePointsTotals( self ):

@@ -1,38 +1,60 @@
 import re
 import csv
 import time
+import collections
 
 class Skill():
 
    # Need to rework to allow a different style of input (a csv file line). And to understand defaults
-   def __init__( self, csvLine=None, points=0):
+   def __init__( self, inputData=None, points=0, format = 'csv' ):
       """
-      Default to 0 (easy) and 1 point spent
+      Skill class
+         inputData:
+            Default: None
+            Either a csv line, or a json dict
+         points:
+            Default: 0
+            Amount of points to allocate to this skill
+         format:
+            Default: 'csv'
+            Either 'csv' or 'json' to take the given form of input
+
       """
       
       # Skill, Attribute, Difficulty, Defaults(; sep), page
       
       # Type Error checking
       assert( points >= 0)
-      assert( csvLine[1] in ['IQ','HT','DX','Will','Per'] ), "Error on:"+csvLine[0]
-      
-      self.Name = csvLine[0]
-      self.AtributeString = csvLine[1]
-      
-      # Temporay string to parse out value
-      self.Difficulty = csvLine[2]
-      
-      self.Points = points
+      if( format == 'csv' ):
+         assert( inputData[1] in ['IQ','HT','DX','Will','Per'] ), "Error on:"+inputData[0]
+         self.Name = inputData[0]
+         self.AttributeString = inputData[1]
+         self.Difficulty = inputData[2]
+         self.Defaults = inputData[3]
+         self.Page = inputData[4]
+         self.Points = points
+         self.SkillMod = None
+         self.Points = points
+
+      elif( format == 'json' ):
+         self.Name = inputData.keys()[0]
+         self.AttributeString = inputData[self.Name]['Attr']
+         self.Difficulty = inputData[self.Name]['Diff']
+         self.Defaults = inputData[self.Name]['Defa']
+         self.Page = inputData[self.Name]['Page']
+         self.Points = inputData[self.Name]['Poin']
       self.SkillMod = None
+      
+      
       self.CalcSkillMod( )
 
 
    def __str__( self ):
-      return "%s-%d (%+d) [%d]" %(self.Name, self.SkillMod, self.SkillMod, self.Points)
+      return "%s (%+d) [%d]" %(self.Name, self.SkillMod, self.Points)
+
 
    def __repr__( self ):      
       return "%s" %(self.Name)
-
 
 
    def CalcSkillMod( self ):
@@ -60,7 +82,7 @@ class Skill():
 
 
    def SetAtrib(self, atributeStr, atributeVal):
-      self.AtributeString = atributeStr
+      self.AttributeString = atributeStr
       self.AtributeValue = atributeVal
 
 
@@ -89,8 +111,20 @@ class Skill():
       if( caller == None ):
          return self.__str__() + " NO CALLER"
       else:
-         return "%s-%d (%s%+d) [%d]" %(self.Name, self.SkillMod + caller.GetAttrValue( self.AtributeString ), self.AtributeString, self.SkillMod, self.Points)
+         return "%s-%d (%s%+d) [%d]" %(self.Name, self.SkillMod + caller.GetAttrValue( self.AttributeString ), self.AttributeString, self.SkillMod, self.Points)
          pass
+
+   def Save( self ):
+      retVal = collections.OrderedDict()
+
+      retVal[self.Name] = collections.OrderedDict()
+      retVal[self.Name]['Attr'] = self.AttributeString 
+      retVal[self.Name]['Diff'] = self.Difficulty 
+      retVal[self.Name]['Defa'] = self.Defaults
+      retVal[self.Name]['Page'] = self.Page 
+      retVal[self.Name]['Poin'] = self.Points 
+
+      return retVal
 
 def Validator( csvLine=None ):
 
