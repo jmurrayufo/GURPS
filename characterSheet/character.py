@@ -1,6 +1,7 @@
 import math
 import types
 import skill
+import os
 
 class Character( ):
     
@@ -264,7 +265,8 @@ class Character( ):
             break
 
          # Get List from Selection
-         skillList = skill.Re2SkilTuple( "data/gameref/skills.csv", matchStr )
+         skillFile = os.path.dirname(os.path.abspath(__file__))+"\\..\\data\\gameref\\skills.csv"
+         skillList = skill.Re2SkilTuple( skillFile, matchStr )
 
          if( len( skillList ) == 0 ):
             continue
