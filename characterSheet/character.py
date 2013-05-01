@@ -622,6 +622,13 @@ class Character( ):
                skillPointsTotal += 1
                break
 
+      """
+      TODO:
+         Advantages
+         Disadvantages
+         Languages
+      """
+
       # Last update before we are done
       self.CalcUpdatePointsTotals()
 

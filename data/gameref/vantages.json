@@ -1,0 +1,13 @@
+{
+   "Advantages":{
+      "Example":{
+         "Type":["Men","Phy","Soc","Exo","Sup"],
+         "BaseCost":25,
+         "CostIsPerLevel":false,
+         "Levels":[null],
+         "Summery":"This is an example summery.",
+         "Synopsis":"This is an example synopsis. It goes into great detail about the vantage."
+      }
+   },
+   "Disadvantages":{}
+}
