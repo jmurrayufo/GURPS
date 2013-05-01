@@ -1,5 +1,7 @@
-
+import csv
 
 class Vantage( ):
-   def __init__( self ):
-      pass
+   
+
+   def __init__( self, dataFile = None, format = 'csv' ):
+      self.Name = dataFile[0]

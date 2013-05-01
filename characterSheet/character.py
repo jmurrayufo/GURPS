@@ -1,10 +1,11 @@
-import math
-import types
-import skill
-import os
 import collections
 import glob
 import json
+import math
+import os
+import random
+import skill
+import types
 
 class Character( ):
     
@@ -142,6 +143,7 @@ class Character( ):
          ( "Save", self.PromptSave ),
          ( "Load", self.PromptLoad ),
          ( "Help", self.PromptHelp ),
+         ( "NPC",  self.PromptNPC ),
          ( "Quit", None )
          )
 
@@ -402,6 +404,12 @@ class Character( ):
       if( not fileName.endswith('.json') ):
          fileName = fileName + '.json'
 
+      if( fileName in glob.glob('*.json') ):
+         print "***WARNING***"
+         print "File",fileName,"already exists, overwrite? (y/n)"
+         if( not raw_input(">") in ['y','Y','Yes','yes','1'] ):
+            return
+
       with open( fileName, 'w' ) as fp:
          mule = collections.OrderedDict()
          mule['Name'] = self.Name
@@ -447,7 +455,7 @@ class Character( ):
 
       print "\n***WARNING***"
       print "Loading this file will delete all unsaved data!"
-      print "Continue?"
+      print "Continue? (y/n)"
       if( not raw_input(">") in ['y','Y','Yes','yes','1'] ):
          print "Did not get a yes, exit load!"
          print "Press enter to continue"
@@ -495,6 +503,58 @@ class Character( ):
             )
       print "\nPress enter to continue..."
       raw_input()
+
+
+   def PromptNPC( self ):
+      print "\n\nNPC Screen"
+      print "***WARNING***"
+      print "This function will overwrite the current player character, and roll an NPC"
+      print "***WARNING***"
+      print "Are you sure you want to continue?"
+      if( not raw_input(">") in ['y','Y','Yes','yes','1'] ):
+         return
+
+      # Show Avaliable Templates
+      templateFiles = os.path.dirname( os.path.abspath( __file__ ) ) + "\\..\\data\\Templates\\*.json"
+      templateFiles = glob.glob( templateFiles )
+      
+      while True:
+         print "\n"
+         for idx,val in enumerate( templateFiles ):
+            print "[%d] %s"%( idx + 1, val.split( "\\" )[-1] )
+
+         try:
+            selection = input(">") - 1
+         except ( NameError ):
+            continue
+         except ( SyntaxError ):
+            return
+
+         try:
+            selection = templateFiles[ selection ]
+         except ( IndexError ):
+            continue
+         break
+
+      with open( selection, 'r' ) as fp:
+         data = json.load( fp )
+
+         dataAttr = data['Attributes']
+         self.STp = int( random.gauss( dataAttr['STp']['mean'], dataAttr['STp']['std'] ) )
+         self.DXp = int( random.gauss( dataAttr['DXp']['mean'], dataAttr['DXp']['std'] ) )
+         self.IQp = int( random.gauss( dataAttr['IQp']['mean'], dataAttr['IQp']['std'] ) )
+         self.HTp = int( random.gauss( dataAttr['HTp']['mean'], dataAttr['HTp']['std'] ) )
+         self.HPp = int( random.gauss( dataAttr['HPp']['mean'], dataAttr['HPp']['std'] ) )
+         self.WILLp = int( random.gauss( dataAttr['WILLp']['mean'], dataAttr['WILLp']['std'] ) )
+         self.PERp = int( random.gauss( dataAttr['PERp']['mean'], dataAttr['PERp']['std'] ) )
+         self.FPp = int( random.gauss( dataAttr['FPp']['mean'], dataAttr['FPp']['std'] ) )
+
+         print "Skills:"
+         print data['Skills'].keys()
+
+      self.CalcUpdatePointsTotals()
+
+
 
 
    def CalcUpdatePointsTotals( self ):

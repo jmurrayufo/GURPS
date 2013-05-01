@@ -46,7 +46,7 @@ Cartography/TL,IQ,A,IQ-5;Geography (any)-2;Mathematics (Surveying)-2;Navigation 
 Chemistry/TL,IQ,H,IQ-6;Alchemy-3,183
 Climbing,DX,A,DX-5,183
 Cloak,DX,A,DX-5;Net-4;Shield (any)-4,184
-#Combat Art or Sport,DX,Varies,Special,184
+Combat Art or Sport,DX,H,Special,184
 Computer Hacking/TL,IQ,VH,None,184
 Computer Operation/TL,IQ,E,IQ-4,184
 Computer Programming/TL,IQ,H,None,184
@@ -157,7 +157,7 @@ Masonry,IQ,E,IQ-4,207
 Mathematics/TL*,IQ,H,IQ-6*,207
 Mechanic/TL*,IQ,A,IQ-5;Engineer (same)-4;Machinist-5,207
 Meditation,Will,H,Will-6;Autohypnosis-4,207
-#Melee Weapon,DX,Varies,Special,208
+Melee Weapon,DX,A,Special,208
 Mental Strength,Will,E,None,209
 Merchant,IQ,A,IQ-5;Finance-6;Market Analysis-4,209
 Metallurgy/TL,IQ,H,Chemistry-5;Jeweler-8;Smith (any)-8,209
