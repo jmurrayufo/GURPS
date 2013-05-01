@@ -3,7 +3,7 @@
     {
         "STp":
         {
-            "mean":0,
+            "mean":5,
             "std" :5
         },
         "DXp":
@@ -53,5 +53,23 @@
         "First Aid":50,
         "Freight Handling":50,
         "Meteorology":50
-    }
+    },
+   "Advantages": {
+
+      }, 
+   "Disadvantages": {
+      
+      }, 
+   "Languages": {
+      
+      }, 
+   "Cultures": {
+      
+      }, 
+   "ReactionMods": {
+      
+      }, 
+   "Height": 0, 
+   "Weight": 0, 
+   "Age": 0
 }

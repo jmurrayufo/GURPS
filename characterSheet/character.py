@@ -4,8 +4,10 @@ import json
 import math
 import os
 import random
+import re
 import skill
 import types
+
 
 class Character( ):
     
@@ -64,19 +66,34 @@ class Character( ):
       self.Skills.append( skill.Skill( csvLine, points ) )
 
 
+   def AddSkillTXT( self, newSkill ):
+      if( self.HasSkill( newSkill, regex = True ) ):
+         return
+      tmp = skill.Skill( newSkill, format='text')
+      if( hasattr( tmp, 'Name' ) ):
+         self.Skills.append( tmp )
+      else:
+         print "Attemped to add:",newSkill
+         print "Current Skills:",self.Skills
+         print "Skill failed to generate!"
+
+
+
    def AddSkill( self, newSkill ):
       if( self.HasSkill( newSkill.Name ) ):
          return
       self.Skills.append( newSkill )
 
 
-   def HasSkill( self, skillName ):
+   def HasSkill( self, skillName, regex=False ):
       """
       Check if the named skill is the in skill list
       """
-      assert( type( skillName ) == str )
+      assert( type( skillName ) == str or type( skillName ) == unicode ),type( skillName )
       for i in self.Skills:
          if( i.Name == skillName ):
+            return True
+         if( regex and re.search( skillName, i.Name, re.IGNORECASE ) ):
             return True
       return False
 
@@ -514,6 +531,9 @@ class Character( ):
       if( not raw_input(">") in ['y','Y','Yes','yes','1'] ):
          return
 
+      # Blank out character
+      self.__init__()
+
       # Show Avaliable Templates
       templateFiles = os.path.dirname( os.path.abspath( __file__ ) ) + "\\..\\data\\Templates\\*.json"
       templateFiles = glob.glob( templateFiles )
@@ -539,20 +559,72 @@ class Character( ):
       with open( selection, 'r' ) as fp:
          data = json.load( fp )
 
-         dataAttr = data['Attributes']
-         self.STp = int( random.gauss( dataAttr['STp']['mean'], dataAttr['STp']['std'] ) )
-         self.DXp = int( random.gauss( dataAttr['DXp']['mean'], dataAttr['DXp']['std'] ) )
-         self.IQp = int( random.gauss( dataAttr['IQp']['mean'], dataAttr['IQp']['std'] ) )
-         self.HTp = int( random.gauss( dataAttr['HTp']['mean'], dataAttr['HTp']['std'] ) )
-         self.HPp = int( random.gauss( dataAttr['HPp']['mean'], dataAttr['HPp']['std'] ) )
-         self.WILLp = int( random.gauss( dataAttr['WILLp']['mean'], dataAttr['WILLp']['std'] ) )
-         self.PERp = int( random.gauss( dataAttr['PERp']['mean'], dataAttr['PERp']['std'] ) )
-         self.FPp = int( random.gauss( dataAttr['FPp']['mean'], dataAttr['FPp']['std'] ) )
-
-         print "Skills:"
-         print data['Skills'].keys()
+      dataAttr = data['Attributes']
+      self.STp = int( random.gauss( dataAttr['STp']['mean'], dataAttr['STp']['std'] ) )
+      self.PointsUnspent -= self.STp 
+      self.DXp = int( random.gauss( dataAttr['DXp']['mean'], dataAttr['DXp']['std'] ) )
+      self.PointsUnspent -= self.DXp 
+      self.IQp = int( random.gauss( dataAttr['IQp']['mean'], dataAttr['IQp']['std'] ) )
+      self.PointsUnspent -= self.IQp 
+      self.HTp = int( random.gauss( dataAttr['HTp']['mean'], dataAttr['HTp']['std'] ) )
+      self.PointsUnspent -= self.HTp 
+      self.HPp = int( random.gauss( dataAttr['HPp']['mean'], dataAttr['HPp']['std'] ) )
+      self.PointsUnspent -= self.HPp 
+      self.WILLp = int( random.gauss( dataAttr['WILLp']['mean'], dataAttr['WILLp']['std'] ) )
+      self.PointsUnspent -= self.WILLp
+      self.PERp = int( random.gauss( dataAttr['PERp']['mean'], dataAttr['PERp']['std'] ) )
+      self.PointsUnspent -= self.PERp
+      self.FPp = int( random.gauss( dataAttr['FPp']['mean'], dataAttr['FPp']['std'] ) )
+      self.PointsUnspent -= self.FPp 
 
       self.CalcUpdatePointsTotals()
+      print self.PointsTotal
+      print self.PointsUnspent
+
+      #### Handle Skills ####
+      while True:
+         try:
+            print "\nEnter the amount of points for skills"
+            dPoints = input(">")
+         except ( NameError ):
+            print "ERROR, Not a valid number!"
+            continue
+         except ( SyntaxError ):
+            dPoints = 0 # Default value of most humans?
+         break
+
+      dataSkill = data['Skills']
+
+      # Build list of weighted skill tuples
+      tmpSkillList = list()
+      tmpTotal = 0
+      for i in data['Skills'].keys():
+         tmpSkillList.append( ( i, dataSkill[i] + tmpTotal ) )
+         tmpTotal += dataSkill[i]
+
+      # Loop through skills, add them to the character
+
+      for idx,val in enumerate( tmpSkillList ):
+         self.AddSkillTXT( val[0] )
+
+      skillPointsTotal = 0
+      while skillPointsTotal < dPoints:
+         # Pick a random skill
+         choice = random.randint( 0, tmpTotal-1 ) # -1 handles max value error
+         for idx,val in enumerate( tmpSkillList ):
+            if( choice < val[1] ):
+               break
+         # Find that skill, add points
+         for i in self.Skills:
+            if( re.search( val[0], i.Name, re.IGNORECASE ) ):
+               i.ModPoints(1)
+               self.PointsUnspent -= 1
+               skillPointsTotal += 1
+               break
+
+      # Last update before we are done
+      self.CalcUpdatePointsTotals()
+
 
 
 

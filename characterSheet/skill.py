@@ -2,6 +2,7 @@ import re
 import csv
 import time
 import collections
+import os
 
 class Skill():
 
@@ -18,6 +19,9 @@ class Skill():
          format:
             Default: 'csv'
             Either 'csv' or 'json' to take the given form of input
+               'csv': inputData is a csv list
+               'json': inputData is a json object with the inputData
+               'text': inputData is the name of a skill from the file to load
 
       """
       
@@ -33,8 +37,6 @@ class Skill():
          self.Defaults = inputData[3]
          self.Page = inputData[4]
          self.Points = points
-         self.SkillMod = None
-         self.Points = points
 
       elif( format == 'json' ):
          self.Name = inputData.keys()[0]
@@ -43,6 +45,40 @@ class Skill():
          self.Defaults = inputData[self.Name]['Defa']
          self.Page = inputData[self.Name]['Page']
          self.Points = inputData[self.Name]['Poin']
+
+      elif( format == 'text' ):
+         assert( type( inputData ) in [ str, unicode ] ), "Bad input type for Skill.__init__(), not a str"
+         skillFile = os.path.dirname(os.path.abspath(__file__))+"\\..\\data\\gameref\\skills.csv"
+         with open( skillFile, 'r' ) as fp:
+            skillreader = csv.reader( fp, delimiter=',' )
+            # Gobble header
+            header = skillreader.next()
+            for idx, val in enumerate( skillreader ):
+               if( val[0] == inputData ):
+                  break
+            else:
+               # Failed to find it exactly, try regex
+               fp.seek(0)
+               skillreader = csv.reader( fp, delimiter=',' )
+               # Gobble header
+               header = skillreader.next()
+               for idx, val in enumerate( skillreader ):
+                  if( re.search( inputData, val[0], re.IGNORECASE ) ):
+                     break
+               else:
+                  return
+
+            self.Name = val[0]
+            self.AttributeString = val[1]
+            self.Difficulty = val[2]
+            self.Defaults = val[3]
+            self.Page = val[4]
+            self.Points = points
+
+      else:
+         assert(0),"Invalid format"
+
+
       self.SkillMod = None
       
       
@@ -111,7 +147,8 @@ class Skill():
       if( caller == None ):
          return self.__str__() + " NO CALLER"
       else:
-         return "%s-%d (%s%+d) [%d]" %(self.Name, self.SkillMod + caller.GetAttrValue( self.AttributeString ), self.AttributeString, self.SkillMod, self.Points)
+         tmpBase = "%s-%d"%( self.Name, self.SkillMod + caller.GetAttrValue( self.AttributeString ) )
+         return "%-25s (%s%+d) [%d]" %(tmpBase, self.AttributeString, self.SkillMod, self.Points)
          pass
 
    def Save( self ):
@@ -149,6 +186,18 @@ def Validator( csvLine=None ):
       return False
 
    return True
+
+def Re2SkillSingle( matchStr ):
+   skillFile = os.path.dirname(os.path.abspath(__file__))+"\\..\\data\\gameref\\skills.csv"
+   with open( skillFile, 'r' ) as fp:
+      skillreader = csv.reader( fp, delimiter=',' )
+      # Gobble header
+      header = skillreader.next()
+      for idx,val in enumerate( skillreader ):
+         if( re.search( matchStr, val[0], re.IGNORECASE ) ):
+            return Skill( val )
+      else:
+         return None
 
 def Re2SkilTuple( csvFile=None, matchStr="."):
 
