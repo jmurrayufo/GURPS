@@ -1,94 +1,74 @@
 {
-    "Attributes":
-    {
-        "ST":
-        {
-            "weight":10
-        },
-        "DX":
-        {
-            "weight":10
-        },
-        "IQ":
-        {
-            "weight":10
-        },
-        "HT":
-        {
-            "weight":10
-        },
-        "HP":
-        {
-            "weight":5
-        },
-        "WILL":
-        {
-            "weight":5
-        },
-        "PER":
-        {
-            "weight":5
-        },
-        "FP":
-        {
-            "weight":5
-        }
-    },
-    "Skills":
-    {
-        "Accounting":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":50
-        },
-        "Administration":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":50
-        },
-        "Animal Handling":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":100
-        },
-        "Biology":
-        {
-            "attribute":"IQ",
-            "diff":"VH",
-            "weight":75
-        },
-        "Electrician":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":100
-        },
-        "Farming":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":500
-        },
-        "First Aid":
-        {
-            "attribute":"IQ",
-            "diff":"E",
-            "weight":50
-        },
-        "Freight Handling":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":50
-        },
-        "Meteorology":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":50
-        }
-    }
+   "Attributes":
+   {
+      "STp":
+      {
+         "mean":10,
+         "std" :10
+      },
+      "DXp":
+      {
+         "mean":10,
+         "std" :10
+      },
+      "IQp":
+      {
+         "mean":-20,
+         "std" :10
+      },
+      "HTp":
+      {
+         "mean":10,
+         "std" :10
+      },
+      "HPp":
+      {
+         "mean":0,
+         "std" :10
+      },
+      "WILLp":
+      {
+         "mean":10,
+         "std" :10
+      },
+      "PERp":
+      {
+         "mean":-10,
+         "std" :10
+      },
+      "FPp":
+      {
+         "mean":10,
+         "std" :10
+      }
+   },
+   "Skills": {
+      "Accounting":50,
+      "Administration":50,
+      "Animal Handling":100,
+      "Biology":75,
+      "Electrician":100,
+      "Farming":200,
+      "First Aid":50,
+      "Freight Handling":50,
+      "Meteorology":50
+   },
+   "Advantages": {
+
+   }, 
+   "Disadvantages": {
+   
+   }, 
+   "Languages": {
+   
+   }, 
+   "Cultures": {
+   
+   }, 
+   "ReactionMods": {
+   
+   }, 
+   "Height": 0, 
+   "Weight": 0, 
+   "Age": 0
 }

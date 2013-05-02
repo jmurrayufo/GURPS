@@ -1,166 +1,83 @@
 {
-    "Attributes":
-    {
-        "ST":
-        {
-            "weight":8
-        },
-        "DX":
-        {
-            "weight":8
-        },
-        "IQ":
-        {
-            "weight":18
-        },
-        "HT":
-        {
-            "weight":10
-        },
-        "HP":
-        {
-            "weight":1
-        },
-        "WILL":
-        {
-            "weight":1
-        },
-        "PER":
-        {
-            "weight":10
-        },
-        "FP":
-        {
-            "weight":1
-        }
-    },
-    "Skills":
-    {
-        "Accounting":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":25
-        },
-        "Anthropology":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Archaeology":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Astronomy":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Bioengineering/10":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Biology/10":
-        {
-            "attribute":"IQ",
-            "diff":"VH",
-            "weight":100
-        },
-        "Chemistry/10":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Computer Operation/10":
-        {
-            "attribute":"IQ",
-            "diff":"E",
-            "weight":120
-        },
-        "Computer Programming/10":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Electronics Operation/10":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":120
-        },
-        "Engineer/10(spec)":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Grography/10 (Physical)":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":40
-        },
-        "Geology/10":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Hazardous Materials/10":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":50
-        },
-        "Linguistics":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":25
-        },
-        "Mathematics/10 (Spec)":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":100
-        },
-        "Metallurgy":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":75
-        },
-        "Meteorology/10":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":100
-        },
-        "Research/10":
-        {
-            "attribute":"IQ",
-            "diff":"A",
-            "weight":150
-        },
-        "Sociology":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":50
-        },
-        "Field Of Study":
-        {
-            "attribute":"IQ",
-            "diff":"H",
-            "weight":300
-        }
-    }
+   "Attributes":
+   {
+      "ST":
+      {
+         "weight":8
+      },
+      "DX":
+      {
+         "weight":8
+      },
+      "IQ":
+      {
+         "weight":18
+      },
+      "HT":
+      {
+         "weight":10
+      },
+      "HP":
+      {
+         "weight":1
+      },
+      "WILL":
+      {
+         "weight":1
+      },
+      "PER":
+      {
+         "weight":10
+      },
+      "FP":
+      {
+         "weight":1
+      }
+   },
+   "Skills":
+   {
+      "Accounting":25,
+      "Anthropology":100,
+      "Archaeology":100,
+      "Astronomy":100,
+      "Bioengineering":100,
+      "Biology":100,
+      "Chemistry":100,
+      "Computer Operation":120,
+      "Computer Programming":100,
+      "Electronics Operation":120,
+      "Engineer(spec)":100,
+      "Grography (Physical)":40,
+      "Geology":100,
+      "Hazardous Materials":50,
+      "Linguistics":25,
+      "Mathematics (Spec)":100,
+      "Metallurgy":75,
+      "Meteorology":100,
+      "Research":150,
+      "Sociology":50
+   },
+   "Advantages": 
+   {
+
+   }, 
+   "Disadvantages": 
+   {
+   
+   }, 
+   "Languages": 
+   {
+   
+   }, 
+   "Cultures": 
+   {
+   
+   }, 
+   "ReactionMods": 
+   {
+   
+   }, 
+   "Height": 0, 
+   "Weight": 0, 
+   "Age": 0
 }
