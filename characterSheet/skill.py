@@ -143,12 +143,12 @@ class Skill():
       pass
 
 
-   def Print( self, caller):
+   def Print( self, caller=None, mod = 0 ):
       if( caller == None ):
          return self.__str__() + " NO CALLER"
       else:
-         tmpBase = "%s-%d"%( self.Name, self.SkillMod + caller.GetAttrValue( self.AttributeString ) )
-         return "%-25s (%s%+d) [%d]" %(tmpBase, self.AttributeString, self.SkillMod, self.Points)
+         tmpBase = "%s-%d"%( self.Name, self.SkillMod + caller.GetAttrValue( self.AttributeString ) + mod )
+         return "%-25s (%s%+d) [%d]" %(tmpBase, self.AttributeString, self.SkillMod + mod, self.Points)
          pass
 
    def Save( self ):
@@ -194,16 +194,22 @@ def Re2SkillSingle( matchStr ):
       # Gobble header
       header = skillreader.next()
       for idx,val in enumerate( skillreader ):
-         if( re.search( matchStr, val[0], re.IGNORECASE ) ):
-            return Skill( val )
+         try:
+            if( re.search( matchStr, val[0], re.IGNORECASE ) ):
+               return Skill( val )
+         except:
+            print "Failed on:",matchStr
+            print "Val of:",val
+            raise
       else:
          return None
 
-def Re2SkilTuple( csvFile=None, matchStr="."):
+def Re2SkilTuple( matchStr="."):
 
    retVal = list()
+   skillFile = os.path.dirname(os.path.abspath(__file__))+"\\..\\data\\gameref\\skills.csv"
 
-   with open( csvFile, 'r' ) as fp:
+   with open( skillFile, 'r' ) as fp:
       skillreader = csv.reader( fp, delimiter=',' )
       # Gobble header
       header = skillreader.next()

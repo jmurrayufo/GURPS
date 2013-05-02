@@ -76,6 +76,8 @@ class Character( ):
          print "Attemped to add:",newSkill
          print "Current Skills:",self.Skills
          print "Skill failed to generate!"
+         print "Press enter to continue"
+         raw_input()
 
 
 
@@ -99,15 +101,16 @@ class Character( ):
 
 
    def GetAttrValue( self, attribute ):
-      def Point( points, div ):
-         if( math.copysign( 1, points ) == -1.0 ):
-            return int( -math.floor( abs( points ) / div ) )
-         return int( math.floor( points / div ) )    
       """
       Return the true value of a given attribute.
          attribute: String of attribute to be returned. Can be..
             ST, DX, IQ, HT, HP, WILL, PER, FP
       """
+      def Point( points, div ):
+         if( math.copysign( 1, points ) == -1.0 ):
+            return int( -math.floor( abs( points ) / div ) )
+         return int( math.floor( points / div ) ) 
+
       # Modify input to uppercase
       attribute = attribute.upper()
       # Determine which attribute needs to be calculated,and return
@@ -139,11 +142,13 @@ class Character( ):
       print "   WILL: %2d [%3d]" % ( self.GetAttrValue( 'WILL' ), self.WILLp )
       print "    PER: %2d [%3d]" % ( self.GetAttrValue( 'PER' ), self.PERp )
       print "     FP: %2d [%3d]" % ( self.GetAttrValue( 'FP' ), self.FPp )
+      print "Stat Total: [%3d]" %( self.CalcPointsStats( ) )
       if( len( self.Skills ) ):
          print "\nSkills:"      
          sortedSkills = sorted(self.Skills, key=lambda x: x.Name)
          for i in sortedSkills:
             print " ",i.Print( self )
+         print "Skill Total: [%3d]" %( self.CalcPointsSkills( ) )
       print "\nPoint Stats:"
       print "   Total Points: %3d"%( self.PointsTotal )
       print " Unspent Points: %3d"%( self.PointsUnspent )
@@ -243,7 +248,7 @@ class Character( ):
       skillMenu = (
          ( "Add Skill From HDD", self.PromptSkillAddHDD ),
          ( "Modify Skill Points",self.PromptSkillModifyPoints ),
-         ( "Find Default",       None ),
+         ( "Find Default",       self.PromptSkillFindDefault ),
          ( "Remove Skill",       self.PromptSkillDelete)
          ) 
 
@@ -270,6 +275,7 @@ class Character( ):
             continue
          break
    
+
    def PromptSkillAddHDD( self ):
       matchStr = ""
       skillList = list()
@@ -290,7 +296,7 @@ class Character( ):
 
          # Get List from Selection
          skillFile = os.path.dirname(os.path.abspath(__file__))+"\\..\\data\\gameref\\skills.csv"
-         skillList = skill.Re2SkilTuple( skillFile, matchStr )
+         skillList = skill.Re2SkilTuple( matchStr )
 
          if( len( skillList ) == 0 ):
             continue
@@ -359,7 +365,61 @@ class Character( ):
 
 
    def PromptSkillFindDefault( self ):
-      print "Not implemented"
+      # Prompt user for regex to skill to find
+      def DefaultLister( matchStr ):
+         retVal = list()
+         skillList = skill.Re2SkilTuple( matchStr ) 
+         for i in skillList:
+            for x in self.Skills:
+               if( i.Name == x.Name ):
+                  i.SetPoints( x.Points )
+                  break
+            retVal.append( i )
+         return retVal
+
+
+      while True:
+         print "\n\nDefault Calculator"
+         print "Enter a valid regex to find as a default"
+         print "Enter ? for help"
+         print "Leave blank to close"
+         matchStr = raw_input(">")
+         if( len ( matchStr ) == 0 ):
+            break
+         if( matchStr == '?' ):
+            print "This screen will attempt to help you find defaults for"
+            continue
+         try:
+            matchRe = re.compile( matchStr, re.IGNORECASE )
+         except( re.error ):
+            print "ERROR: \'%s\'' is not a valid regex. Try again!"%( matchStr )
+            continue
+
+         # Parse through matches, and defaults. Print the results
+         matchStrBase = "([^\(\-]+)"
+         matchStrNum  = "(\d+)"
+         for i in DefaultLister( matchStr ):
+            print "\n"+i.Print( self )
+            # Print through just the defaults
+            for default in i.Defaults.split(';'):
+               base = re.search( matchStrBase, default )
+               num  = re.search( matchStrNum , default )
+               # Make sure we got match objects for both searches
+               if( base and num ):
+                  base = base.group( 1 )
+                  num = num.group( 1 )
+                  print "  %s"%( default )
+                  # Dont look for base stats, they are clear as it is
+                  if( base in  ['ST','DX','IQ','HT','HP','WILL','PER','FP']):
+                     continue
+                  # Get the skill we are looking for
+                  tmp = skill.Re2SkillSingle( base )
+                  for x in self.Skills:
+                     if( tmp.Name == x.Name ):
+                        tmp.SetPoints( x.Points )
+                        break
+                  # Print the result modified for this character
+                  print "   ->%s"%( tmp.Print( self, mod = -eval(num) ) )
 
 
    def PromptSkillDelete( self ):
@@ -561,66 +621,80 @@ class Character( ):
 
       dataAttr = data['Attributes']
       self.STp = int( random.gauss( dataAttr['STp']['mean'], dataAttr['STp']['std'] ) )
-      self.PointsUnspent -= self.STp 
       self.DXp = int( random.gauss( dataAttr['DXp']['mean'], dataAttr['DXp']['std'] ) )
-      self.PointsUnspent -= self.DXp 
       self.IQp = int( random.gauss( dataAttr['IQp']['mean'], dataAttr['IQp']['std'] ) )
-      self.PointsUnspent -= self.IQp 
       self.HTp = int( random.gauss( dataAttr['HTp']['mean'], dataAttr['HTp']['std'] ) )
-      self.PointsUnspent -= self.HTp 
       self.HPp = int( random.gauss( dataAttr['HPp']['mean'], dataAttr['HPp']['std'] ) )
-      self.PointsUnspent -= self.HPp 
       self.WILLp = int( random.gauss( dataAttr['WILLp']['mean'], dataAttr['WILLp']['std'] ) )
-      self.PointsUnspent -= self.WILLp
       self.PERp = int( random.gauss( dataAttr['PERp']['mean'], dataAttr['PERp']['std'] ) )
-      self.PointsUnspent -= self.PERp
       self.FPp = int( random.gauss( dataAttr['FPp']['mean'], dataAttr['FPp']['std'] ) )
+
+      # Adjust points to legal values
+      attrList = ['ST','DX','IQ','HT','HP','WILL','PER','FP']
+      for i in attrList:
+         while( self.GetAttrValue( i ) <= 0 ):
+            setattr( self, i+'p', getattr( self, i+'p' )+1 )
+
+      self.PointsUnspent -= self.STp
+      self.PointsUnspent -= self.DXp 
+      self.PointsUnspent -= self.IQp 
+      self.PointsUnspent -= self.HTp 
+      self.PointsUnspent -= self.HPp 
+      self.PointsUnspent -= self.WILLp
+      self.PointsUnspent -= self.PERp
       self.PointsUnspent -= self.FPp 
+
 
       self.CalcUpdatePointsTotals()
       print self.PointsTotal
       print self.PointsUnspent
 
       #### Handle Skills ####
-      while True:
-         try:
-            print "\nEnter the amount of points for skills"
-            dPoints = input(">")
-         except ( NameError ):
-            print "ERROR, Not a valid number!"
-            continue
-         except ( SyntaxError ):
-            dPoints = 0 # Default value of most humans?
-         break
+      """
+      This section will attempt to load up skills as dictated from the data sheet
+      """
 
       dataSkill = data['Skills']
 
-      # Build list of weighted skill tuples
-      tmpSkillList = list()
-      tmpTotal = 0
-      for i in data['Skills'].keys():
-         tmpSkillList.append( ( i, dataSkill[i] + tmpTotal ) )
-         tmpTotal += dataSkill[i]
+      if( len( data['Skills'].keys( ) ) ):
 
-      # Loop through skills, add them to the character
+         while True:
+            try:
+               print "\nEnter the amount of points for skills"
+               dPoints = input(">")
+            except ( NameError ):
+               print "ERROR, Not a valid number!"
+               continue
+            except ( SyntaxError ):
+               dPoints = 0 # Default value of most humans?
+            break
 
-      for idx,val in enumerate( tmpSkillList ):
-         self.AddSkillTXT( val[0] )
+         # Build list of weighted skill tuples
+         tmpSkillList = list()
+         tmpTotal = 0
+         for i in data['Skills'].keys():
+            tmpSkillList.append( ( i, dataSkill[i] + tmpTotal ) )
+            tmpTotal += dataSkill[i]
 
-      skillPointsTotal = 0
-      while skillPointsTotal < dPoints:
-         # Pick a random skill
-         choice = random.randint( 0, tmpTotal-1 ) # -1 handles max value error
+         # Loop through skills, add them to the character
+
          for idx,val in enumerate( tmpSkillList ):
-            if( choice < val[1] ):
-               break
-         # Find that skill, add points
-         for i in self.Skills:
-            if( re.search( val[0], i.Name, re.IGNORECASE ) ):
-               i.ModPoints(1)
-               self.PointsUnspent -= 1
-               skillPointsTotal += 1
-               break
+            self.AddSkillTXT( val[0] )
+
+         skillPointsTotal = 0
+         while skillPointsTotal < dPoints:
+            # Pick a random skill
+            choice = random.randint( 0, tmpTotal-1 ) # -1 handles max value error
+            for idx,val in enumerate( tmpSkillList ):
+               if( choice < val[1] ):
+                  break
+            # Find that skill, add points
+            for i in self.Skills:
+               if( re.search( val[0], i.Name, re.IGNORECASE ) ):
+                  i.ModPoints(1)
+                  self.PointsUnspent -= 1
+                  skillPointsTotal += 1
+                  break
 
       """
       TODO:
@@ -633,7 +707,25 @@ class Character( ):
       self.CalcUpdatePointsTotals()
 
 
+   def CalcPointsStats( self ):
+      """
+      Return the total points currently allocated to stats
+      """
+      attrList = ['STp','DXp','IQp','HTp','HPp','WILLp','PERp','FPp']
+      retVal = 0
+      for i in attrList:
+         retVal += getattr( self, i )
+      return retVal
 
+
+   def CalcPointsSkills( self ):
+      """
+      Return the total points currently allocated to skills
+      """
+      retVal = 0
+      for i in self.Skills:
+         retVal += i.Points
+      return retVal
 
 
    def CalcUpdatePointsTotals( self ):
