@@ -16,6 +16,17 @@ def VantageValidator( item ):
    if( not type( item ) == dict ):
       return False
 
+   tmp = item[item.keys()[0]]
+
+   if(   not 'Type' in tmp 
+      or not 'BaseCost' in tmp
+      or not 'CostIsPerLevel' in tmp
+      or not 'Levels' in tmp
+      or not 'Summery' in tmp
+      or not 'Synopsis' in tmp
+      ):
+      return False
+
    return True
 
 
