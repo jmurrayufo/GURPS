@@ -236,7 +236,7 @@ class RangedAttackCalculator():
             return default
 
       logger.debug('Begin attempt to load file.')
-      savedFileList = glob.glob(".\\Save\\*.json")
+      savedFileList = glob.glob("./Save/*.json")
       if( len( savedFileList ) == 0 ):
          logger.error('No files found in the save directory from the glob.glob')
          print "No files in the Save directory!"
@@ -518,7 +518,8 @@ class RangedAttackCalculator():
       # Object Fields
       self.WeaponList = list()
 
-      files = glob.glob('.\\Weapons\\*.json')
+      files = glob.glob('./Weapons/*.json')
+      print "files=",files
 
       # Init functionality
       for i in files:
