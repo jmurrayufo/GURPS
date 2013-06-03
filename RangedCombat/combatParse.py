@@ -111,7 +111,7 @@ class RangedAttackCalculator():
       self.CalcAttributes = [
          ("DX",            int,     10,      "DX",                None),
          ("Skill",         int,     1,       "Skill",             "Skill = Base skill, NOT effective"),
-         ("SM",            float,   2.0,     "SM",                "SM = Size of target in yards"),
+         ("SM",            float,   2.0,     "Size",              "Size of target in yards"),
          ("Range",         float,   1.0,     "Range",             "Range = Distance to target, in yards"),
          ("Speed",         float,   0.0,     "Speed",             "Speed = Relative speed of target in yards/s"),
          ("DarkFog",       int,     0,       "Darkness and Fog", "Darkness and Fog = Negative modifier due to light and fog condition \nDarkness and Fog must be between -9 and 0"),
@@ -155,6 +155,7 @@ class RangedAttackCalculator():
          ("Check me for errors",self.PrintErrorGuide),
          ("Change Weapon",self.PromptChangeWeapon ),
          ("Print Gun Details",self.PrintGunDetails),
+         ("Print Score Values",self.PrintNumericEffects),
          ("Save",self.PromptSaveSettings),
          ("Load",self.PromptLoadSettings)
          ]
@@ -420,6 +421,42 @@ class RangedAttackCalculator():
       print "MiscBonus:",  self.MiscBonus
       print "       ===Result==="
       print "FINAL RESULT: >>> %d <<<"%( self.Mod )
+
+   def PrintNumericEffects( self ):
+
+      logger.debug( 'Started to display scores' )
+      print "\n\n\n   ===Numeric Effects==="
+      print "            DX: %5d => %+d"%( self.DX, self.DX )
+      print "         Skill: %5d => %+d"%( self.Skill, self.Skill )
+      print "            SM: %5d => %+d"%( self.SM, self.CalcSizeModifier( self.SM ) )
+      print "   Speed/Range: %2d/%2d => %+d"%( self.Speed, self.Range, 
+         self.CalcSpeedAndRange( self.Range, self.Speed ) )
+      print "  Hit Location: %5s => %+d"%( self.HitLoc, 
+         self.CalcHitLocation( self.HitLoc ) )
+      print "Vision Effects:"
+      print "     Can See: %5s"%( self.CanSee )
+      print "    Know Loc: %5s"%( self.KnowLoc )
+      print "    Dark/Fog: %5s"%( self.DarkFog )
+      print "   Concealed: %5s"%( self.Concealment )
+      print "                      => %+d"%( self.CalcVisionEffects( self.CanSee, 
+         self.KnowLoc, self.DarkFog, self.Concealment ) )
+      print "Weapon Effects:"
+      print "   Round Aim: %5d"%( self.RoundsAiming )
+      print "      Pop-Up: %5s"%( self.PopUpAttack )
+      print " Move+Attack: %5s"%( self.MoveAndAttack )
+      print "  New Facing: %5s"%( self.ChangeFacing )
+      print "                      => %+d"%( self.CalcWeaponMods( 
+         self.RoundsAiming, self.PopUpAttack, self.MoveAndAttack, 
+         self.ChangeFacing ) )
+      print "  Rate Of Fire: %5d => %+d"%( self.ShotsFired, self.CalcRateOfFireBonus( self.ShotsFired ) )
+      print "       Bracing: %5s => %+d"%( self.Bracing, self.Bracing )
+      print "         Shock: %5d => %+d"%( self.Shock, self.Shock )
+      print "All-Out-Attack: %5s => %+d"%( self.AllOutAttack, self.AllOutAttack )
+      print "  Misc Bonuses: %5d => %+d"%( self.MiscBonus, self.MiscBonus )
+
+      input_pause( "Press enter to continue" )
+
+      logger.debug( 'Finished with desplay of scores' )
 
    def HelpUserWithMath( self ):
       """
