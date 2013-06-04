@@ -2,9 +2,10 @@ import random
 import re
 import numpy
 import time
-import readline
+import optparse
+# import readline
 
-_DEBUG = False
+#_DEBUG = True
 
 class Dice():
    def __init__( self, n=1, s=6 ):
@@ -136,8 +137,11 @@ def DieEvaluator( diceExpression ):
       n=int( matchobj.group( 1 ) )
       s=int( matchobj.group( 2 ) )
       retval = 0
+      if(_DEBUG): print "Rolling..."
       for i in range(n):
-         retval += random.randint(1,s)
+         tmp = random.randint(1,s)
+         if(_DEBUG): print tmp
+         retval += tmp
       return str(retval)
 
    if(_DEBUG): print "\nBegin eval"
@@ -239,22 +243,39 @@ def PromptDice():
    print "?: help"
    print "q: quit"
    while True:
-      tmp = raw_input(">")
+      tmp = raw_input("\n>")
+
       if( tmp in ['q','Q','quit','exit'] ):
          break
       if( tmp in ['h','H','-?','?'] ):
          print "Enter any valid dice expression to evaluate it."
-         print "  Extra text is ignored, math is evaluated."
+         print "  Extra text is ignored, math is evaluated. Note that all dice"
+         print "  expressions are evaluated before any math."
          print "Enter blank string to repeat last entry."
          print "Enter 'q' to quit."
          continue
          
       if( len( tmp ) == 0 ):
-         print ">",old_tmp
+         print "r>"+old_tmp
          tmp = old_tmp
       old_tmp = tmp
       print DieEvaluator( tmp )
 
 if __name__ == '__main__':
+
+   parser = optparse.OptionParser()
+
+   parser.add_option( 
+      '-d',
+      '--debug', 
+      action = "store_true", 
+      help = "Activate debug statements",
+      dest = "DEBUG", 
+      default = False 
+      )
+
+   (options, args) =  parser.parse_args()
+   _DEBUG = options.DEBUG
+
    PromptDice()
 
