@@ -7,7 +7,7 @@ import time
 import types
 import atexit
 
-version = '0.0.3'
+version = '0.0.4'
 
 """
 GURPS is a trademark of Steve Jackson Games, and its rules and art are copyrighted 
@@ -556,7 +556,6 @@ class RangedAttackCalculator():
       self.WeaponList = list()
 
       files = glob.glob('./Weapons/*.json')
-      print "files=",files
 
       # Init functionality
       for i in files:
@@ -775,7 +774,7 @@ if __name__ == '__main__':
       os.system('cls')
 
    print "/\\"
-   for i in range(24):
+   for i in range(25):
       print "||"
    print "\\/"
    print "This program uses a lot of screen space, so I suggest you expand your window"
