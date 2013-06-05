@@ -133,6 +133,70 @@ class Dice2():
       except ValueError:
          print "Never"
 
+def ParenEval( expression ):
+
+   # Run Cleanup of expression for evaluation
+   while True:
+      # Append '6' onto hanging d's
+      matchStr = "(\d+d)([^0-9]|$)"
+      if( re.search( matchStr, expression ) ): 
+         if(_DEBUG): print " Nd Fix:",re.search( matchStr, expression ).group(1)
+         replStr = re.search( matchStr, expression ).group(1)
+         expression = re.sub( replStr, replStr+'6', expression, count=1 )
+         continue
+
+      # Prepend '1' infront of hanging d's
+      matchStr = "[^\d](d\d+)"
+      if( re.search( matchStr, expression ) ): 
+         if(_DEBUG): print " dN Fix:",re.search( matchStr, expression ).group(1)
+         replStr = re.search( matchStr, expression ).group(1)
+         print expression
+         expression = re.sub( replStr, '1'+replStr, expression, count=1 )
+         print expression
+         continue
+
+      # XFixer
+      matchStr = "\d+[xX]\d+"
+      if( re.search( matchStr, expression ) ):
+         if(_DEBUG): print " x-Fix:",re.search( matchStr, expression ).group(0)
+         expression = re.sub( "[xX]", "*", expression, count=1 )
+         continue 
+
+      matchStr = '([\d\)])(\()'
+      if( re.search( matchStr, expression ) ):         
+         if(_DEBUG): print " ParenFix:",re.search( matchStr, expression ).groups()
+         matches = re.search( matchStr, expression ).groups()
+         replStr = matches[0]+'*'+matches[1]
+         expression = re.sub( matchStr, replStr, expression, count = 1 )
+         continue
+
+      break
+
+  
+
+   parenDepth = 0
+   subStr = ''
+
+   for idx,val in enumerate( expression ):
+
+      if( val == '(' ):
+         parenDepth += 1
+      elif( val == ')' ):
+         parenDepth -= 1
+
+      if( parenDepth and 
+         not ( val == '(' and parenDepth == 1 ) 
+         ):
+         subStr += val
+      elif( len( subStr ) ):
+         replStr = ParenEval( subStr )
+         subStr = '('+subStr+')'
+         # expression = re.sub( subStr, replStr, expression, count = 1 )
+         expression = expression.replace( subStr, replStr, 1)
+         subStr = ''
+
+   return DieEvaluator( expression )
+
 def DieEvaluator( diceExpression ):   
    def funcRoll( matchobj ):
       n=int( matchobj.group( 1 ) )
@@ -168,24 +232,6 @@ def DieEvaluator( diceExpression ):
          diceExpression = re.sub( matchStr, funcRoll, diceExpression, count=1 )
          continue
 
-      # Append '6' onto hanging d's
-      matchStr = "(\d+d)[^0-9]?"
-      # matchStr = "(\d+d)(?:[^0-9])"
-      if( re.search( matchStr, diceExpression ) ): 
-         if(_DEBUG): print " Nd Fix:",re.search( matchStr, diceExpression ).group(1)
-         replStr = re.search( matchStr, diceExpression ).group(1)
-         diceExpression = re.sub( replStr, replStr+'6', diceExpression, count=1 )
-         continue
-
-      # Prepend '1' infront of hanging d's
-      matchStr = "d\d+"
-      # matchStr = "(\d+d)(?:[^0-9])"
-      if( re.search( matchStr, diceExpression ) ): 
-         if(_DEBUG): print " dN Fix:",re.search( matchStr, diceExpression ).group(0)
-         replStr = re.search( matchStr, diceExpression ).group(0)
-         diceExpression = re.sub( replStr, '1'+replStr, diceExpression, count=1 )
-         continue
-
       # Exponents
       matchStr = "\d+\^\d+"
       if( re.search( matchStr, diceExpression ) ):
@@ -194,14 +240,7 @@ def DieEvaluator( diceExpression ):
          replStr = eval( replStr )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
-         continue
-
-      # XFixer
-      matchStr = "\d+[xX]\d+"
-      if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print " x-Fix:",re.search( matchStr, diceExpression ).group(0)
-         diceExpression = re.sub( "[xX]", "*", diceExpression, count=1 )
-         continue      
+         continue 
 
       # Multiplication
       matchStr = "\d+[*]\d+"
@@ -278,7 +317,8 @@ def PromptDice():
          print "r>"+old_tmp
          tmp = old_tmp
       old_tmp = tmp
-      print DieEvaluator( tmp )
+      # print DieEvaluator( tmp )
+      print ParenEval( tmp )
 
 if __name__ == '__main__':
 
