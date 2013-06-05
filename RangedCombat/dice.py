@@ -3,9 +3,10 @@ import re
 import numpy
 import time
 import optparse
-# import readline
-
-#_DEBUG = True
+import os
+if ( os.name == 'posix' ):
+   # We only want this on OSX
+   import readline
 
 class Dice():
    def __init__( self, n=1, s=6 ):
@@ -137,24 +138,24 @@ def DieEvaluator( diceExpression ):
       n=int( matchobj.group( 1 ) )
       s=int( matchobj.group( 2 ) )
       retval = 0
-      if(_DEBUG): print "Rolling..."
+      if(_DEBUG): print " Rolling..."
       for i in range(n):
          tmp = random.randint(1,s)
-         if(_DEBUG): print tmp
+         if(_DEBUG): print "  %d"%(tmp)
          retval += tmp
       return str(retval)
 
    if(_DEBUG): print "\nBegin eval"
    while True:
       if(_DEBUG): 
-         print "Loop on:",diceExpression
+         print "\nLoop on:",diceExpression
          time.sleep(1)
 
 
       # Remove parenthesis with only numbers inside of them
       matchStr = "\(\d+\)"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Peren:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " Peren:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -163,7 +164,7 @@ def DieEvaluator( diceExpression ):
       # Evaluate correct dice stings
       matchStr = "(\d+)d(\d+)"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Dice:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " Dice:",re.search( matchStr, diceExpression ).group(0)
          diceExpression = re.sub( matchStr, funcRoll, diceExpression, count=1 )
          continue
 
@@ -171,7 +172,7 @@ def DieEvaluator( diceExpression ):
       matchStr = "(\d+d)[^0-9]?"
       # matchStr = "(\d+d)(?:[^0-9])"
       if( re.search( matchStr, diceExpression ) ): 
-         if(_DEBUG): print "Nd Fix:",re.search( matchStr, diceExpression ).group(1)
+         if(_DEBUG): print " Nd Fix:",re.search( matchStr, diceExpression ).group(1)
          replStr = re.search( matchStr, diceExpression ).group(1)
          diceExpression = re.sub( replStr, replStr+'6', diceExpression, count=1 )
          continue
@@ -180,7 +181,7 @@ def DieEvaluator( diceExpression ):
       matchStr = "d\d+"
       # matchStr = "(\d+d)(?:[^0-9])"
       if( re.search( matchStr, diceExpression ) ): 
-         if(_DEBUG): print "dN Fix:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " dN Fix:",re.search( matchStr, diceExpression ).group(0)
          replStr = re.search( matchStr, diceExpression ).group(0)
          diceExpression = re.sub( replStr, '1'+replStr, diceExpression, count=1 )
          continue
@@ -188,20 +189,26 @@ def DieEvaluator( diceExpression ):
       # Exponents
       matchStr = "\d+\^\d+"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Exponent:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " Exponent:",re.search( matchStr, diceExpression ).group(0)
          replStr = re.sub( "\^", "**", re.search( matchStr, diceExpression ).group(0) )
          replStr = eval( replStr )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
          continue
 
-      # Multiplication
-      matchStr = "\d+[*xX]\d+"
+      # XFixer
+      matchStr = "\d+[xX]\d+"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Multi:",re.search( matchStr, diceExpression ).group(0)
-         replStr = re.sub( "x", "*", re.search( matchStr, diceExpression ).group(0) )
-         replStr = re.sub( "X", "*", re.search( matchStr, diceExpression ).group(0) )
-         replStr = eval( replStr )
+         if(_DEBUG): print " x-Fix:",re.search( matchStr, diceExpression ).group(0)
+         diceExpression = re.sub( "[xX]", "*", diceExpression, count=1 )
+         continue      
+
+      # Multiplication
+      matchStr = "\d+[*]\d+"
+      if( re.search( matchStr, diceExpression ) ):
+         if(_DEBUG): print " Multi:",re.search( matchStr, diceExpression ).group(0)
+         replStr = eval( re.search( matchStr, diceExpression ).group(0) )
+         # replStr = eval( replStr ) 
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
          continue      
@@ -209,7 +216,7 @@ def DieEvaluator( diceExpression ):
       # Dor-vision
       matchStr = "\d+\/\d+"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Divide:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " Divide:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -218,7 +225,7 @@ def DieEvaluator( diceExpression ):
       # Addition
       matchStr = "\d+\+\d+"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Add:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " Add:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
@@ -227,19 +234,31 @@ def DieEvaluator( diceExpression ):
       # Surb-Traction
       matchStr = "\d+\-\d+"
       if( re.search( matchStr, diceExpression ) ):
-         if(_DEBUG): print "Sub:",re.search( matchStr, diceExpression ).group(0)
+         if(_DEBUG): print " Sub:",re.search( matchStr, diceExpression ).group(0)
          replStr = eval( re.search( matchStr, diceExpression ).group(0) )
          replStr = str( replStr )
          diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
          continue
+
+      # Logical Results
+      matchStr = "^(?:-|\+)?\d+(<|<=|>|>=|==)(?:-|\+)?\d+$"
+      if( re.search( matchStr, diceExpression ) ):
+         if(_DEBUG): print " Logic:",re.search( matchStr, diceExpression ).group(0)
+         print " Logical Compareson:",diceExpression
+         replStr = eval( re.search( matchStr, diceExpression ).group(0) )
+         replStr = str( replStr )
+         diceExpression = re.sub( matchStr, replStr, diceExpression, count=1 )
+         # No continue here, we are DONE. This can only be run when the diceExpression is 
+         #  out of new things for us to test!
+
       # We only get here when we have nothing left to parse!
       break
 
-   if(_DEBUG): print "Return:", diceExpression
+   if(_DEBUG): print "\nReturn:", diceExpression
    return diceExpression
 
 def PromptDice():
-   old_tmp = ''
+   old_tmp = '1d20'
    print "?: help"
    print "q: quit"
    while True:
