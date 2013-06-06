@@ -191,7 +191,7 @@ def ParenEval( expression ):
       elif( len( subStr ) ):
          replStr = ParenEval( subStr )
          subStr = '('+subStr+')'
-         # expression = re.sub( subStr, replStr, expression, count = 1 )
+         if(_DEBUG): print "Replace: "+subStr + " => " + replStr
          expression = expression.replace( subStr, replStr, 1)
          subStr = ''
 
