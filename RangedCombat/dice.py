@@ -337,4 +337,6 @@ if __name__ == '__main__':
    _DEBUG = options.DEBUG
 
    PromptDice()
+else:
+   _DEBUG = False
 
