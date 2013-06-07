@@ -1,10 +1,21 @@
-import csv
+# import csv
+import json
 
 class Vantage( ):
    
 
-   def __init__( self, dataFile = None, format = 'csv' ):
-      self.Name = dataFile[0]
+   def __init__( self ):
+      base = BaseVantageDict( )
+      self.Name = base.keys()[0]
+      subBase = base[ self.Name ]
+      self.Type = subBase[ 'Type' ]
+      self.BaseCost = subBase[ 'BaseCost' ]
+      self.CostIsPerLevel = subBase[ 'CostIsPerLevel' ]
+      self.Levels = subBase[ 'Levels' ]
+      self.Summery = subBase[ 'Summery' ]
+      self.Synopsis = subBase[ 'Synopsis' ]
+
+
 
 
 def VantageValidator( item ):
@@ -56,4 +67,10 @@ def BaseVantageDict():
 
    return retVal
 
-print VantageValidator( BaseVantageDict( ) )
+def VantageGenerator( self ):
+   pass
+
+
+if __name__ == "__main__":
+   # print VantageValidator( BaseVantageDict( ) )
+   x = Vantage()
